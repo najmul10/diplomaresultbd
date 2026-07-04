@@ -6,13 +6,15 @@ import {
   Search,
   Loader2,
   SearchX,
-  Lightbulb,
-  SlidersHorizontal,
   ExternalLink,
   ShieldCheck,
+  Radio,
+  Database,
+  Zap,
 } from "lucide-react";
 import { SectionHeading } from "@/components/site/section-heading";
-import { HistoryTimeline } from "@/components/site/history-timeline";
+import { ResultCard } from "@/components/site/result-card";
+import { AdSlot } from "@/components/site/ad-slot";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -25,115 +27,126 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from "@/components/ui/collapsible";
-import type { StudentHistory } from "@/lib/types";
+import type { StudentResult } from "@/lib/types";
 import { toast } from "sonner";
 
+type ExamOption = { code: string; name: string };
+type SessionPart = { code: string; name: string };
 type Options = {
-  examTypes: string[];
-  curricula: string[];
-  years: number[];
-  semesters: number[];
+  exams: ExamOption[];
+  years: string[];
+  sessionParts: SessionPart[];
 };
 
 async function fetchOptions(): Promise<Options> {
-  const res = await fetch("/api/results/options");
+  const res = await fetch("/api/results/live-options");
   const j = await res.json();
   return j.data;
 }
 
-async function searchResult(params: {
+async function searchLive(params: {
+  exam: string;
+  year: string;
   roll: string;
-  registrationNo?: string;
-  examType?: string;
-  curriculum?: string;
-  semester?: string;
-  examYear?: string;
-}): Promise<StudentHistory> {
+  reg?: string;
+  sessPart?: string;
+}): Promise<StudentResult> {
   const sp = new URLSearchParams();
+  sp.set("exam", params.exam);
+  sp.set("year", params.year);
   sp.set("roll", params.roll);
-  if (params.registrationNo) sp.set("registrationNo", params.registrationNo);
-  if (params.examType) sp.set("examType", params.examType);
-  if (params.curriculum) sp.set("curriculum", params.curriculum);
-  if (params.semester) sp.set("semester", params.semester);
-  if (params.examYear) sp.set("examYear", params.examYear);
-  const res = await fetch(`/api/results/search?${sp.toString()}`);
+  if (params.reg) sp.set("reg", params.reg);
+  if (params.sessPart) sp.set("sessPart", params.sessPart);
+  const res = await fetch(`/api/results/live-search?${sp.toString()}`);
   const json = await res.json();
   if (!res.ok || !json.success) {
     throw new Error(json.error || "Search failed");
   }
-  return json.data as StudentHistory;
+  return json.data as StudentResult;
 }
 
 export function IndividualView() {
+  const [exam, setExam] = React.useState<string>("15"); // Diploma in Engineering default
+  const [year, setYear] = React.useState<string>("2022");
   const [roll, setRoll] = React.useState("");
-  const [registrationNo, setRegistrationNo] = React.useState("");
-  const [examType, setExamType] = React.useState<string>("all");
-  const [curriculum, setCurriculum] = React.useState<string>("all");
-  const [semester, setSemester] = React.useState<string>("all");
-  const [examYear, setExamYear] = React.useState<string>("all");
-  const [advanced, setAdvanced] = React.useState(false);
-  const [submitted, setSubmitted] = React.useState<string | null>(null);
+  const [reg, setReg] = React.useState("");
+  const [sessPart, setSessPart] = React.useState<string>("any");
+  const [submitted, setSubmitted] = React.useState<{
+    exam: string;
+    year: string;
+    roll: string;
+    reg?: string;
+    sessPart?: string;
+  } | null>(null);
 
   const { data: options } = useQuery({
-    queryKey: ["result-options"],
+    queryKey: ["live-options"],
     queryFn: fetchOptions,
   });
 
   const { data, isLoading, error } = useQuery({
-    queryKey: [
-      "result",
-      submitted,
-      examType,
-      curriculum,
-      semester,
-      examYear,
-    ],
-    queryFn: () =>
-      searchResult({
-        roll: submitted!,
-        examType: examType === "all" ? undefined : examType,
-        curriculum: curriculum === "all" ? undefined : curriculum,
-        semester: semester === "all" ? undefined : semester,
-        examYear: examYear === "all" ? undefined : examYear,
-      }),
-    enabled: !!submitted && submitted.length > 0,
+    queryKey: ["live-result", submitted],
+    queryFn: () => searchLive(submitted!),
+    enabled: !!submitted,
     retry: false,
   });
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const v = roll.trim();
-    if (!v && !registrationNo.trim()) {
-      toast.error("Please enter a roll number or registration number");
+    if (!roll.trim()) {
+      toast.error("Please enter your roll number");
       return;
     }
-    setSubmitted(v);
+    if (!exam || !year) {
+      toast.error("Please select exam type and year");
+      return;
+    }
+    setSubmitted({
+      exam,
+      year,
+      roll: roll.trim(),
+      reg: reg.trim() || undefined,
+      sessPart: sessPart && sessPart !== "any" ? sessPart : undefined,
+    });
   };
-
-  const trySample = (r: string) => {
-    setRoll(r);
-    setSubmitted(r);
-  };
-
-  const activeFilters =
-    (examType !== "all" ? 1 : 0) +
-    (curriculum !== "all" ? 1 : 0) +
-    (semester !== "all" ? 1 : 0) +
-    (examYear !== "all" ? 1 : 0);
 
   return (
     <div className="mx-auto w-full max-w-4xl px-4 py-8 sm:px-6 lg:py-12">
       <SectionHeading
         title="Individual Results"
-        description="Find your BTEB result by roll number — same fields as the official BTEB Archive System."
+        description="Search your real BTEB result live from the official Bangladesh Technical Education Board archive."
         icon={Search}
-        badge="Most Popular"
+        badge="Live"
       />
+
+      {/* Live source banner */}
+      <Card className="mt-6 border-emerald-500/30 bg-emerald-500/5">
+        <CardContent className="flex items-start gap-3 p-4">
+          <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-emerald-500/15 text-emerald-600 dark:text-emerald-400">
+            <Radio className="h-5 w-5" />
+          </span>
+          <div className="flex-1 text-sm">
+            <p className="font-semibold text-emerald-700 dark:text-emerald-300">
+              Connected to the official BTEB archive
+            </p>
+            <p className="mt-0.5 text-muted-foreground">
+              Results are fetched in real time from the Bangladesh Technical
+              Education Board&apos;s public archive. Enter your exact exam type,
+              year, roll and registration to see your real result. No demo data —
+              this is the live government source.
+            </p>
+            <a
+              href="http://180.211.162.102:8444/result_arch/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-1.5 inline-flex items-center gap-1 text-xs font-medium text-emerald-700 underline-offset-2 hover:underline dark:text-emerald-300"
+            >
+              <ExternalLink className="h-3 w-3" />
+              Official source: 180.211.162.102:8444/result_arch
+            </a>
+          </div>
+        </CardContent>
+      </Card>
 
       {/* Search form */}
       <Card className="mt-6">
@@ -141,27 +154,57 @@ export function IndividualView() {
           <form onSubmit={onSubmit} className="space-y-4">
             <div className="grid gap-3 sm:grid-cols-2">
               <div className="space-y-1.5">
-                <Label htmlFor="roll">Roll No *</Label>
-                <div className="relative">
-                  <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-                  <Input
-                    id="roll"
-                    value={roll}
-                    onChange={(e) => setRoll(e.target.value)}
-                    placeholder="e.g. 100156"
-                    className="h-11 pl-9 font-mono"
-                    inputMode="numeric"
-                    autoComplete="off"
-                  />
-                </div>
+                <Label htmlFor="exam">Exam Type *</Label>
+                <Select value={exam} onValueChange={setExam}>
+                  <SelectTrigger id="exam" className="h-11">
+                    <SelectValue placeholder="Select exam type" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {options?.exams.map((x) => (
+                      <SelectItem key={x.code} value={x.code}>
+                        {x.name}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
               <div className="space-y-1.5">
-                <Label htmlFor="reg">Registration No (optional)</Label>
+                <Label htmlFor="year">Exam Year *</Label>
+                <Select value={year} onValueChange={setYear}>
+                  <SelectTrigger id="year" className="h-11">
+                    <SelectValue placeholder="Select year" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {options?.years.map((y) => (
+                      <SelectItem key={y} value={y}>
+                        {y}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
+
+            <div className="grid gap-3 sm:grid-cols-2">
+              <div className="space-y-1.5">
+                <Label htmlFor="roll">Roll No *</Label>
+                <Input
+                  id="roll"
+                  value={roll}
+                  onChange={(e) => setRoll(e.target.value)}
+                  placeholder="e.g. 449381"
+                  className="h-11 font-mono"
+                  inputMode="numeric"
+                  autoComplete="off"
+                />
+              </div>
+              <div className="space-y-1.5">
+                <Label htmlFor="reg">Registration No</Label>
                 <Input
                   id="reg"
-                  value={registrationNo}
-                  onChange={(e) => setRegistrationNo(e.target.value)}
-                  placeholder="e.g. 202110100567"
+                  value={reg}
+                  onChange={(e) => setReg(e.target.value)}
+                  placeholder="10-digit registration no"
                   className="h-11 font-mono"
                   inputMode="numeric"
                   autoComplete="off"
@@ -169,151 +212,53 @@ export function IndividualView() {
               </div>
             </div>
 
-            {/* Advanced filters (official BTEB form fields) */}
-            <Collapsible open={advanced} onOpenChange={setAdvanced}>
-              <div className="flex items-center justify-between">
-                <CollapsibleTrigger asChild>
-                  <Button
-                    type="button"
-                    variant="ghost"
-                    size="sm"
-                    className="gap-1.5 px-2 text-muted-foreground"
-                  >
-                    <SlidersHorizontal className="h-4 w-4" />
-                    Advanced filters
-                    {activeFilters > 0 ? (
-                      <Badge variant="secondary" className="ml-1 h-5 px-1.5 text-[10px]">
-                        {activeFilters}
-                      </Badge>
-                    ) : null}
-                  </Button>
-                </CollapsibleTrigger>
-                <a
-                  href="https://result.bteb.gov.bd"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 text-xs text-muted-underline hover:text-primary"
-                >
-                  <ExternalLink className="h-3 w-3" />
-                  Official source
-                </a>
-              </div>
-              <CollapsibleContent className="mt-3">
-                <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-                  <div className="space-y-1.5">
-                    <Label className="text-xs">Exam Type</Label>
-                    <Select value={examType} onValueChange={setExamType}>
-                      <SelectTrigger className="h-10">
-                        <SelectValue placeholder="All" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="all">All</SelectItem>
-                        {options?.examTypes.map((t) => (
-                          <SelectItem key={t} value={t}>
-                            {t}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </div>
-                  <div className="space-y-1.5">
-                    <Label className="text-xs">Curriculum</Label>
-                    <Select value={curriculum} onValueChange={setCurriculum}>
-                      <SelectTrigger className="h-10">
-                        <SelectValue placeholder="All" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="all">All</SelectItem>
-                        {options?.curricula.map((c) => (
-                          <SelectItem key={c} value={c}>
-                            {c}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </div>
-                  <div className="space-y-1.5">
-                    <Label className="text-xs">Semester</Label>
-                    <Select value={semester} onValueChange={setSemester}>
-                      <SelectTrigger className="h-10">
-                        <SelectValue placeholder="All" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="all">All</SelectItem>
-                        {options?.semesters.map((s) => (
-                          <SelectItem key={s} value={String(s)}>
-                            {s}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </div>
-                  <div className="space-y-1.5">
-                    <Label className="text-xs">Exam Year</Label>
-                    <Select value={examYear} onValueChange={setExamYear}>
-                      <SelectTrigger className="h-10">
-                        <SelectValue placeholder="All" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="all">All</SelectItem>
-                        {options?.years.map((y) => (
-                          <SelectItem key={y} value={String(y)}>
-                            {y}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </div>
-                </div>
-              </CollapsibleContent>
-            </Collapsible>
-
-            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-              <Button
-                type="submit"
-                size="lg"
-                className="h-11 gap-2 px-6"
-                disabled={isLoading}
-              >
-                {isLoading ? (
-                  <Loader2 className="h-5 w-5 animate-spin" />
-                ) : (
-                  <Search className="h-5 w-5" />
-                )}
-                {isLoading ? "Searching..." : "Check Result"}
-              </Button>
-              <div className="flex flex-wrap items-center gap-2">
-                <span className="inline-flex items-center gap-1.5 text-xs text-muted-foreground">
-                  <Lightbulb className="h-3.5 w-3.5 text-amber-500" />
-                  Try:
-                </span>
-                {["440001", "449381", "451234", "455678"].map((r) => (
-                  <Button
-                    key={r}
-                    type="button"
-                    variant="outline"
-                    size="sm"
-                    className="h-7 font-mono text-xs"
-                    onClick={() => trySample(r)}
-                  >
-                    {r}
-                  </Button>
-                ))}
-              </div>
+            <div className="space-y-1.5">
+              <Label htmlFor="sess">Session Part (optional)</Label>
+              <Select value={sessPart} onValueChange={setSessPart}>
+                <SelectTrigger id="sess" className="h-11">
+                  <SelectValue placeholder="Any / All" />
+                </SelectTrigger>
+                <SelectContent>
+                  {options?.sessionParts.map((s) => (
+                    <SelectItem key={s.code || "any"} value={s.code || "any"}>
+                      {s.name}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </div>
+
+            <Button
+              type="submit"
+              size="lg"
+              className="h-11 w-full gap-2 px-6 sm:w-auto"
+              disabled={isLoading}
+            >
+              {isLoading ? (
+                <Loader2 className="h-5 w-5 animate-spin" />
+              ) : (
+                <Search className="h-5 w-5" />
+              )}
+              {isLoading ? "Searching official archive..." : "Check Live Result"}
+            </Button>
           </form>
         </CardContent>
       </Card>
 
       {/* Result area */}
       <div className="mt-6">
+        {/* Ad slot above results */}
+        <AdSlot slot="individual-inline" className="mb-6" />
+
         {isLoading ? (
           <Card>
             <CardContent className="flex flex-col items-center justify-center gap-3 py-16">
-              <Loader2 className="h-8 w-8 animate-spin text-primary" />
+              <Loader2 className="h-8 w-8 animate-spin text-emerald-600" />
               <p className="text-sm text-muted-foreground">
-                Fetching result for roll{" "}
-                <span className="font-mono font-semibold">{submitted}</span>...
+                Fetching from official BTEB archive...
+              </p>
+              <p className="text-xs text-muted-foreground">
+                Roll <span className="font-mono font-semibold">{submitted?.roll}</span> • {submitted?.year} • {submitted?.exam}
               </p>
             </CardContent>
           </Card>
@@ -325,43 +270,53 @@ export function IndividualView() {
               </span>
               <div>
                 <p className="font-semibold">No result found</p>
-                <p className="mt-1 max-w-sm text-sm text-muted-foreground">
+                <p className="mt-1 max-w-md text-sm text-muted-foreground">
                   {error instanceof Error
                     ? error.message
-                    : "Please check your roll number and try again."}
+                    : "Please check your details and try again."}
                 </p>
               </div>
-              {activeFilters > 0 ? (
-                <p className="text-xs text-muted-foreground">
-                  Tip: relax the advanced filters and retry.
-                </p>
-              ) : null}
+              <div className="mt-2 max-w-md rounded-lg bg-muted/50 p-3 text-left text-xs text-muted-foreground">
+                <p className="font-semibold text-foreground">Tips:</p>
+                <ul className="mt-1 list-inside list-disc space-y-0.5">
+                  <li>Make sure the exam type matches your curriculum.</li>
+                  <li>The exam year should be the year you sat that semester&apos;s board exam.</li>
+                  <li>Enter your registration number for a more precise match.</li>
+                  <li>Try a session part if the default doesn&apos;t return a result.</li>
+                </ul>
+              </div>
             </CardContent>
           </Card>
         ) : data ? (
           <>
-            <div className="mb-3 flex items-center gap-2 text-xs text-muted-foreground">
-              <ShieldCheck className="h-3.5 w-3.5 text-emerald-500" />
-              Resolved from BTEB Results Zone mirror of the official archive —
-              showing complete academic history ({data.results.length} semester
-              result{data.results.length !== 1 ? "s" : ""})
+            <div className="mb-3 flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
+              <Badge className="gap-1 bg-emerald-600 hover:bg-emerald-600">
+                <ShieldCheck className="h-3.5 w-3.5" />
+                Live from official BTEB archive
+              </Badge>
+              <span className="inline-flex items-center gap-1">
+                <Database className="h-3.5 w-3.5" />
+                Real-time fetch
+              </span>
+              <span className="inline-flex items-center gap-1">
+                <Zap className="h-3.5 w-3.5" />
+                Cached for repeat searches
+              </span>
             </div>
-            <HistoryTimeline history={data} />
+            <ResultCard result={data} />
           </>
         ) : (
           <Card className="border-dashed">
             <CardContent className="flex flex-col items-center justify-center gap-3 py-16 text-center">
-              <span className="flex h-14 w-14 items-center justify-center rounded-full bg-primary/10 text-primary">
+              <span className="flex h-14 w-14 items-center justify-center rounded-full bg-emerald-500/10 text-emerald-600">
                 <Search className="h-7 w-7" />
               </span>
               <div>
-                <p className="font-semibold">Search for a result</p>
+                <p className="font-semibold">Search your live result</p>
                 <p className="mt-1 max-w-sm text-sm text-muted-foreground">
-                  Enter your roll number above and click{" "}
-                  <Badge variant="secondary" className="mx-0.5">
-                    Check Result
-                  </Badge>{" "}
-                  to view your BTEB result.
+                  Select your exam type, year, and enter your roll number to
+                  fetch your real BTEB result from the official government
+                  archive.
                 </p>
               </div>
             </CardContent>

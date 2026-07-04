@@ -6,21 +6,21 @@
     "curriculum": "Diploma in Textile Engineering",
     "semester": 4,
     "examYear": 2021,
-    "publicationDate": "2021-01-13",
+    "publicationDate": "2021-01-06",
     "batchLabel": "19-20",
-    "totalStudents": 287,
-    "passRate": 76,
+    "totalStudents": 57,
+    "passRate": 78.9,
     "files": [
       {
         "fileId": "pub-19-20-Dipl-4-f1",
         "fileName": "Diploma in Textile Engineering 4th Semester 2021 - File 1.pdf",
-        "students": 287,
-        "passed": 218,
-        "failed": 69
+        "students": 57,
+        "passed": 45,
+        "failed": 12
       }
     ],
     "rollStart": 440001,
-    "rollEnd": 441417
+    "rollEnd": 440237
   },
   {
     "id": "pub-19-20-Dipl-5",
@@ -29,21 +29,21 @@
     "curriculum": "Diploma in Textile Engineering",
     "semester": 5,
     "examYear": 2021,
-    "publicationDate": "2021-04-25",
+    "publicationDate": "2021-04-06",
     "batchLabel": "19-20",
-    "totalStudents": 287,
-    "passRate": 71.1,
+    "totalStudents": 57,
+    "passRate": 80.7,
     "files": [
       {
         "fileId": "pub-19-20-Dipl-5-f1",
         "fileName": "Diploma in Textile Engineering 5th Semester 2021 - File 1.pdf",
-        "students": 287,
-        "passed": 204,
-        "failed": 83
+        "students": 57,
+        "passed": 46,
+        "failed": 11
       }
     ],
     "rollStart": 440001,
-    "rollEnd": 441417
+    "rollEnd": 440237
   },
   {
     "id": "pub-19-20-Dipl-6",
@@ -52,21 +52,21 @@
     "curriculum": "Diploma in Textile Engineering",
     "semester": 6,
     "examYear": 2022,
-    "publicationDate": "2022-07-12",
+    "publicationDate": "2022-07-18",
     "batchLabel": "19-20",
-    "totalStudents": 287,
-    "passRate": 75.6,
+    "totalStudents": 57,
+    "passRate": 77.2,
     "files": [
       {
         "fileId": "pub-19-20-Dipl-6-f1",
         "fileName": "Diploma in Textile Engineering 6th Semester 2022 - File 1.pdf",
-        "students": 287,
-        "passed": 217,
-        "failed": 70
+        "students": 57,
+        "passed": 44,
+        "failed": 13
       }
     ],
     "rollStart": 440001,
-    "rollEnd": 441417
+    "rollEnd": 440237
   },
   {
     "id": "pub-19-20-Dipl-7",
@@ -77,19 +77,19 @@
     "examYear": 2022,
     "publicationDate": "2022-10-23",
     "batchLabel": "19-20",
-    "totalStudents": 287,
-    "passRate": 74.6,
+    "totalStudents": 57,
+    "passRate": 82.5,
     "files": [
       {
         "fileId": "pub-19-20-Dipl-7-f1",
         "fileName": "Diploma in Textile Engineering 7th Semester 2022 - File 1.pdf",
-        "students": 287,
-        "passed": 214,
-        "failed": 73
+        "students": 57,
+        "passed": 47,
+        "failed": 10
       }
     ],
     "rollStart": 440001,
-    "rollEnd": 441417
+    "rollEnd": 440237
   },
   {
     "id": "pub-19-20-Dipl-8",
@@ -98,21 +98,21 @@
     "curriculum": "Diploma in Textile Engineering",
     "semester": 8,
     "examYear": 2023,
-    "publicationDate": "2023-01-18",
+    "publicationDate": "2023-01-09",
     "batchLabel": "19-20",
-    "totalStudents": 287,
-    "passRate": 74.9,
+    "totalStudents": 57,
+    "passRate": 75.4,
     "files": [
       {
         "fileId": "pub-19-20-Dipl-8-f1",
         "fileName": "Diploma in Textile Engineering 8th Semester 2023 - File 1.pdf",
-        "students": 287,
-        "passed": 215,
-        "failed": 72
+        "students": 57,
+        "passed": 43,
+        "failed": 14
       }
     ],
     "rollStart": 440001,
-    "rollEnd": 441417
+    "rollEnd": 440237
   },
   {
     "id": "pub-20-21-Dipl-4",
@@ -121,21 +121,21 @@
     "curriculum": "Diploma in Engineering",
     "semester": 4,
     "examYear": 2022,
-    "publicationDate": "2022-01-22",
+    "publicationDate": "2022-01-16",
     "batchLabel": "20-21",
-    "totalStudents": 277,
-    "passRate": 71.8,
+    "totalStudents": 49,
+    "passRate": 73.5,
     "files": [
       {
         "fileId": "pub-20-21-Dipl-4-f1",
         "fileName": "Diploma in Engineering 4th Semester 2022 - File 1.pdf",
-        "students": 277,
-        "passed": 199,
-        "failed": 78
+        "students": 49,
+        "passed": 36,
+        "failed": 13
       }
     ],
     "rollStart": 440008,
-    "rollEnd": 441421
+    "rollEnd": 440242
   },
   {
     "id": "pub-20-21-Dipl-5",
@@ -144,21 +144,21 @@
     "curriculum": "Diploma in Engineering",
     "semester": 5,
     "examYear": 2022,
-    "publicationDate": "2022-04-23",
+    "publicationDate": "2022-04-11",
     "batchLabel": "20-21",
-    "totalStudents": 277,
-    "passRate": 69.3,
+    "totalStudents": 49,
+    "passRate": 75.5,
     "files": [
       {
         "fileId": "pub-20-21-Dipl-5-f1",
         "fileName": "Diploma in Engineering 5th Semester 2022 - File 1.pdf",
-        "students": 277,
-        "passed": 192,
-        "failed": 85
+        "students": 49,
+        "passed": 37,
+        "failed": 12
       }
     ],
     "rollStart": 440008,
-    "rollEnd": 441421
+    "rollEnd": 440242
   },
   {
     "id": "pub-20-21-Dipl-6",
@@ -169,19 +169,19 @@
     "examYear": 2023,
     "publicationDate": "2023-07-05",
     "batchLabel": "20-21",
-    "totalStudents": 277,
-    "passRate": 75.1,
+    "totalStudents": 49,
+    "passRate": 79.6,
     "files": [
       {
         "fileId": "pub-20-21-Dipl-6-f1",
         "fileName": "Diploma in Engineering 6th Semester 2023 - File 1.pdf",
-        "students": 277,
-        "passed": 208,
-        "failed": 69
+        "students": 49,
+        "passed": 39,
+        "failed": 10
       }
     ],
     "rollStart": 440008,
-    "rollEnd": 441421
+    "rollEnd": 440242
   },
   {
     "id": "pub-20-21-Dipl-7",
@@ -190,21 +190,21 @@
     "curriculum": "Diploma in Engineering",
     "semester": 7,
     "examYear": 2023,
-    "publicationDate": "2023-10-24",
+    "publicationDate": "2023-10-22",
     "batchLabel": "20-21",
-    "totalStudents": 277,
-    "passRate": 69.7,
+    "totalStudents": 49,
+    "passRate": 63.3,
     "files": [
       {
         "fileId": "pub-20-21-Dipl-7-f1",
         "fileName": "Diploma in Engineering 7th Semester 2023 - File 1.pdf",
-        "students": 277,
-        "passed": 193,
-        "failed": 84
+        "students": 49,
+        "passed": 31,
+        "failed": 18
       }
     ],
     "rollStart": 440008,
-    "rollEnd": 441421
+    "rollEnd": 440242
   },
   {
     "id": "pub-20-21-Dipl-8",
@@ -215,19 +215,19 @@
     "examYear": 2024,
     "publicationDate": "2024-01-06",
     "batchLabel": "20-21",
-    "totalStudents": 277,
-    "passRate": 70.8,
+    "totalStudents": 49,
+    "passRate": 89.8,
     "files": [
       {
         "fileId": "pub-20-21-Dipl-8-f1",
         "fileName": "Diploma in Engineering 8th Semester 2024 - File 1.pdf",
-        "students": 277,
-        "passed": 196,
-        "failed": 81
+        "students": 49,
+        "passed": 44,
+        "failed": 5
       }
     ],
     "rollStart": 440008,
-    "rollEnd": 441421
+    "rollEnd": 440242
   },
   {
     "id": "pub-21-22-Dipl-1",
@@ -236,21 +236,21 @@
     "curriculum": "Diploma in Engineering",
     "semester": 1,
     "examYear": 2021,
-    "publicationDate": "2021-04-05",
+    "publicationDate": "2021-04-15",
     "batchLabel": "21-22",
-    "totalStudents": 272,
-    "passRate": 72.1,
+    "totalStudents": 53,
+    "passRate": 67.9,
     "files": [
       {
         "fileId": "pub-21-22-Dipl-1-f1",
         "fileName": "Diploma in Engineering 1th Semester 2021 - File 1.pdf",
-        "students": 272,
-        "passed": 196,
-        "failed": 76
+        "students": 53,
+        "passed": 36,
+        "failed": 17
       }
     ],
     "rollStart": 440016,
-    "rollEnd": 441426
+    "rollEnd": 440250
   },
   {
     "id": "pub-21-22-Dipl-2",
@@ -259,21 +259,21 @@
     "curriculum": "Diploma in Engineering",
     "semester": 2,
     "examYear": 2022,
-    "publicationDate": "2022-07-25",
+    "publicationDate": "2022-07-08",
     "batchLabel": "21-22",
-    "totalStudents": 272,
-    "passRate": 71,
+    "totalStudents": 53,
+    "passRate": 67.9,
     "files": [
       {
         "fileId": "pub-21-22-Dipl-2-f1",
         "fileName": "Diploma in Engineering 2th Semester 2022 - File 1.pdf",
-        "students": 272,
-        "passed": 193,
-        "failed": 79
+        "students": 53,
+        "passed": 36,
+        "failed": 17
       }
     ],
     "rollStart": 440016,
-    "rollEnd": 441426
+    "rollEnd": 440250
   },
   {
     "id": "pub-21-22-Dipl-3",
@@ -282,21 +282,21 @@
     "curriculum": "Diploma in Engineering",
     "semester": 3,
     "examYear": 2022,
-    "publicationDate": "2022-10-15",
+    "publicationDate": "2022-10-21",
     "batchLabel": "21-22",
-    "totalStudents": 272,
-    "passRate": 74.6,
+    "totalStudents": 53,
+    "passRate": 66,
     "files": [
       {
         "fileId": "pub-21-22-Dipl-3-f1",
         "fileName": "Diploma in Engineering 3th Semester 2022 - File 1.pdf",
-        "students": 272,
-        "passed": 203,
-        "failed": 69
+        "students": 53,
+        "passed": 35,
+        "failed": 18
       }
     ],
     "rollStart": 440016,
-    "rollEnd": 441426
+    "rollEnd": 440250
   },
   {
     "id": "pub-21-22-Dipl-4",
@@ -307,19 +307,19 @@
     "examYear": 2023,
     "publicationDate": "2023-01-15",
     "batchLabel": "21-22",
-    "totalStudents": 272,
-    "passRate": 68.8,
+    "totalStudents": 53,
+    "passRate": 77.4,
     "files": [
       {
         "fileId": "pub-21-22-Dipl-4-f1",
         "fileName": "Diploma in Engineering 4th Semester 2023 - File 1.pdf",
-        "students": 272,
-        "passed": 187,
-        "failed": 85
+        "students": 53,
+        "passed": 41,
+        "failed": 12
       }
     ],
     "rollStart": 440016,
-    "rollEnd": 441426
+    "rollEnd": 440250
   },
   {
     "id": "pub-21-22-Dipl-5",
@@ -328,21 +328,21 @@
     "curriculum": "Diploma in Engineering",
     "semester": 5,
     "examYear": 2023,
-    "publicationDate": "2023-04-16",
+    "publicationDate": "2023-04-07",
     "batchLabel": "21-22",
-    "totalStudents": 272,
-    "passRate": 74.3,
+    "totalStudents": 53,
+    "passRate": 75.5,
     "files": [
       {
         "fileId": "pub-21-22-Dipl-5-f1",
         "fileName": "Diploma in Engineering 5th Semester 2023 - File 1.pdf",
-        "students": 272,
-        "passed": 202,
-        "failed": 70
+        "students": 53,
+        "passed": 40,
+        "failed": 13
       }
     ],
     "rollStart": 440016,
-    "rollEnd": 441426
+    "rollEnd": 440250
   },
   {
     "id": "pub-21-22-Dipl-6",
@@ -351,21 +351,21 @@
     "curriculum": "Diploma in Engineering",
     "semester": 6,
     "examYear": 2024,
-    "publicationDate": "2024-07-16",
+    "publicationDate": "2024-07-23",
     "batchLabel": "21-22",
-    "totalStudents": 272,
-    "passRate": 74.6,
+    "totalStudents": 53,
+    "passRate": 81.1,
     "files": [
       {
         "fileId": "pub-21-22-Dipl-6-f1",
         "fileName": "Diploma in Engineering 6th Semester 2024 - File 1.pdf",
-        "students": 272,
-        "passed": 203,
-        "failed": 69
+        "students": 53,
+        "passed": 43,
+        "failed": 10
       }
     ],
     "rollStart": 440016,
-    "rollEnd": 441426
+    "rollEnd": 440250
   },
   {
     "id": "pub-21-22-Dipl-7",
@@ -374,21 +374,21 @@
     "curriculum": "Diploma in Engineering",
     "semester": 7,
     "examYear": 2024,
-    "publicationDate": "2024-10-12",
+    "publicationDate": "2024-10-16",
     "batchLabel": "21-22",
-    "totalStudents": 272,
-    "passRate": 74.3,
+    "totalStudents": 53,
+    "passRate": 71.7,
     "files": [
       {
         "fileId": "pub-21-22-Dipl-7-f1",
         "fileName": "Diploma in Engineering 7th Semester 2024 - File 1.pdf",
-        "students": 272,
-        "passed": 202,
-        "failed": 70
+        "students": 53,
+        "passed": 38,
+        "failed": 15
       }
     ],
     "rollStart": 440016,
-    "rollEnd": 441426
+    "rollEnd": 440250
   },
   {
     "id": "pub-21-22-Dipl-8",
@@ -397,21 +397,21 @@
     "curriculum": "Diploma in Engineering",
     "semester": 8,
     "examYear": 2025,
-    "publicationDate": "2025-01-17",
+    "publicationDate": "2025-01-12",
     "batchLabel": "21-22",
-    "totalStudents": 272,
-    "passRate": 71.7,
+    "totalStudents": 53,
+    "passRate": 73.6,
     "files": [
       {
         "fileId": "pub-21-22-Dipl-8-f1",
         "fileName": "Diploma in Engineering 8th Semester 2025 - File 1.pdf",
-        "students": 272,
-        "passed": 195,
-        "failed": 77
+        "students": 53,
+        "passed": 39,
+        "failed": 14
       }
     ],
     "rollStart": 440016,
-    "rollEnd": 441426
+    "rollEnd": 440250
   },
   {
     "id": "pub-22-23-Dipl-1",
@@ -420,21 +420,21 @@
     "curriculum": "Diploma in Textile Engineering",
     "semester": 1,
     "examYear": 2022,
-    "publicationDate": "2022-04-24",
+    "publicationDate": "2022-04-19",
     "batchLabel": "22-23",
-    "totalStudents": 302,
-    "passRate": 77.2,
+    "totalStudents": 46,
+    "passRate": 82.6,
     "files": [
       {
         "fileId": "pub-22-23-Dipl-1-f1",
         "fileName": "Diploma in Textile Engineering 1th Semester 2022 - File 1.pdf",
-        "students": 302,
-        "passed": 233,
-        "failed": 69
+        "students": 46,
+        "passed": 38,
+        "failed": 8
       }
     ],
     "rollStart": 440024,
-    "rollEnd": 441434
+    "rollEnd": 440254
   },
   {
     "id": "pub-22-23-Dipl-2",
@@ -443,21 +443,21 @@
     "curriculum": "Diploma in Textile Engineering",
     "semester": 2,
     "examYear": 2023,
-    "publicationDate": "2023-07-12",
+    "publicationDate": "2023-07-22",
     "batchLabel": "22-23",
-    "totalStudents": 302,
-    "passRate": 71.9,
+    "totalStudents": 46,
+    "passRate": 80.4,
     "files": [
       {
         "fileId": "pub-22-23-Dipl-2-f1",
         "fileName": "Diploma in Textile Engineering 2th Semester 2023 - File 1.pdf",
-        "students": 302,
-        "passed": 217,
-        "failed": 85
+        "students": 46,
+        "passed": 37,
+        "failed": 9
       }
     ],
     "rollStart": 440024,
-    "rollEnd": 441434
+    "rollEnd": 440254
   },
   {
     "id": "pub-22-23-Dipl-3",
@@ -466,21 +466,21 @@
     "curriculum": "Diploma in Textile Engineering",
     "semester": 3,
     "examYear": 2023,
-    "publicationDate": "2023-10-25",
+    "publicationDate": "2023-10-17",
     "batchLabel": "22-23",
-    "totalStudents": 302,
-    "passRate": 73.2,
+    "totalStudents": 46,
+    "passRate": 76.1,
     "files": [
       {
         "fileId": "pub-22-23-Dipl-3-f1",
         "fileName": "Diploma in Textile Engineering 3th Semester 2023 - File 1.pdf",
-        "students": 302,
-        "passed": 221,
-        "failed": 81
+        "students": 46,
+        "passed": 35,
+        "failed": 11
       }
     ],
     "rollStart": 440024,
-    "rollEnd": 441434
+    "rollEnd": 440254
   },
   {
     "id": "pub-22-23-Dipl-4",
@@ -489,21 +489,21 @@
     "curriculum": "Diploma in Textile Engineering",
     "semester": 4,
     "examYear": 2024,
-    "publicationDate": "2024-01-17",
+    "publicationDate": "2024-01-23",
     "batchLabel": "22-23",
-    "totalStudents": 302,
-    "passRate": 74.5,
+    "totalStudents": 46,
+    "passRate": 69.6,
     "files": [
       {
         "fileId": "pub-22-23-Dipl-4-f1",
         "fileName": "Diploma in Textile Engineering 4th Semester 2024 - File 1.pdf",
-        "students": 302,
-        "passed": 225,
-        "failed": 77
+        "students": 46,
+        "passed": 32,
+        "failed": 14
       }
     ],
     "rollStart": 440024,
-    "rollEnd": 441434
+    "rollEnd": 440254
   },
   {
     "id": "pub-22-23-Dipl-5",
@@ -512,21 +512,21 @@
     "curriculum": "Diploma in Textile Engineering",
     "semester": 5,
     "examYear": 2024,
-    "publicationDate": "2024-04-11",
+    "publicationDate": "2024-04-05",
     "batchLabel": "22-23",
-    "totalStudents": 302,
-    "passRate": 72.2,
+    "totalStudents": 46,
+    "passRate": 67.4,
     "files": [
       {
         "fileId": "pub-22-23-Dipl-5-f1",
         "fileName": "Diploma in Textile Engineering 5th Semester 2024 - File 1.pdf",
-        "students": 302,
-        "passed": 218,
-        "failed": 84
+        "students": 46,
+        "passed": 31,
+        "failed": 15
       }
     ],
     "rollStart": 440024,
-    "rollEnd": 441434
+    "rollEnd": 440254
   },
   {
     "id": "pub-22-23-Dipl-6",
@@ -535,21 +535,21 @@
     "curriculum": "Diploma in Textile Engineering",
     "semester": 6,
     "examYear": 2025,
-    "publicationDate": "2025-07-05",
+    "publicationDate": "2025-07-09",
     "batchLabel": "22-23",
-    "totalStudents": 302,
-    "passRate": 70.5,
+    "totalStudents": 46,
+    "passRate": 76.1,
     "files": [
       {
         "fileId": "pub-22-23-Dipl-6-f1",
         "fileName": "Diploma in Textile Engineering 6th Semester 2025 - File 1.pdf",
-        "students": 302,
-        "passed": 213,
-        "failed": 89
+        "students": 46,
+        "passed": 35,
+        "failed": 11
       }
     ],
     "rollStart": 440024,
-    "rollEnd": 441434
+    "rollEnd": 440254
   },
   {
     "id": "pub-22-23-Dipl-7",
@@ -558,21 +558,21 @@
     "curriculum": "Diploma in Textile Engineering",
     "semester": 7,
     "examYear": 2025,
-    "publicationDate": "2025-10-11",
+    "publicationDate": "2025-10-16",
     "batchLabel": "22-23",
-    "totalStudents": 302,
-    "passRate": 74.2,
+    "totalStudents": 46,
+    "passRate": 69.6,
     "files": [
       {
         "fileId": "pub-22-23-Dipl-7-f1",
         "fileName": "Diploma in Textile Engineering 7th Semester 2025 - File 1.pdf",
-        "students": 302,
-        "passed": 224,
-        "failed": 78
+        "students": 46,
+        "passed": 32,
+        "failed": 14
       }
     ],
     "rollStart": 440024,
-    "rollEnd": 441434
+    "rollEnd": 440254
   },
   {
     "id": "pub-22-23-Dipl-8",
@@ -581,21 +581,21 @@
     "curriculum": "Diploma in Textile Engineering",
     "semester": 8,
     "examYear": 2026,
-    "publicationDate": "2026-01-21",
+    "publicationDate": "2026-01-25",
     "batchLabel": "22-23",
-    "totalStudents": 302,
-    "passRate": 74.8,
+    "totalStudents": 46,
+    "passRate": 67.4,
     "files": [
       {
         "fileId": "pub-22-23-Dipl-8-f1",
         "fileName": "Diploma in Textile Engineering 8th Semester 2026 - File 1.pdf",
-        "students": 302,
-        "passed": 226,
-        "failed": 76
+        "students": 46,
+        "passed": 31,
+        "failed": 15
       }
     ],
     "rollStart": 440024,
-    "rollEnd": 441434
+    "rollEnd": 440254
   },
   {
     "id": "pub-23-24-Dipl-1",
@@ -604,21 +604,21 @@
     "curriculum": "Diploma in Engineering",
     "semester": 1,
     "examYear": 2023,
-    "publicationDate": "2023-04-17",
+    "publicationDate": "2023-04-24",
     "batchLabel": "23-24",
-    "totalStudents": 301,
-    "passRate": 75.1,
+    "totalStudents": 57,
+    "passRate": 71.9,
     "files": [
       {
         "fileId": "pub-23-24-Dipl-1-f1",
         "fileName": "Diploma in Engineering 1th Semester 2023 - File 1.pdf",
-        "students": 301,
-        "passed": 226,
-        "failed": 75
+        "students": 57,
+        "passed": 41,
+        "failed": 16
       }
     ],
     "rollStart": 440029,
-    "rollEnd": 441439
+    "rollEnd": 440262
   },
   {
     "id": "pub-23-24-Dipl-2",
@@ -627,21 +627,21 @@
     "curriculum": "Diploma in Engineering",
     "semester": 2,
     "examYear": 2024,
-    "publicationDate": "2024-07-14",
+    "publicationDate": "2024-07-09",
     "batchLabel": "23-24",
-    "totalStudents": 301,
-    "passRate": 74.8,
+    "totalStudents": 57,
+    "passRate": 75.4,
     "files": [
       {
         "fileId": "pub-23-24-Dipl-2-f1",
         "fileName": "Diploma in Engineering 2th Semester 2024 - File 1.pdf",
-        "students": 301,
-        "passed": 225,
-        "failed": 76
+        "students": 57,
+        "passed": 43,
+        "failed": 14
       }
     ],
     "rollStart": 440029,
-    "rollEnd": 441439
+    "rollEnd": 440262
   },
   {
     "id": "pub-23-24-Dipl-3",
@@ -650,21 +650,21 @@
     "curriculum": "Diploma in Engineering",
     "semester": 3,
     "examYear": 2024,
-    "publicationDate": "2024-10-09",
+    "publicationDate": "2024-10-19",
     "batchLabel": "23-24",
-    "totalStudents": 301,
-    "passRate": 74.4,
+    "totalStudents": 57,
+    "passRate": 68.4,
     "files": [
       {
         "fileId": "pub-23-24-Dipl-3-f1",
         "fileName": "Diploma in Engineering 3th Semester 2024 - File 1.pdf",
-        "students": 301,
-        "passed": 224,
-        "failed": 77
+        "students": 57,
+        "passed": 39,
+        "failed": 18
       }
     ],
     "rollStart": 440029,
-    "rollEnd": 441439
+    "rollEnd": 440262
   },
   {
     "id": "pub-23-24-Dipl-4",
@@ -673,21 +673,21 @@
     "curriculum": "Diploma in Engineering",
     "semester": 4,
     "examYear": 2025,
-    "publicationDate": "2025-01-10",
+    "publicationDate": "2025-01-07",
     "batchLabel": "23-24",
-    "totalStudents": 301,
-    "passRate": 79.4,
+    "totalStudents": 57,
+    "passRate": 75.4,
     "files": [
       {
         "fileId": "pub-23-24-Dipl-4-f1",
         "fileName": "Diploma in Engineering 4th Semester 2025 - File 1.pdf",
-        "students": 301,
-        "passed": 239,
-        "failed": 62
+        "students": 57,
+        "passed": 43,
+        "failed": 14
       }
     ],
     "rollStart": 440029,
-    "rollEnd": 441439
+    "rollEnd": 440262
   },
   {
     "id": "pub-23-24-Dipl-5",
@@ -696,21 +696,21 @@
     "curriculum": "Diploma in Engineering",
     "semester": 5,
     "examYear": 2025,
-    "publicationDate": "2025-04-22",
+    "publicationDate": "2025-04-16",
     "batchLabel": "23-24",
-    "totalStudents": 301,
-    "passRate": 67.1,
+    "totalStudents": 57,
+    "passRate": 77.2,
     "files": [
       {
         "fileId": "pub-23-24-Dipl-5-f1",
         "fileName": "Diploma in Engineering 5th Semester 2025 - File 1.pdf",
-        "students": 301,
-        "passed": 202,
-        "failed": 99
+        "students": 57,
+        "passed": 44,
+        "failed": 13
       }
     ],
     "rollStart": 440029,
-    "rollEnd": 441439
+    "rollEnd": 440262
   },
   {
     "id": "pub-23-24-Dipl-6",
@@ -719,21 +719,21 @@
     "curriculum": "Diploma in Engineering",
     "semester": 6,
     "examYear": 2026,
-    "publicationDate": "2026-07-08",
+    "publicationDate": "2026-07-11",
     "batchLabel": "23-24",
-    "totalStudents": 301,
-    "passRate": 75.4,
+    "totalStudents": 57,
+    "passRate": 66.7,
     "files": [
       {
         "fileId": "pub-23-24-Dipl-6-f1",
         "fileName": "Diploma in Engineering 6th Semester 2026 - File 1.pdf",
-        "students": 301,
-        "passed": 227,
-        "failed": 74
+        "students": 57,
+        "passed": 38,
+        "failed": 19
       }
     ],
     "rollStart": 440029,
-    "rollEnd": 441439
+    "rollEnd": 440262
   },
   {
     "id": "pub-23-24-Dipl-7",
@@ -742,21 +742,21 @@
     "curriculum": "Diploma in Engineering",
     "semester": 7,
     "examYear": 2026,
-    "publicationDate": "2026-10-24",
+    "publicationDate": "2026-10-18",
     "batchLabel": "23-24",
-    "totalStudents": 301,
-    "passRate": 70.8,
+    "totalStudents": 57,
+    "passRate": 75.4,
     "files": [
       {
         "fileId": "pub-23-24-Dipl-7-f1",
         "fileName": "Diploma in Engineering 7th Semester 2026 - File 1.pdf",
-        "students": 301,
-        "passed": 213,
-        "failed": 88
+        "students": 57,
+        "passed": 43,
+        "failed": 14
       }
     ],
     "rollStart": 440029,
-    "rollEnd": 441439
+    "rollEnd": 440262
   },
   {
     "id": "pub-23-24-Dipl-8",
@@ -765,20 +765,20 @@
     "curriculum": "Diploma in Engineering",
     "semester": 8,
     "examYear": 2027,
-    "publicationDate": "2027-01-22",
+    "publicationDate": "2027-01-05",
     "batchLabel": "23-24",
-    "totalStudents": 301,
-    "passRate": 72.8,
+    "totalStudents": 57,
+    "passRate": 71.9,
     "files": [
       {
         "fileId": "pub-23-24-Dipl-8-f1",
         "fileName": "Diploma in Engineering 8th Semester 2027 - File 1.pdf",
-        "students": 301,
-        "passed": 219,
-        "failed": 82
+        "students": 57,
+        "passed": 41,
+        "failed": 16
       }
     ],
     "rollStart": 440029,
-    "rollEnd": 441439
+    "rollEnd": 440262
   }
 ]

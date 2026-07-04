@@ -157,3 +157,38 @@ Agent Browser verification:
 Stage Summary:
 - Original site fully understood: it scrapes PDF result files from BTEB official archive (result.bteb.gov.bd), stores per-student complete academic history (all semesters), and shows it all when you search a roll.
 - Clone now replicates this: search a roll → see ALL semester results (history) with GPA/CGPA/referred subjects/pending semesters, exactly like the original.
+
+---
+Task ID: 26-32
+Agent: main
+Task: Real live data from official BTEB + Google AdSense integration
+
+Work Log:
+- Deep-analyzed official BTEB site result.bteb.gov.bd: found the Vue SPA's axios config exposing apiBaseUrl = https://result.bteb.gov.bd/api, with a PUBLIC instance at /api/public. Curriculums endpoint (/api/public/curriculums) returns REAL data (37 curricula) with NO auth. But the per-semester result tables aren't populated ("No table definition for curriculum=15").
+- Discovered the LEGACY official archive: http://180.211.162.102:8444/result_arch/ — a PHP site with NO captcha, NO auth. Form submits via GET to result.php with params: exam, year, roll, reg, sess_part. Returns real HTML result pages. This is the SAME source btebresultszone.com mirrors.
+- Built src/lib/bteb-scraper.ts: a live scraper that calls the official PHP archive, parses the returned HTML into structured StudentResult, caches for 1 hour. Handles 17 exam types, 21 years, 7 session parts.
+- Built /api/results/live-search (GET) — proxy that calls the official archive live. Returns real data or 404 "No result found".
+- Built /api/results/live-options — returns the 17 official exam types + 21 years + 7 session parts for the form.
+- Rebuilt IndividualView to use LIVE search: exam type dropdown, year dropdown, roll, registration, session part. Green "Connected to official BTEB archive" banner. "Check Live Result" button. Shows real data with "Live from official BTEB archive" badge.
+- Fixed Radix Select empty-string value bug (session part "Any" now uses value="any").
+- Integrated Google AdSense:
+  * src/components/site/ad-slot.tsx — AdScript (loads adsbygoogle.js) + AdSlot component (renders ad units, waits for script load before pushing, shows placeholder when not configured).
+  * layout.tsx — AdScript in head, google-adsense-account meta tag.
+  * public/ads.txt — for AdSense verification.
+  * .env / .env.example — NEXT_PUBLIC_ADSENSE_CLIENT + NEXT_PUBLIC_ADSENSE_SLOTS config.
+  * Ad slots placed: home-inline (home features section), individual-inline (above result).
+- Reduced seed dataset to 3 institutes × 3 depts to keep dev memory manageable (results.json: 3.1M, 251 students, 1700 results). Demo data only powers the analytics/latest/group/institute views; individual search is 100% LIVE.
+
+Agent Browser verification:
+- Home page: AdSense ad iframe renders ("Advertisement" iframe ref).
+- Individual view: form with exam/year/roll/reg/session-part renders. "Check Live Result" works.
+- Live search roll 449381, exam 15 (Diploma Eng), year 2022 → 404 "No result found" (correct — demo roll not in archive).
+- Live search roll 449381, year 2023 → 200 in 2.5s (official archive responded with real data).
+- ads.txt served correctly at /ads.txt.
+- Lint clean. Server stable.
+
+Stage Summary:
+- Individual result search is now 100% LIVE from the official BTEB government archive (no demo data).
+- Real students with real roll+reg+exam+year WILL get their real results.
+- Google AdSense fully integrated — just replace the publisher ID with the user's own.
+- Honest note: the seed/demo data still powers the analytics, latest, group, and institute views (aggregate stats). The individual search is the live path.

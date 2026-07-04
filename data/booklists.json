@@ -10,7 +10,7 @@
         "code": "67211",
         "name": "Computer Fundamentals",
         "credit": 3,
-        "author": "Engr. S. M. Nazrul Islam",
+        "author": "Dr. Quazi S. Hossain",
         "edition": "3rd Edition",
         "publisher": "Bangladesh Book Depot"
       },
@@ -19,159 +19,159 @@
         "name": "Electrical Circuits I",
         "credit": 4,
         "author": "Prof. M. Rafiqul Islam",
-        "edition": "2nd Edition",
-        "publisher": "Bangla Book House"
+        "edition": "3rd Edition",
+        "publisher": "Student Publications"
       },
       {
         "code": "67213",
         "name": "Mathematics I",
         "credit": 4,
-        "author": "Prof. M. Rafiqul Islam",
-        "edition": "1st Edition",
-        "publisher": "Bangla Book House"
+        "author": "Dr. Quazi S. Hossain",
+        "edition": "Revised Edition",
+        "publisher": "Technical Education Board"
       },
       {
         "code": "67214",
         "name": "Physics I",
         "credit": 3,
-        "author": "Prof. M. Rafiqul Islam",
-        "edition": "2nd Edition",
+        "author": "Md. Ashraf Hossain",
+        "edition": "1st Edition",
         "publisher": "Bangla Book House"
       },
       {
         "code": "67215",
         "name": "English I",
         "credit": 3,
-        "author": "Engr. S. M. Nazrul Islam",
+        "author": "Prof. M. Rafiqul Islam",
         "edition": "2nd Edition",
-        "publisher": "Technical Education Board"
+        "publisher": "Student Publications"
       },
       {
         "code": "67221",
         "name": "Programming with C",
         "credit": 4,
-        "author": "Engr. S. M. Nazrul Islam",
-        "edition": "Revised Edition",
-        "publisher": "Technical Education Board"
+        "author": "Prof. A. K. M. Fazlul Haque",
+        "edition": "2nd Edition",
+        "publisher": "Bangladesh Book Depot"
       },
       {
         "code": "67222",
         "name": "Digital Electronics",
         "credit": 3,
-        "author": "Prof. A. K. M. Fazlul Haque",
-        "edition": "1st Edition",
-        "publisher": "Student Publications"
+        "author": "Md. Ashraf Hossain",
+        "edition": "Revised Edition",
+        "publisher": "Bangladesh Book Depot"
       },
       {
         "code": "67223",
         "name": "Data Structure",
         "credit": 4,
         "author": "Prof. M. Rafiqul Islam",
-        "edition": "3rd Edition",
+        "edition": "2nd Edition",
         "publisher": "Technical Education Board"
       },
       {
         "code": "67224",
         "name": "Discrete Mathematics",
         "credit": 3,
-        "author": "Prof. M. Rafiqul Islam",
-        "edition": "3rd Edition",
-        "publisher": "Technical Education Board"
+        "author": "Dr. M. A. Wadud",
+        "edition": "1st Edition",
+        "publisher": "Bangla Book House"
       },
       {
         "code": "67231",
         "name": "Object Oriented Programming",
         "credit": 4,
-        "author": "Dr. Quazi S. Hossain",
+        "author": "Prof. A. K. M. Fazlul Haque",
         "edition": "3rd Edition",
-        "publisher": "Student Publications"
+        "publisher": "Technical Education Board"
       },
       {
         "code": "67232",
         "name": "Database Management System",
         "credit": 4,
-        "author": "Md. Ashraf Hossain",
-        "edition": "1st Edition",
-        "publisher": "Student Publications"
+        "author": "Dr. M. A. Wadud",
+        "edition": "Revised Edition",
+        "publisher": "Bangla Book House"
       },
       {
         "code": "67233",
         "name": "Operating System",
         "credit": 3,
-        "author": "Prof. M. Rafiqul Islam",
-        "edition": "3rd Edition",
-        "publisher": "Student Publications"
+        "author": "Engr. S. M. Nazrul Islam",
+        "edition": "Revised Edition",
+        "publisher": "Bangla Book House"
       },
       {
         "code": "67241",
         "name": "Computer Networks",
         "credit": 4,
-        "author": "Dr. M. A. Wadud",
+        "author": "Md. Ashraf Hossain",
         "edition": "Revised Edition",
-        "publisher": "Bangladesh Book Depot"
+        "publisher": "Technical Education Board"
       },
       {
         "code": "67242",
         "name": "Software Engineering",
         "credit": 3,
-        "author": "Md. Ashraf Hossain",
-        "edition": "Revised Edition",
+        "author": "Prof. A. K. M. Fazlul Haque",
+        "edition": "2nd Edition",
         "publisher": "Bangladesh Book Depot"
       },
       {
         "code": "67243",
         "name": "Web Engineering",
         "credit": 4,
-        "author": "Dr. M. A. Wadud",
+        "author": "Prof. M. Rafiqul Islam",
         "edition": "2nd Edition",
-        "publisher": "Bangladesh Book Depot"
+        "publisher": "Technical Education Board"
       },
       {
         "code": "67251",
         "name": "Data Communication",
         "credit": 3,
-        "author": "Dr. M. A. Wadud",
+        "author": "Engr. S. M. Nazrul Islam",
         "edition": "2nd Edition",
-        "publisher": "Bangla Book House"
+        "publisher": "Technical Education Board"
       },
       {
         "code": "67252",
         "name": "Microprocessor & Interfacing",
         "credit": 4,
-        "author": "Dr. M. A. Wadud",
-        "edition": "Revised Edition",
+        "author": "Md. Ashraf Hossain",
+        "edition": "3rd Edition",
         "publisher": "Student Publications"
       },
       {
         "code": "67261",
         "name": "Project Work",
         "credit": 4,
-        "author": "Prof. M. Rafiqul Islam",
-        "edition": "1st Edition",
+        "author": "Prof. A. K. M. Fazlul Haque",
+        "edition": "Revised Edition",
         "publisher": "Technical Education Board"
       },
       {
         "code": "67262",
         "name": "In-plant Training",
         "credit": 2,
-        "author": "Engr. S. M. Nazrul Islam",
-        "edition": "3rd Edition",
-        "publisher": "Technical Education Board"
+        "author": "Dr. Quazi S. Hossain",
+        "edition": "1st Edition",
+        "publisher": "Bangla Book House"
       },
       {
         "code": "67271",
         "name": "Cyber Security",
         "credit": 3,
         "author": "Prof. A. K. M. Fazlul Haque",
-        "edition": "3rd Edition",
+        "edition": "2nd Edition",
         "publisher": "Technical Education Board"
       },
       {
         "code": "67272",
         "name": "Cloud Computing",
         "credit": 3,
-        "author": "Prof. A. K. M. Fazlul Haque",
-        "edition": "Revised Edition",
+        "author": "Dr. Quazi S. Hossain",
+        "edition": "2nd Edition",
         "publisher": "Technical Education Board"
       },
       {
@@ -179,8 +179,8 @@
         "name": "Machine Learning",
         "credit": 3,
         "author": "Engr. S. M. Nazrul Islam",
-        "edition": "3rd Edition",
-        "publisher": "Student Publications"
+        "edition": "2nd Edition",
+        "publisher": "Technical Education Board"
       },
       {
         "code": "67282",
@@ -188,14 +188,14 @@
         "credit": 4,
         "author": "Md. Ashraf Hossain",
         "edition": "3rd Edition",
-        "publisher": "Bangla Book House"
+        "publisher": "Student Publications"
       },
       {
         "code": "67283",
         "name": "IT Entrepreneurship",
         "credit": 2,
         "author": "Dr. M. A. Wadud",
-        "edition": "3rd Edition",
+        "edition": "1st Edition",
         "publisher": "Student Publications"
       }
     ]
@@ -211,137 +211,137 @@
         "code": "66211",
         "name": "Electrical Circuits I",
         "credit": 4,
-        "author": "Dr. M. A. Wadud",
-        "edition": "2nd Edition",
-        "publisher": "Bangladesh Book Depot"
+        "author": "Md. Ashraf Hossain",
+        "edition": "3rd Edition",
+        "publisher": "Bangla Book House"
       },
       {
         "code": "66212",
         "name": "Electrical Drafting",
         "credit": 3,
-        "author": "Dr. M. A. Wadud",
-        "edition": "1st Edition",
-        "publisher": "Bangladesh Book Depot"
+        "author": "Dr. Quazi S. Hossain",
+        "edition": "Revised Edition",
+        "publisher": "Technical Education Board"
       },
       {
         "code": "66213",
         "name": "Mathematics I",
         "credit": 4,
-        "author": "Dr. Quazi S. Hossain",
+        "author": "Dr. M. A. Wadud",
         "edition": "2nd Edition",
-        "publisher": "Bangla Book House"
+        "publisher": "Bangladesh Book Depot"
       },
       {
         "code": "66214",
         "name": "Physics I",
         "credit": 3,
-        "author": "Dr. Quazi S. Hossain",
-        "edition": "2nd Edition",
-        "publisher": "Student Publications"
+        "author": "Prof. A. K. M. Fazlul Haque",
+        "edition": "3rd Edition",
+        "publisher": "Bangladesh Book Depot"
       },
       {
         "code": "66215",
         "name": "English I",
         "credit": 3,
         "author": "Prof. A. K. M. Fazlul Haque",
-        "edition": "Revised Edition",
+        "edition": "3rd Edition",
         "publisher": "Student Publications"
       },
       {
         "code": "66221",
         "name": "Electrical Machines I",
         "credit": 4,
-        "author": "Dr. M. A. Wadud",
-        "edition": "Revised Edition",
-        "publisher": "Technical Education Board"
+        "author": "Md. Ashraf Hossain",
+        "edition": "2nd Edition",
+        "publisher": "Bangladesh Book Depot"
       },
       {
         "code": "66222",
         "name": "Electrical Circuits II",
         "credit": 4,
         "author": "Engr. S. M. Nazrul Islam",
-        "edition": "1st Edition",
-        "publisher": "Technical Education Board"
+        "edition": "3rd Edition",
+        "publisher": "Bangladesh Book Depot"
       },
       {
         "code": "66223",
         "name": "Electronics I",
         "credit": 3,
-        "author": "Prof. A. K. M. Fazlul Haque",
-        "edition": "2nd Edition",
-        "publisher": "Student Publications"
+        "author": "Md. Ashraf Hossain",
+        "edition": "Revised Edition",
+        "publisher": "Bangla Book House"
       },
       {
         "code": "66231",
         "name": "Electrical Machines II",
         "credit": 4,
-        "author": "Prof. M. Rafiqul Islam",
-        "edition": "1st Edition",
-        "publisher": "Bangladesh Book Depot"
+        "author": "Dr. Quazi S. Hossain",
+        "edition": "3rd Edition",
+        "publisher": "Bangla Book House"
       },
       {
         "code": "66232",
         "name": "Power System I",
         "credit": 4,
-        "author": "Dr. Quazi S. Hossain",
+        "author": "Prof. M. Rafiqul Islam",
         "edition": "1st Edition",
-        "publisher": "Bangla Book House"
+        "publisher": "Student Publications"
       },
       {
         "code": "66233",
         "name": "Electrical Measurements",
         "credit": 3,
-        "author": "Dr. M. A. Wadud",
-        "edition": "1st Edition",
+        "author": "Prof. M. Rafiqul Islam",
+        "edition": "Revised Edition",
         "publisher": "Student Publications"
       },
       {
         "code": "66241",
         "name": "Power System II",
         "credit": 4,
-        "author": "Engr. S. M. Nazrul Islam",
-        "edition": "Revised Edition",
-        "publisher": "Technical Education Board"
+        "author": "Dr. Quazi S. Hossain",
+        "edition": "3rd Edition",
+        "publisher": "Bangla Book House"
       },
       {
         "code": "66242",
         "name": "Switchgear & Protection",
         "credit": 3,
-        "author": "Prof. A. K. M. Fazlul Haque",
-        "edition": "1st Edition",
-        "publisher": "Technical Education Board"
+        "author": "Engr. S. M. Nazrul Islam",
+        "edition": "3rd Edition",
+        "publisher": "Bangladesh Book Depot"
       },
       {
         "code": "66243",
         "name": "Electrical Wiring",
         "credit": 3,
         "author": "Engr. S. M. Nazrul Islam",
-        "edition": "3rd Edition",
-        "publisher": "Student Publications"
+        "edition": "1st Edition",
+        "publisher": "Bangladesh Book Depot"
       },
       {
         "code": "66251",
         "name": "Industrial Electronics",
         "credit": 3,
-        "author": "Md. Ashraf Hossain",
-        "edition": "3rd Edition",
-        "publisher": "Technical Education Board"
+        "author": "Prof. M. Rafiqul Islam",
+        "edition": "Revised Edition",
+        "publisher": "Bangla Book House"
       },
       {
         "code": "66261",
         "name": "Project Work",
         "credit": 4,
-        "author": "Engr. S. M. Nazrul Islam",
-        "edition": "2nd Edition",
-        "publisher": "Technical Education Board"
+        "author": "Prof. A. K. M. Fazlul Haque",
+        "edition": "1st Edition",
+        "publisher": "Student Publications"
       },
       {
         "code": "66262",
         "name": "In-plant Training",
         "credit": 2,
-        "author": "Dr. M. A. Wadud",
+        "author": "Prof. A. K. M. Fazlul Haque",
         "edition": "2nd Edition",
-        "publisher": "Student Publications"
+        "publisher": "Bangladesh Book Depot"
       }
     ]
   },
@@ -356,40 +356,40 @@
         "code": "65211",
         "name": "Electrical Circuits I",
         "credit": 4,
-        "author": "Prof. A. K. M. Fazlul Haque",
-        "edition": "2nd Edition",
+        "author": "Prof. M. Rafiqul Islam",
+        "edition": "Revised Edition",
         "publisher": "Student Publications"
       },
       {
         "code": "65212",
         "name": "Electronics Fundamentals",
         "credit": 3,
-        "author": "Dr. M. A. Wadud",
-        "edition": "2nd Edition",
+        "author": "Dr. Quazi S. Hossain",
+        "edition": "3rd Edition",
         "publisher": "Bangla Book House"
       },
       {
         "code": "65213",
         "name": "Mathematics I",
         "credit": 4,
-        "author": "Prof. M. Rafiqul Islam",
+        "author": "Dr. Quazi S. Hossain",
         "edition": "3rd Edition",
-        "publisher": "Student Publications"
+        "publisher": "Bangla Book House"
       },
       {
         "code": "65221",
         "name": "Digital Electronics",
         "credit": 4,
-        "author": "Prof. M. Rafiqul Islam",
-        "edition": "1st Edition",
-        "publisher": "Technical Education Board"
+        "author": "Engr. S. M. Nazrul Islam",
+        "edition": "3rd Edition",
+        "publisher": "Bangladesh Book Depot"
       },
       {
         "code": "65222",
         "name": "Electronic Devices",
         "credit": 3,
-        "author": "Prof. A. K. M. Fazlul Haque",
-        "edition": "1st Edition",
+        "author": "Prof. M. Rafiqul Islam",
+        "edition": "2nd Edition",
         "publisher": "Technical Education Board"
       },
       {
@@ -405,48 +405,48 @@
         "name": "Microprocessor",
         "credit": 4,
         "author": "Md. Ashraf Hossain",
-        "edition": "1st Edition",
-        "publisher": "Bangla Book House"
+        "edition": "3rd Edition",
+        "publisher": "Bangladesh Book Depot"
       },
       {
         "code": "65241",
         "name": "Microcontroller",
         "credit": 4,
-        "author": "Prof. A. K. M. Fazlul Haque",
+        "author": "Dr. Quazi S. Hossain",
         "edition": "2nd Edition",
-        "publisher": "Bangladesh Book Depot"
+        "publisher": "Student Publications"
       },
       {
         "code": "65242",
         "name": "Communication Electronics",
         "credit": 3,
         "author": "Dr. M. A. Wadud",
-        "edition": "Revised Edition",
-        "publisher": "Bangladesh Book Depot"
+        "edition": "1st Edition",
+        "publisher": "Bangla Book House"
       },
       {
         "code": "65251",
         "name": "Industrial Electronics",
         "credit": 3,
-        "author": "Engr. S. M. Nazrul Islam",
-        "edition": "2nd Edition",
-        "publisher": "Technical Education Board"
+        "author": "Md. Ashraf Hossain",
+        "edition": "1st Edition",
+        "publisher": "Student Publications"
       },
       {
         "code": "65261",
         "name": "Project Work",
         "credit": 4,
-        "author": "Prof. A. K. M. Fazlul Haque",
-        "edition": "3rd Edition",
+        "author": "Prof. M. Rafiqul Islam",
+        "edition": "2nd Edition",
         "publisher": "Bangla Book House"
       },
       {
         "code": "65262",
         "name": "In-plant Training",
         "credit": 2,
-        "author": "Dr. Quazi S. Hossain",
+        "author": "Md. Ashraf Hossain",
         "edition": "3rd Edition",
-        "publisher": "Bangla Book House"
+        "publisher": "Bangladesh Book Depot"
       }
     ]
   },
@@ -461,105 +461,105 @@
         "code": "64211",
         "name": "Engineering Materials",
         "credit": 3,
-        "author": "Md. Ashraf Hossain",
-        "edition": "3rd Edition",
-        "publisher": "Bangla Book House"
+        "author": "Dr. M. A. Wadud",
+        "edition": "2nd Edition",
+        "publisher": "Student Publications"
       },
       {
         "code": "64212",
         "name": "Engineering Drawing I",
         "credit": 4,
-        "author": "Engr. S. M. Nazrul Islam",
+        "author": "Prof. A. K. M. Fazlul Haque",
         "edition": "1st Edition",
-        "publisher": "Bangladesh Book Depot"
+        "publisher": "Technical Education Board"
       },
       {
         "code": "64213",
         "name": "Mathematics I",
         "credit": 4,
-        "author": "Engr. S. M. Nazrul Islam",
-        "edition": "Revised Edition",
-        "publisher": "Bangla Book House"
+        "author": "Prof. M. Rafiqul Islam",
+        "edition": "2nd Edition",
+        "publisher": "Student Publications"
       },
       {
         "code": "64214",
         "name": "Workshop Practice I",
         "credit": 3,
         "author": "Dr. Quazi S. Hossain",
-        "edition": "3rd Edition",
-        "publisher": "Bangla Book House"
+        "edition": "Revised Edition",
+        "publisher": "Bangladesh Book Depot"
       },
       {
         "code": "64221",
         "name": "Thermodynamics",
         "credit": 4,
-        "author": "Engr. S. M. Nazrul Islam",
-        "edition": "1st Edition",
+        "author": "Dr. Quazi S. Hossain",
+        "edition": "Revised Edition",
         "publisher": "Technical Education Board"
       },
       {
         "code": "64222",
         "name": "Strength of Materials",
         "credit": 4,
-        "author": "Dr. Quazi S. Hossain",
-        "edition": "3rd Edition",
-        "publisher": "Bangla Book House"
+        "author": "Prof. M. Rafiqul Islam",
+        "edition": "1st Edition",
+        "publisher": "Bangladesh Book Depot"
       },
       {
         "code": "64231",
         "name": "Fluid Mechanics",
         "credit": 4,
-        "author": "Dr. M. A. Wadud",
-        "edition": "3rd Edition",
+        "author": "Prof. M. Rafiqul Islam",
+        "edition": "Revised Edition",
         "publisher": "Bangladesh Book Depot"
       },
       {
         "code": "64232",
         "name": "Machine Design",
         "credit": 3,
-        "author": "Dr. Quazi S. Hossain",
-        "edition": "1st Edition",
+        "author": "Prof. M. Rafiqul Islam",
+        "edition": "Revised Edition",
         "publisher": "Bangladesh Book Depot"
       },
       {
         "code": "64241",
         "name": "Thermal Engineering",
         "credit": 4,
-        "author": "Engr. S. M. Nazrul Islam",
-        "edition": "3rd Edition",
+        "author": "Md. Ashraf Hossain",
+        "edition": "2nd Edition",
         "publisher": "Bangladesh Book Depot"
       },
       {
         "code": "64242",
         "name": "Production Engineering",
         "credit": 3,
-        "author": "Md. Ashraf Hossain",
-        "edition": "Revised Edition",
-        "publisher": "Technical Education Board"
+        "author": "Engr. S. M. Nazrul Islam",
+        "edition": "2nd Edition",
+        "publisher": "Bangladesh Book Depot"
       },
       {
         "code": "64251",
         "name": "Industrial Management",
         "credit": 3,
-        "author": "Md. Ashraf Hossain",
-        "edition": "2nd Edition",
-        "publisher": "Student Publications"
+        "author": "Dr. Quazi S. Hossain",
+        "edition": "1st Edition",
+        "publisher": "Bangladesh Book Depot"
       },
       {
         "code": "64261",
         "name": "Project Work",
         "credit": 4,
-        "author": "Engr. S. M. Nazrul Islam",
-        "edition": "Revised Edition",
-        "publisher": "Bangla Book House"
+        "author": "Dr. M. A. Wadud",
+        "edition": "1st Edition",
+        "publisher": "Technical Education Board"
       },
       {
         "code": "64262",
         "name": "In-plant Training",
         "credit": 2,
-        "author": "Engr. S. M. Nazrul Islam",
+        "author": "Md. Ashraf Hossain",
         "edition": "1st Edition",
-        "publisher": "Bangla Book House"
+        "publisher": "Technical Education Board"
       }
     ]
   },
@@ -574,104 +574,104 @@
         "code": "63211",
         "name": "Engineering Drawing I",
         "credit": 4,
-        "author": "Engr. S. M. Nazrul Islam",
-        "edition": "Revised Edition",
+        "author": "Prof. M. Rafiqul Islam",
+        "edition": "3rd Edition",
         "publisher": "Bangladesh Book Depot"
       },
       {
         "code": "63212",
         "name": "Mathematics I",
         "credit": 4,
-        "author": "Dr. Quazi S. Hossain",
-        "edition": "3rd Edition",
-        "publisher": "Bangla Book House"
+        "author": "Dr. M. A. Wadud",
+        "edition": "2nd Edition",
+        "publisher": "Technical Education Board"
       },
       {
         "code": "63213",
         "name": "Physics I",
         "credit": 3,
-        "author": "Dr. M. A. Wadud",
-        "edition": "3rd Edition",
-        "publisher": "Student Publications"
+        "author": "Engr. S. M. Nazrul Islam",
+        "edition": "Revised Edition",
+        "publisher": "Bangla Book House"
       },
       {
         "code": "63214",
         "name": "Civil Engineering Materials",
         "credit": 3,
         "author": "Engr. S. M. Nazrul Islam",
-        "edition": "3rd Edition",
-        "publisher": "Bangla Book House"
+        "edition": "Revised Edition",
+        "publisher": "Technical Education Board"
       },
       {
         "code": "63221",
         "name": "Surveying I",
         "credit": 4,
-        "author": "Prof. M. Rafiqul Islam",
-        "edition": "1st Edition",
-        "publisher": "Technical Education Board"
+        "author": "Md. Ashraf Hossain",
+        "edition": "2nd Edition",
+        "publisher": "Student Publications"
       },
       {
         "code": "63222",
         "name": "Mechanics of Materials",
         "credit": 4,
-        "author": "Prof. A. K. M. Fazlul Haque",
-        "edition": "1st Edition",
-        "publisher": "Technical Education Board"
+        "author": "Engr. S. M. Nazrul Islam",
+        "edition": "3rd Edition",
+        "publisher": "Bangladesh Book Depot"
       },
       {
         "code": "63231",
         "name": "Structural Mechanics",
         "credit": 4,
-        "author": "Dr. Quazi S. Hossain",
+        "author": "Md. Ashraf Hossain",
         "edition": "1st Edition",
-        "publisher": "Bangladesh Book Depot"
+        "publisher": "Technical Education Board"
       },
       {
         "code": "63232",
         "name": "Concrete Technology",
         "credit": 3,
-        "author": "Prof. A. K. M. Fazlul Haque",
-        "edition": "1st Edition",
+        "author": "Md. Ashraf Hossain",
+        "edition": "Revised Edition",
         "publisher": "Bangla Book House"
       },
       {
         "code": "63241",
         "name": "Reinforced Concrete Design",
         "credit": 4,
-        "author": "Engr. S. M. Nazrul Islam",
-        "edition": "3rd Edition",
-        "publisher": "Bangla Book House"
+        "author": "Dr. M. A. Wadud",
+        "edition": "2nd Edition",
+        "publisher": "Technical Education Board"
       },
       {
         "code": "63242",
         "name": "Geotechnical Engineering",
         "credit": 3,
-        "author": "Prof. M. Rafiqul Islam",
-        "edition": "2nd Edition",
-        "publisher": "Bangla Book House"
+        "author": "Dr. Quazi S. Hossain",
+        "edition": "Revised Edition",
+        "publisher": "Bangladesh Book Depot"
       },
       {
         "code": "63251",
         "name": "Highway Engineering",
         "credit": 4,
-        "author": "Md. Ashraf Hossain",
-        "edition": "1st Edition",
-        "publisher": "Bangladesh Book Depot"
+        "author": "Dr. M. A. Wadud",
+        "edition": "2nd Edition",
+        "publisher": "Technical Education Board"
       },
       {
         "code": "63261",
         "name": "Project Work",
         "credit": 4,
-        "author": "Engr. S. M. Nazrul Islam",
+        "author": "Prof. A. K. M. Fazlul Haque",
         "edition": "1st Edition",
-        "publisher": "Student Publications"
+        "publisher": "Bangladesh Book Depot"
       },
       {
         "code": "63262",
         "name": "In-plant Training",
         "credit": 2,
-        "author": "Dr. M. A. Wadud",
-        "edition": "3rd Edition",
+        "author": "Dr. Quazi S. Hossain",
+        "edition": "Revised Edition",
         "publisher": "Student Publications"
       }
     ]
@@ -687,89 +687,89 @@
         "code": "62211",
         "name": "Thermodynamics",
         "credit": 4,
-        "author": "Prof. A. K. M. Fazlul Haque",
-        "edition": "2nd Edition",
-        "publisher": "Student Publications"
+        "author": "Dr. M. A. Wadud",
+        "edition": "Revised Edition",
+        "publisher": "Bangladesh Book Depot"
       },
       {
         "code": "62212",
         "name": "Refrigeration Fundamentals",
         "credit": 3,
-        "author": "Md. Ashraf Hossain",
-        "edition": "Revised Edition",
-        "publisher": "Bangladesh Book Depot"
+        "author": "Prof. M. Rafiqul Islam",
+        "edition": "3rd Edition",
+        "publisher": "Student Publications"
       },
       {
         "code": "62213",
         "name": "Mathematics I",
         "credit": 4,
-        "author": "Engr. S. M. Nazrul Islam",
-        "edition": "2nd Edition",
-        "publisher": "Bangla Book House"
+        "author": "Prof. A. K. M. Fazlul Haque",
+        "edition": "Revised Edition",
+        "publisher": "Bangladesh Book Depot"
       },
       {
         "code": "62221",
         "name": "Refrigeration Systems",
         "credit": 4,
-        "author": "Engr. S. M. Nazrul Islam",
-        "edition": "2nd Edition",
-        "publisher": "Student Publications"
+        "author": "Md. Ashraf Hossain",
+        "edition": "Revised Edition",
+        "publisher": "Bangladesh Book Depot"
       },
       {
         "code": "62222",
         "name": "Air Conditioning",
         "credit": 4,
-        "author": "Prof. A. K. M. Fazlul Haque",
-        "edition": "2nd Edition",
-        "publisher": "Student Publications"
+        "author": "Engr. S. M. Nazrul Islam",
+        "edition": "1st Edition",
+        "publisher": "Bangladesh Book Depot"
       },
       {
         "code": "62231",
         "name": "Heat Transfer",
         "credit": 3,
-        "author": "Dr. M. A. Wadud",
-        "edition": "3rd Edition",
-        "publisher": "Technical Education Board"
+        "author": "Prof. M. Rafiqul Islam",
+        "edition": "1st Edition",
+        "publisher": "Bangla Book House"
       },
       {
         "code": "62232",
         "name": "Refrigeration Components",
         "credit": 4,
-        "author": "Md. Ashraf Hossain",
-        "edition": "2nd Edition",
+        "author": "Engr. S. M. Nazrul Islam",
+        "edition": "3rd Edition",
         "publisher": "Student Publications"
       },
       {
         "code": "62241",
         "name": "AC System Design",
         "credit": 4,
-        "author": "Dr. Quazi S. Hossain",
-        "edition": "1st Edition",
-        "publisher": "Technical Education Board"
+        "author": "Engr. S. M. Nazrul Islam",
+        "edition": "3rd Edition",
+        "publisher": "Bangla Book House"
       },
       {
         "code": "62251",
         "name": "Industrial Refrigeration",
         "credit": 3,
-        "author": "Prof. A. K. M. Fazlul Haque",
-        "edition": "1st Edition",
+        "author": "Prof. M. Rafiqul Islam",
+        "edition": "2nd Edition",
         "publisher": "Bangladesh Book Depot"
       },
       {
         "code": "62261",
         "name": "Project Work",
         "credit": 4,
-        "author": "Prof. A. K. M. Fazlul Haque",
-        "edition": "1st Edition",
+        "author": "Engr. S. M. Nazrul Islam",
+        "edition": "2nd Edition",
         "publisher": "Technical Education Board"
       },
       {
         "code": "62262",
         "name": "In-plant Training",
         "credit": 2,
-        "author": "Dr. M. A. Wadud",
-        "edition": "1st Edition",
-        "publisher": "Technical Education Board"
+        "author": "Engr. S. M. Nazrul Islam",
+        "edition": "2nd Edition",
+        "publisher": "Bangla Book House"
       }
     ]
   },
@@ -784,89 +784,89 @@
         "code": "61211",
         "name": "Automobile Fundamentals",
         "credit": 3,
-        "author": "Md. Ashraf Hossain",
+        "author": "Dr. M. A. Wadud",
         "edition": "1st Edition",
-        "publisher": "Technical Education Board"
+        "publisher": "Student Publications"
       },
       {
         "code": "61212",
         "name": "Engineering Drawing",
         "credit": 4,
-        "author": "Dr. M. A. Wadud",
-        "edition": "Revised Edition",
-        "publisher": "Bangla Book House"
+        "author": "Engr. S. M. Nazrul Islam",
+        "edition": "2nd Edition",
+        "publisher": "Technical Education Board"
       },
       {
         "code": "61213",
         "name": "Mathematics I",
         "credit": 4,
-        "author": "Dr. Quazi S. Hossain",
-        "edition": "Revised Edition",
-        "publisher": "Student Publications"
+        "author": "Dr. M. A. Wadud",
+        "edition": "3rd Edition",
+        "publisher": "Bangladesh Book Depot"
       },
       {
         "code": "61221",
         "name": "Automobile Engines",
         "credit": 4,
-        "author": "Engr. S. M. Nazrul Islam",
-        "edition": "1st Edition",
-        "publisher": "Bangladesh Book Depot"
+        "author": "Prof. M. Rafiqul Islam",
+        "edition": "3rd Edition",
+        "publisher": "Bangla Book House"
       },
       {
         "code": "61222",
         "name": "Automobile Chassis",
         "credit": 3,
-        "author": "Engr. S. M. Nazrul Islam",
-        "edition": "2nd Edition",
+        "author": "Dr. Quazi S. Hossain",
+        "edition": "3rd Edition",
         "publisher": "Student Publications"
       },
       {
         "code": "61231",
         "name": "Automobile Transmission",
         "credit": 4,
-        "author": "Prof. M. Rafiqul Islam",
-        "edition": "Revised Edition",
+        "author": "Engr. S. M. Nazrul Islam",
+        "edition": "3rd Edition",
         "publisher": "Student Publications"
       },
       {
         "code": "61232",
         "name": "Automobile Electrical",
         "credit": 3,
-        "author": "Md. Ashraf Hossain",
-        "edition": "2nd Edition",
+        "author": "Engr. S. M. Nazrul Islam",
+        "edition": "3rd Edition",
         "publisher": "Bangla Book House"
       },
       {
         "code": "61241",
         "name": "Automobile Maintenance",
         "credit": 4,
-        "author": "Dr. M. A. Wadud",
+        "author": "Prof. M. Rafiqul Islam",
         "edition": "3rd Edition",
-        "publisher": "Bangla Book House"
+        "publisher": "Bangladesh Book Depot"
       },
       {
         "code": "61251",
         "name": "Garage Management",
         "credit": 3,
-        "author": "Prof. M. Rafiqul Islam",
-        "edition": "3rd Edition",
-        "publisher": "Student Publications"
+        "author": "Dr. Quazi S. Hossain",
+        "edition": "2nd Edition",
+        "publisher": "Bangladesh Book Depot"
       },
       {
         "code": "61261",
         "name": "Project Work",
         "credit": 4,
-        "author": "Prof. A. K. M. Fazlul Haque",
-        "edition": "Revised Edition",
-        "publisher": "Student Publications"
+        "author": "Dr. Quazi S. Hossain",
+        "edition": "2nd Edition",
+        "publisher": "Bangla Book House"
       },
       {
         "code": "61262",
         "name": "In-plant Training",
         "credit": 2,
-        "author": "Prof. M. Rafiqul Islam",
-        "edition": "3rd Edition",
-        "publisher": "Bangla Book House"
+        "author": "Dr. Quazi S. Hossain",
+        "edition": "Revised Edition",
+        "publisher": "Technical Education Board"
       }
     ]
   },
@@ -881,9 +881,9 @@
         "code": "60211",
         "name": "Chemical Process Calculations",
         "credit": 4,
-        "author": "Dr. M. A. Wadud",
-        "edition": "2nd Edition",
-        "publisher": "Student Publications"
+        "author": "Prof. M. Rafiqul Islam",
+        "edition": "Revised Edition",
+        "publisher": "Bangladesh Book Depot"
       },
       {
         "code": "60212",
@@ -891,53 +891,53 @@
         "credit": 3,
         "author": "Prof. A. K. M. Fazlul Haque",
         "edition": "3rd Edition",
-        "publisher": "Student Publications"
+        "publisher": "Bangla Book House"
       },
       {
         "code": "60213",
         "name": "Mathematics I",
         "credit": 4,
         "author": "Dr. Quazi S. Hossain",
-        "edition": "1st Edition",
-        "publisher": "Student Publications"
+        "edition": "Revised Edition",
+        "publisher": "Technical Education Board"
       },
       {
         "code": "60221",
         "name": "Organic Chemistry",
         "credit": 3,
-        "author": "Prof. A. K. M. Fazlul Haque",
-        "edition": "2nd Edition",
+        "author": "Dr. Quazi S. Hossain",
+        "edition": "3rd Edition",
         "publisher": "Bangladesh Book Depot"
       },
       {
         "code": "60222",
         "name": "Physical Chemistry",
         "credit": 4,
-        "author": "Prof. A. K. M. Fazlul Haque",
-        "edition": "1st Edition",
-        "publisher": "Technical Education Board"
+        "author": "Prof. M. Rafiqul Islam",
+        "edition": "Revised Edition",
+        "publisher": "Student Publications"
       },
       {
         "code": "60231",
         "name": "Chemical Engineering",
         "credit": 4,
-        "author": "Md. Ashraf Hossain",
-        "edition": "Revised Edition",
+        "author": "Engr. S. M. Nazrul Islam",
+        "edition": "1st Edition",
         "publisher": "Bangla Book House"
       },
       {
         "code": "60241",
         "name": "Unit Operations",
         "credit": 4,
-        "author": "Prof. M. Rafiqul Islam",
-        "edition": "Revised Edition",
-        "publisher": "Bangladesh Book Depot"
+        "author": "Engr. S. M. Nazrul Islam",
+        "edition": "1st Edition",
+        "publisher": "Bangla Book House"
       },
       {
         "code": "60251",
         "name": "Process Control",
         "credit": 3,
-        "author": "Dr. Quazi S. Hossain",
+        "author": "Md. Ashraf Hossain",
         "edition": "3rd Edition",
         "publisher": "Bangladesh Book Depot"
       },
@@ -945,8 +945,8 @@
         "code": "60261",
         "name": "Project Work",
         "credit": 4,
-        "author": "Prof. A. K. M. Fazlul Haque",
-        "edition": "3rd Edition",
+        "author": "Engr. S. M. Nazrul Islam",
+        "edition": "1st Edition",
         "publisher": "Bangladesh Book Depot"
       },
       {
@@ -954,8 +954,8 @@
         "name": "In-plant Training",
         "credit": 2,
         "author": "Engr. S. M. Nazrul Islam",
-        "edition": "3rd Edition",
-        "publisher": "Student Publications"
+        "edition": "2nd Edition",
+        "publisher": "Bangla Book House"
       }
     ]
   },
@@ -970,31 +970,31 @@
         "code": "69211",
         "name": "Food Chemistry",
         "credit": 4,
-        "author": "Prof. A. K. M. Fazlul Haque",
-        "edition": "1st Edition",
-        "publisher": "Technical Education Board"
+        "author": "Prof. M. Rafiqul Islam",
+        "edition": "2nd Edition",
+        "publisher": "Student Publications"
       },
       {
         "code": "69212",
         "name": "Food Microbiology",
         "credit": 3,
         "author": "Dr. M. A. Wadud",
-        "edition": "3rd Edition",
+        "edition": "2nd Edition",
         "publisher": "Bangladesh Book Depot"
       },
       {
         "code": "69213",
         "name": "Mathematics I",
         "credit": 4,
-        "author": "Engr. S. M. Nazrul Islam",
-        "edition": "2nd Edition",
-        "publisher": "Bangla Book House"
+        "author": "Prof. M. Rafiqul Islam",
+        "edition": "3rd Edition",
+        "publisher": "Student Publications"
       },
       {
         "code": "69221",
         "name": "Food Processing",
         "credit": 4,
-        "author": "Md. Ashraf Hossain",
+        "author": "Dr. M. A. Wadud",
         "edition": "1st Edition",
         "publisher": "Technical Education Board"
       },
@@ -1002,23 +1002,23 @@
         "code": "69222",
         "name": "Food Engineering",
         "credit": 3,
-        "author": "Prof. A. K. M. Fazlul Haque",
-        "edition": "3rd Edition",
-        "publisher": "Student Publications"
+        "author": "Dr. M. A. Wadud",
+        "edition": "2nd Edition",
+        "publisher": "Technical Education Board"
       },
       {
         "code": "69231",
         "name": "Food Preservation",
         "credit": 4,
-        "author": "Prof. A. K. M. Fazlul Haque",
-        "edition": "2nd Edition",
-        "publisher": "Student Publications"
+        "author": "Dr. Quazi S. Hossain",
+        "edition": "3rd Edition",
+        "publisher": "Bangladesh Book Depot"
       },
       {
         "code": "69232",
         "name": "Food Quality Control",
         "credit": 3,
-        "author": "Prof. M. Rafiqul Islam",
+        "author": "Prof. A. K. M. Fazlul Haque",
         "edition": "3rd Edition",
         "publisher": "Student Publications"
       },
@@ -1026,15 +1026,15 @@
         "code": "69241",
         "name": "Food Packaging",
         "credit": 4,
-        "author": "Dr. Quazi S. Hossain",
-        "edition": "3rd Edition",
+        "author": "Md. Ashraf Hossain",
+        "edition": "2nd Edition",
         "publisher": "Bangla Book House"
       },
       {
         "code": "69251",
         "name": "Dairy Technology",
         "credit": 3,
-        "author": "Md. Ashraf Hossain",
+        "author": "Prof. M. Rafiqul Islam",
         "edition": "3rd Edition",
         "publisher": "Bangladesh Book Depot"
       },
@@ -1042,17 +1042,17 @@
         "code": "69261",
         "name": "Project Work",
         "credit": 4,
-        "author": "Prof. A. K. M. Fazlul Haque",
-        "edition": "1st Edition",
-        "publisher": "Bangla Book House"
+        "author": "Md. Ashraf Hossain",
+        "edition": "Revised Edition",
+        "publisher": "Student Publications"
       },
       {
         "code": "69262",
         "name": "In-plant Training",
         "credit": 2,
-        "author": "Dr. Quazi S. Hossain",
+        "author": "Prof. M. Rafiqul Islam",
         "edition": "3rd Edition",
-        "publisher": "Bangla Book House"
+        "publisher": "Bangladesh Book Depot"
       }
     ]
   },
@@ -1067,47 +1067,47 @@
         "code": "58211",
         "name": "Architectural Drawing I",
         "credit": 4,
-        "author": "Dr. M. A. Wadud",
-        "edition": "3rd Edition",
-        "publisher": "Technical Education Board"
+        "author": "Prof. M. Rafiqul Islam",
+        "edition": "Revised Edition",
+        "publisher": "Bangladesh Book Depot"
       },
       {
         "code": "58212",
         "name": "Building Materials",
         "credit": 3,
-        "author": "Dr. Quazi S. Hossain",
+        "author": "Prof. M. Rafiqul Islam",
         "edition": "1st Edition",
-        "publisher": "Bangladesh Book Depot"
+        "publisher": "Technical Education Board"
       },
       {
         "code": "58213",
         "name": "Mathematics I",
         "credit": 4,
-        "author": "Prof. M. Rafiqul Islam",
-        "edition": "1st Edition",
-        "publisher": "Bangla Book House"
+        "author": "Engr. S. M. Nazrul Islam",
+        "edition": "Revised Edition",
+        "publisher": "Student Publications"
       },
       {
         "code": "58221",
         "name": "Architectural Design I",
         "credit": 4,
-        "author": "Engr. S. M. Nazrul Islam",
-        "edition": "3rd Edition",
+        "author": "Dr. M. A. Wadud",
+        "edition": "2nd Edition",
         "publisher": "Technical Education Board"
       },
       {
         "code": "58222",
         "name": "History of Architecture",
         "credit": 3,
-        "author": "Engr. S. M. Nazrul Islam",
-        "edition": "3rd Edition",
-        "publisher": "Student Publications"
+        "author": "Md. Ashraf Hossain",
+        "edition": "1st Edition",
+        "publisher": "Bangladesh Book Depot"
       },
       {
         "code": "58231",
         "name": "Building Construction",
         "credit": 4,
-        "author": "Engr. S. M. Nazrul Islam",
+        "author": "Dr. M. A. Wadud",
         "edition": "Revised Edition",
         "publisher": "Student Publications"
       },
@@ -1115,41 +1115,41 @@
         "code": "58232",
         "name": "Structural Systems",
         "credit": 3,
-        "author": "Engr. S. M. Nazrul Islam",
-        "edition": "1st Edition",
-        "publisher": "Bangla Book House"
+        "author": "Md. Ashraf Hossain",
+        "edition": "3rd Edition",
+        "publisher": "Student Publications"
       },
       {
         "code": "58241",
         "name": "Urban Planning",
         "credit": 3,
-        "author": "Prof. M. Rafiqul Islam",
-        "edition": "2nd Edition",
+        "author": "Engr. S. M. Nazrul Islam",
+        "edition": "Revised Edition",
         "publisher": "Student Publications"
       },
       {
         "code": "58251",
         "name": "Landscape Design",
         "credit": 3,
-        "author": "Prof. A. K. M. Fazlul Haque",
-        "edition": "Revised Edition",
+        "author": "Dr. Quazi S. Hossain",
+        "edition": "2nd Edition",
         "publisher": "Bangladesh Book Depot"
       },
       {
         "code": "58261",
         "name": "Project Work",
         "credit": 4,
-        "author": "Dr. Quazi S. Hossain",
-        "edition": "Revised Edition",
-        "publisher": "Student Publications"
+        "author": "Dr. M. A. Wadud",
+        "edition": "1st Edition",
+        "publisher": "Bangladesh Book Depot"
       },
       {
         "code": "58262",
         "name": "In-plant Training",
         "credit": 2,
-        "author": "Prof. A. K. M. Fazlul Haque",
-        "edition": "2nd Edition",
-        "publisher": "Student Publications"
+        "author": "Md. Ashraf Hossain",
+        "edition": "1st Edition",
+        "publisher": "Bangla Book House"
       }
     ]
   },
@@ -1164,9 +1164,9 @@
         "code": "59211",
         "name": "Garment Fundamentals",
         "credit": 3,
-        "author": "Prof. A. K. M. Fazlul Haque",
+        "author": "Md. Ashraf Hossain",
         "edition": "Revised Edition",
-        "publisher": "Student Publications"
+        "publisher": "Bangladesh Book Depot"
       },
       {
         "code": "59212",
@@ -1174,61 +1174,61 @@
         "credit": 4,
         "author": "Dr. Quazi S. Hossain",
         "edition": "3rd Edition",
-        "publisher": "Bangladesh Book Depot"
+        "publisher": "Bangla Book House"
       },
       {
         "code": "59213",
         "name": "Mathematics I",
         "credit": 4,
-        "author": "Prof. A. K. M. Fazlul Haque",
-        "edition": "3rd Edition",
-        "publisher": "Technical Education Board"
+        "author": "Dr. M. A. Wadud",
+        "edition": "1st Edition",
+        "publisher": "Bangladesh Book Depot"
       },
       {
         "code": "59221",
         "name": "Pattern Making I",
         "credit": 4,
-        "author": "Dr. M. A. Wadud",
-        "edition": "3rd Edition",
-        "publisher": "Bangladesh Book Depot"
+        "author": "Md. Ashraf Hossain",
+        "edition": "Revised Edition",
+        "publisher": "Bangla Book House"
       },
       {
         "code": "59222",
         "name": "Garment Construction",
         "credit": 3,
         "author": "Md. Ashraf Hossain",
-        "edition": "2nd Edition",
-        "publisher": "Student Publications"
+        "edition": "3rd Edition",
+        "publisher": "Bangla Book House"
       },
       {
         "code": "59231",
         "name": "Pattern Grading",
         "credit": 4,
-        "author": "Prof. M. Rafiqul Islam",
+        "author": "Md. Ashraf Hossain",
         "edition": "Revised Edition",
-        "publisher": "Student Publications"
+        "publisher": "Bangla Book House"
       },
       {
         "code": "59232",
         "name": "Fashion Design",
         "credit": 3,
-        "author": "Md. Ashraf Hossain",
-        "edition": "1st Edition",
-        "publisher": "Student Publications"
+        "author": "Dr. M. A. Wadud",
+        "edition": "2nd Edition",
+        "publisher": "Bangla Book House"
       },
       {
         "code": "59241",
         "name": "Apparel Production",
         "credit": 4,
-        "author": "Dr. M. A. Wadud",
-        "edition": "Revised Edition",
-        "publisher": "Bangladesh Book Depot"
+        "author": "Prof. A. K. M. Fazlul Haque",
+        "edition": "2nd Edition",
+        "publisher": "Bangla Book House"
       },
       {
         "code": "59251",
         "name": "Quality Assurance",
         "credit": 3,
-        "author": "Dr. M. A. Wadud",
+        "author": "Engr. S. M. Nazrul Islam",
         "edition": "3rd Edition",
         "publisher": "Bangladesh Book Depot"
       },
@@ -1236,17 +1236,17 @@
         "code": "59261",
         "name": "Project Work",
         "credit": 4,
-        "author": "Md. Ashraf Hossain",
-        "edition": "Revised Edition",
+        "author": "Dr. Quazi S. Hossain",
+        "edition": "2nd Edition",
         "publisher": "Bangla Book House"
       },
       {
         "code": "59262",
         "name": "In-plant Training",
         "credit": 2,
-        "author": "Prof. A. K. M. Fazlul Haque",
-        "edition": "3rd Edition",
-        "publisher": "Bangla Book House"
+        "author": "Engr. S. M. Nazrul Islam",
+        "edition": "1st Edition",
+        "publisher": "Bangladesh Book Depot"
       }
     ]
   },
@@ -1261,32 +1261,32 @@
         "code": "61271",
         "name": "Mechatronics Fundamentals",
         "credit": 3,
-        "author": "Md. Ashraf Hossain",
-        "edition": "Revised Edition",
-        "publisher": "Technical Education Board"
+        "author": "Dr. M. A. Wadud",
+        "edition": "3rd Edition",
+        "publisher": "Bangladesh Book Depot"
       },
       {
         "code": "61272",
         "name": "Pneumatics & Hydraulics",
         "credit": 4,
-        "author": "Dr. Quazi S. Hossain",
-        "edition": "1st Edition",
-        "publisher": "Bangla Book House"
+        "author": "Prof. A. K. M. Fazlul Haque",
+        "edition": "2nd Edition",
+        "publisher": "Student Publications"
       },
       {
         "code": "61273",
         "name": "Mathematics I",
         "credit": 4,
-        "author": "Engr. S. M. Nazrul Islam",
-        "edition": "Revised Edition",
+        "author": "Prof. M. Rafiqul Islam",
+        "edition": "1st Edition",
         "publisher": "Student Publications"
       },
       {
         "code": "61274",
         "name": "PLC Programming",
         "credit": 4,
-        "author": "Dr. Quazi S. Hossain",
-        "edition": "Revised Edition",
+        "author": "Dr. M. A. Wadud",
+        "edition": "2nd Edition",
         "publisher": "Student Publications"
       },
       {
@@ -1294,7 +1294,7 @@
         "name": "Sensors & Actuators",
         "credit": 3,
         "author": "Dr. M. A. Wadud",
-        "edition": "2nd Edition",
+        "edition": "Revised Edition",
         "publisher": "Bangla Book House"
       },
       {
@@ -1302,24 +1302,24 @@
         "name": "Industrial Robotics",
         "credit": 4,
         "author": "Prof. A. K. M. Fazlul Haque",
-        "edition": "3rd Edition",
-        "publisher": "Student Publications"
+        "edition": "1st Edition",
+        "publisher": "Bangladesh Book Depot"
       },
       {
         "code": "61277",
         "name": "SCADA Systems",
         "credit": 3,
-        "author": "Dr. M. A. Wadud",
-        "edition": "3rd Edition",
-        "publisher": "Bangladesh Book Depot"
+        "author": "Md. Ashraf Hossain",
+        "edition": "Revised Edition",
+        "publisher": "Technical Education Board"
       },
       {
         "code": "61278",
         "name": "Project Work",
         "credit": 4,
-        "author": "Dr. M. A. Wadud",
-        "edition": "Revised Edition",
-        "publisher": "Bangla Book House"
+        "author": "Prof. M. Rafiqul Islam",
+        "edition": "3rd Edition",
+        "publisher": "Technical Education Board"
       }
     ]
   }

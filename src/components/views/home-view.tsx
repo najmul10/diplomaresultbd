@@ -25,6 +25,7 @@ import {
   GraduationCap,
   Layers,
 } from "lucide-react";
+import { AdSlot } from "@/components/site/ad-slot";
 import type { PlatformStats } from "@/lib/types";
 
 type Feature = {
@@ -279,6 +280,10 @@ export function HomeView() {
 
       {/* Features */}
       <section className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
+        {/* Ad slot */}
+        <div className="mb-10">
+          <AdSlot slot="home-inline" />
+        </div>
         <div className="mx-auto max-w-2xl text-center">
           <Badge variant="secondary" className="mb-3 gap-1.5">
             <Layers className="h-3.5 w-3.5" />

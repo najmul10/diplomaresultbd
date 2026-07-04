@@ -356,8 +356,8 @@ const BATCHES = [
 // To keep the bundled JSON manageable, we only fully model a small subset of
 // institutes × departments × batches. Each student gets a globally-unique
 // 6-digit roll (mirrors the user's real roll like 449381).
-const FEATURED_INSTITUTES = institutes.slice(0, 8); // 8 institutes
-const FEATURED_DEPARTMENTS = departments.slice(0, 6); // 6 depts
+const FEATURED_INSTITUTES = institutes.slice(0, 3); // 3 institutes (keep dev memory low)
+const FEATURED_DEPARTMENTS = departments.slice(0, 3); // 3 depts
 let rollCounter = 440000; // start near the user's roll range
 for (const inst of FEATURED_INSTITUTES) {
   for (const dept of FEATURED_DEPARTMENTS) {

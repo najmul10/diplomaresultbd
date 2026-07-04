@@ -5,6 +5,9 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as SonnerToaster } from "@/components/ui/sonner";
 import { ThemeProvider } from "@/components/theme-provider";
 import { QueryProvider } from "@/components/query-provider";
+import { AdScript } from "@/components/site/ad-slot";
+
+const ADSENSE_CLIENT = process.env.NEXT_PUBLIC_ADSENSE_CLIENT || "";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,6 +34,9 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "BTEB Results Zone" }],
   manifest: "/manifest.webmanifest",
+  other: ADSENSE_CLIENT
+    ? { "google-adsense-account": ADSENSE_CLIENT }
+    : undefined,
   openGraph: {
     title: "BTEB Results Zone | Results at your fingertips",
     description:
@@ -71,6 +77,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <QueryProvider>
+            <AdScript />
             {children}
             <Toaster />
             <SonnerToaster position="top-center" richColors />

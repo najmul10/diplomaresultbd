@@ -1,0 +1,4 @@
+# Google AdSense ads.txt
+# Replace ca-pub-1119994195656037 with YOUR actual AdSense publisher ID.
+# Get it from your AdSense dashboard: https://www.google.com/adsense/
+google.com, pub-1119994195656037, DIRECT, f08c47fec0942fa0
