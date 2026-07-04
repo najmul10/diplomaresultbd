@@ -108,7 +108,7 @@ const TRUST = [
 const STATS = [
   { value: "37+", label: "Exam Types", sub: "All BTEB curricula" },
   { value: "20+", label: "Years", sub: "2005 – 2026" },
-  { value: "50+", label: "Institutes", sub: "Across Bangladesh" },
+  { value: "100+", label: "Institutes", sub: "Across Bangladesh" },
   { value: "Free", label: "Forever", sub: "No charges, ever" },
 ];
 

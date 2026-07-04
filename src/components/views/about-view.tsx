@@ -86,7 +86,7 @@ export function AboutView() {
       <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
         {[
           { icon: BookOpen, label: "Exam Types", value: "37+" },
-          { icon: Building2, label: "Institutes", value: "50+" },
+          { icon: Building2, label: "Institutes", value: "100+" },
           { icon: Zap, label: "Years", value: "20+" },
           { icon: Gift, label: "Price", value: "Free" },
         ].map((s) => (

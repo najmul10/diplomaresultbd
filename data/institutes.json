@@ -1,302 +1,104 @@
 [
-  {
-    "code": "1010",
-    "name": "Dhaka Polytechnic Institute",
-    "district": "Dhaka",
-    "type": "Government"
-  },
-  {
-    "code": "1020",
-    "name": "Chattogram Polytechnic Institute",
-    "district": "Chattogram",
-    "type": "Government"
-  },
-  {
-    "code": "1030",
-    "name": "Khulna Polytechnic Institute",
-    "district": "Khulna",
-    "type": "Government"
-  },
-  {
-    "code": "1040",
-    "name": "Rajshahi Polytechnic Institute",
-    "district": "Rajshahi",
-    "type": "Government"
-  },
-  {
-    "code": "1050",
-    "name": "Sylhet Polytechnic Institute",
-    "district": "Sylhet",
-    "type": "Government"
-  },
-  {
-    "code": "1060",
-    "name": "Barishal Polytechnic Institute",
-    "district": "Barishal",
-    "type": "Government"
-  },
-  {
-    "code": "1070",
-    "name": "Rangpur Polytechnic Institute",
-    "district": "Rangpur",
-    "type": "Government"
-  },
-  {
-    "code": "1080",
-    "name": "Mymensingh Polytechnic Institute",
-    "district": "Mymensingh",
-    "type": "Government"
-  },
-  {
-    "code": "1090",
-    "name": "Cumilla Polytechnic Institute",
-    "district": "Cumilla",
-    "type": "Government"
-  },
-  {
-    "code": "1100",
-    "name": "Bogura Polytechnic Institute",
-    "district": "Bogura",
-    "type": "Government"
-  },
-  {
-    "code": "1110",
-    "name": "Pabna Polytechnic Institute",
-    "district": "Pabna",
-    "type": "Government"
-  },
-  {
-    "code": "1120",
-    "name": "Dinajpur Polytechnic Institute",
-    "district": "Dinajpur",
-    "type": "Government"
-  },
-  {
-    "code": "1130",
-    "name": "Faridpur Polytechnic Institute",
-    "district": "Faridpur",
-    "type": "Government"
-  },
-  {
-    "code": "1140",
-    "name": "Jashore Polytechnic Institute",
-    "district": "Jashore",
-    "type": "Government"
-  },
-  {
-    "code": "1150",
-    "name": "Kushtia Polytechnic Institute",
-    "district": "Kushtia",
-    "type": "Government"
-  },
-  {
-    "code": "1160",
-    "name": "Noakhali Polytechnic Institute",
-    "district": "Noakhali",
-    "type": "Government"
-  },
-  {
-    "code": "1170",
-    "name": "Patuakhali Polytechnic Institute",
-    "district": "Patuakhali",
-    "type": "Government"
-  },
-  {
-    "code": "1180",
-    "name": "Tangail Polytechnic Institute",
-    "district": "Tangail",
-    "type": "Government"
-  },
-  {
-    "code": "1190",
-    "name": "Habiganj Polytechnic Institute",
-    "district": "Habiganj",
-    "type": "Government"
-  },
-  {
-    "code": "1200",
-    "name": "Barguna Polytechnic Institute",
-    "district": "Barguna",
-    "type": "Government"
-  },
-  {
-    "code": "1210",
-    "name": "Moulvibazar Polytechnic Institute",
-    "district": "Moulvibazar",
-    "type": "Government"
-  },
-  {
-    "code": "1220",
-    "name": "Natore Polytechnic Institute",
-    "district": "Natore",
-    "type": "Government"
-  },
-  {
-    "code": "1230",
-    "name": "Sirajganj Polytechnic Institute",
-    "district": "Sirajganj",
-    "type": "Government"
-  },
-  {
-    "code": "1240",
-    "name": "Gopalganj Polytechnic Institute",
-    "district": "Gopalganj",
-    "type": "Government"
-  },
-  {
-    "code": "1250",
-    "name": "Cox's Bazar Polytechnic Institute",
-    "district": "Cox's Bazar",
-    "type": "Government"
-  },
-  {
-    "code": "1260",
-    "name": "Bhola Polytechnic Institute",
-    "district": "Bhola",
-    "type": "Government"
-  },
-  {
-    "code": "1270",
-    "name": "Brahmanbaria Polytechnic Institute",
-    "district": "Brahmanbaria",
-    "type": "Government"
-  },
-  {
-    "code": "1280",
-    "name": "Chandpur Polytechnic Institute",
-    "district": "Chandpur",
-    "type": "Government"
-  },
-  {
-    "code": "1290",
-    "name": "Chapai Nawabganj Polytechnic Institute",
-    "district": "Chapai Nawabganj",
-    "type": "Government"
-  },
-  {
-    "code": "1300",
-    "name": "Chuadanga Polytechnic Institute",
-    "district": "Chuadanga",
-    "type": "Government"
-  },
-  {
-    "code": "1310",
-    "name": "Feni Polytechnic Institute",
-    "district": "Feni",
-    "type": "Government"
-  },
-  {
-    "code": "1320",
-    "name": "Gazipur Polytechnic Institute",
-    "district": "Gazipur",
-    "type": "Government"
-  },
-  {
-    "code": "1330",
-    "name": "Jhenaidah Polytechnic Institute",
-    "district": "Jhenaidah",
-    "type": "Government"
-  },
-  {
-    "code": "1340",
-    "name": "Kishoreganj Polytechnic Institute",
-    "district": "Kishoreganj",
-    "type": "Government"
-  },
-  {
-    "code": "1350",
-    "name": "Kurigram Polytechnic Institute",
-    "district": "Kurigram",
-    "type": "Government"
-  },
-  {
-    "code": "1360",
-    "name": "Lakshmipur Polytechnic Institute",
-    "district": "Lakshmipur",
-    "type": "Government"
-  },
-  {
-    "code": "1370",
-    "name": "Magura Polytechnic Institute",
-    "district": "Magura",
-    "type": "Government"
-  },
-  {
-    "code": "1380",
-    "name": "Manikganj Polytechnic Institute",
-    "district": "Manikganj",
-    "type": "Government"
-  },
-  {
-    "code": "1390",
-    "name": "Munshiganj Polytechnic Institute",
-    "district": "Munshiganj",
-    "type": "Government"
-  },
-  {
-    "code": "1400",
-    "name": "Naogaon Polytechnic Institute",
-    "district": "Naogaon",
-    "type": "Government"
-  },
-  {
-    "code": "1410",
-    "name": "Narayanganj Polytechnic Institute",
-    "district": "Narayanganj",
-    "type": "Government"
-  },
-  {
-    "code": "1420",
-    "name": "Narsingdi Polytechnic Institute",
-    "district": "Narsingdi",
-    "type": "Government"
-  },
-  {
-    "code": "1430",
-    "name": "Netrokona Polytechnic Institute",
-    "district": "Netrokona",
-    "type": "Government"
-  },
-  {
-    "code": "1440",
-    "name": "Pirojpur Polytechnic Institute",
-    "district": "Pirojpur",
-    "type": "Government"
-  },
-  {
-    "code": "1450",
-    "name": "Rajbari Polytechnic Institute",
-    "district": "Rajbari",
-    "type": "Government"
-  },
-  {
-    "code": "1460",
-    "name": "Shariatpur Polytechnic Institute",
-    "district": "Shariatpur",
-    "type": "Government"
-  },
-  {
-    "code": "1470",
-    "name": "Sherpur Polytechnic Institute",
-    "district": "Sherpur",
-    "type": "Government"
-  },
-  {
-    "code": "1480",
-    "name": "Sunamganj Polytechnic Institute",
-    "district": "Sunamganj",
-    "type": "Government"
-  },
-  {
-    "code": "1490",
-    "name": "Joypurhat Polytechnic Institute",
-    "district": "Joypurhat",
-    "type": "Government"
-  },
-  {
-    "code": "1500",
-    "name": "Daffodil Polytechnic Institute",
-    "district": "Dhaka",
-    "type": "Private"
-  }
+  { "code": "50117", "name": "Dhaka Polytechnic Institute", "district": "Dhaka", "type": "Government" },
+  { "code": "70048", "name": "Chattogram Polytechnic Institute", "district": "Chattogram", "type": "Government" },
+  { "code": "35048", "name": "Khulna Polytechnic Institute", "district": "Khulna", "type": "Government" },
+  { "code": "23105", "name": "Rajshahi Polytechnic Institute", "district": "Rajshahi", "type": "Government" },
+  { "code": "61016", "name": "Sylhet Polytechnic Institute", "district": "Sylhet", "type": "Government" },
+  { "code": "42045", "name": "Barishal Govt. Polytechnic Institute", "district": "Barishal", "type": "Government" },
+  { "code": "16058", "name": "Rangpur Polytechnic Institute", "district": "Rangpur", "type": "Government" },
+  { "code": "57067", "name": "Mymensingh Polytechnic Institute", "district": "Mymensingh", "type": "Government" },
+  { "code": "65054", "name": "Cumilla Polytechnic Institute", "district": "Cumilla", "type": "Government" },
+  { "code": "20099", "name": "Bogura Polytechnic Institute", "district": "Bogura", "type": "Government" },
+  { "code": "26062", "name": "Pabna Polytechnic Institute", "district": "Pabna", "type": "Government" },
+  { "code": "13085", "name": "Dinajpur Polytechnic Institute", "district": "Dinajpur", "type": "Government" },
+  { "code": "46026", "name": "Faridpur Polytechnic Institute", "district": "Faridpur", "type": "Government" },
+  { "code": "33053", "name": "Jashore Polytechnic Institute", "district": "Jashore", "type": "Government" },
+  { "code": "27040", "name": "Kushtia Polytechnic Institute", "district": "Kushtia", "type": "Government" },
+  { "code": "39051", "name": "Patuakhali Polytechnic Institute", "district": "Patuakhali", "type": "Government" },
+  { "code": "54049", "name": "Tangail Polytechnic Institute", "district": "Tangail", "type": "Government" },
+  { "code": "12053", "name": "Thakurgaon Polytechnic Institute", "district": "Thakurgaon", "type": "Government" },
+  { "code": "38033", "name": "Barguna Polytechnic Institute", "district": "Barguna", "type": "Government" },
+  { "code": "40029", "name": "Bhola Polytechnic Institute", "district": "Bhola", "type": "Government" },
+  { "code": "64024", "name": "Brahmanbaria Polytechnic Institute", "district": "Brahmanbaria", "type": "Government" },
+  { "code": "66035", "name": "Chandpur Polytechnic Institute", "district": "Chandpur", "type": "Government" },
+  { "code": "22052", "name": "Chapai Nawabganj Polytechnic Institute", "district": "Chapai Nawabganj", "type": "Government" },
+  { "code": "29043", "name": "Chuadanga Polytechnic Institute", "district": "Chuadanga", "type": "Government" },
+  { "code": "74009", "name": "Cox's Bazar Polytechnic Institute", "district": "Cox's Bazar", "type": "Government" },
+  { "code": "69015", "name": "Feni Polytechnic Institute", "district": "Feni", "type": "Government" },
+  { "code": "53082", "name": "Gazipur Polytechnic Institute", "district": "Gazipur", "type": "Government" },
+  { "code": "45015", "name": "Gopalganj Polytechnic Institute", "district": "Gopalganj", "type": "Government" },
+  { "code": "63010", "name": "Habiganj Polytechnic Institute", "district": "Habiganj", "type": "Government" },
+  { "code": "30023", "name": "Jhenaidah Polytechnic Institute", "district": "Jhenaidah", "type": "Government" },
+  { "code": "59060", "name": "Kishoreganj Polytechnic Institute", "district": "Kishoreganj", "type": "Government" },
+  { "code": "17057", "name": "Kurigram Polytechnic Institute", "district": "Kurigram", "type": "Government" },
+  { "code": "67016", "name": "Lakshmipur Polytechnic Institute", "district": "Lakshmipur", "type": "Government" },
+  { "code": "31036", "name": "Magura Polytechnic Institute", "district": "Magura", "type": "Government" },
+  { "code": "62024", "name": "Moulvibazar Polytechnic Institute", "district": "Moulvibazar", "type": "Government" },
+  { "code": "49021", "name": "Munshiganj Polytechnic Institute", "district": "Munshiganj", "type": "Government" },
+  { "code": "21064", "name": "Naogaon Polytechnic Institute", "district": "Naogaon", "type": "Government" },
+  { "code": "51040", "name": "Narayanganj Polytechnic Institute", "district": "Narayanganj", "type": "Government" },
+  { "code": "52041", "name": "Narsingdi Polytechnic Institute", "district": "Narsingdi", "type": "Government" },
+  { "code": "34048", "name": "Satkhira Polytechnic Institute", "district": "Satkhira", "type": "Government" },
+  { "code": "43014", "name": "Shariatpur Polytechnic Institute", "district": "Shariatpur", "type": "Government" },
+  { "code": "56018", "name": "Sherpur Polytechnic Institute", "district": "Sherpur", "type": "Government" },
+  { "code": "25064", "name": "Sirajganj Polytechnic Institute", "district": "Sirajganj", "type": "Government" },
+  { "code": "24061", "name": "Natore Polytechnic Institute", "district": "Natore", "type": "Government" },
+  { "code": "19056", "name": "Joypurhat Polytechnic Institute", "district": "Joypurhat", "type": "Government" },
+  { "code": "55043", "name": "Netrokona Polytechnic Institute", "district": "Netrokona", "type": "Government" },
+  { "code": "36041", "name": "Jhalokati Polytechnic Institute", "district": "Jhalokati", "type": "Government" },
+  { "code": "37037", "name": "Pirojpur Polytechnic Institute", "district": "Pirojpur", "type": "Government" },
+  { "code": "41027", "name": "Jhalokati Polytechnic Institute", "district": "Jhalokati", "type": "Government" },
+  { "code": "28046", "name": "Meherpur Polytechnic Institute", "district": "Meherpur", "type": "Government" },
+  { "code": "32034", "name": "Narail Polytechnic Institute", "district": "Narail", "type": "Government" },
+  { "code": "48019", "name": "Manikganj Polytechnic Institute", "district": "Manikganj", "type": "Government" },
+  { "code": "58058", "name": "Jamalpur Polytechnic Institute", "district": "Jamalpur", "type": "Government" },
+  { "code": "15048", "name": "Nilphamari Polytechnic Institute", "district": "Nilphamari", "type": "Government" },
+  { "code": "14051", "name": "Lalmonirhat Polytechnic Institute", "district": "Lalmonirhat", "type": "Government" },
+  { "code": "18054", "name": "Gaibandha Polytechnic Institute", "district": "Gaibandha", "type": "Government" },
+  { "code": "11047", "name": "Panchagarh Polytechnic Institute", "district": "Panchagarh", "type": "Government" },
+  { "code": "68014", "name": "Noakhali Polytechnic Institute", "district": "Noakhali", "type": "Government" },
+  { "code": "44020", "name": "Rajbari Polytechnic Institute", "district": "Rajbari", "type": "Government" },
+  { "code": "47025", "name": "Madaripur Polytechnic Institute", "district": "Madaripur", "type": "Government" },
+  { "code": "75007", "name": "Bandarban Polytechnic Institute", "district": "Bandarban", "type": "Government" },
+  { "code": "73005", "name": "Rangamati Polytechnic Institute", "district": "Rangamati", "type": "Government" },
+  { "code": "72003", "name": "Khagrachhari Polytechnic Institute", "district": "Khagrachhari", "type": "Government" },
+  { "code": "50118", "name": "Dhaka Mohila Polytechnic Institute", "district": "Dhaka", "type": "Government" },
+  { "code": "70049", "name": "Chattogram Mohila Polytechnic Institute", "district": "Chattogram", "type": "Government" },
+  { "code": "35049", "name": "Khulna Mohila Polytechnic Institute", "district": "Khulna", "type": "Government" },
+  { "code": "23106", "name": "Rajshahi Mohila Polytechnic Institute", "district": "Rajshahi", "type": "Government" },
+  { "code": "61017", "name": "Sylhet Mohila Polytechnic Institute", "district": "Sylhet", "type": "Government" },
+  { "code": "42046", "name": "Barishal Mohila Polytechnic Institute", "district": "Barishal", "type": "Government" },
+  { "code": "16059", "name": "Rangpur Mohila Polytechnic Institute", "district": "Rangpur", "type": "Government" },
+  { "code": "57068", "name": "Mymensingh Mohila Polytechnic Institute", "district": "Mymensingh", "type": "Government" },
+  { "code": "20399", "name": "Bangladesh Sweden Polytechnic Institute", "district": "Kushtia", "type": "Government" },
+  { "code": "50120", "name": "Bangladesh Institute of Glass & Ceramics", "district": "Dhaka", "type": "Government" },
+  { "code": "50119", "name": "Survey Institute of Bangladesh", "district": "Dhaka", "type": "Government" },
+  { "code": "10990", "name": "Mymensingh Engineering College", "district": "Mymensingh", "type": "Government" },
+  { "code": "20990", "name": "Faridpur Engineering College", "district": "Faridpur", "type": "Government" },
+  { "code": "30990", "name": "Sylhet Engineering College", "district": "Sylhet", "type": "Government" },
+  { "code": "40990", "name": "Barishal Engineering College", "district": "Barishal", "type": "Government" },
+  { "code": "50991", "name": "Patuakhali Engineering College", "district": "Patuakhali", "type": "Government" },
+  { "code": "60990", "name": "Pabna Engineering College", "district": "Pabna", "type": "Government" },
+  { "code": "70990", "name": "Rangamati Engineering College", "district": "Rangamati", "type": "Government" },
+  { "code": "80990", "name": "Khagrachhari Engineering College", "district": "Khagrachhari", "type": "Government" },
+  { "code": "11111", "name": "Daffodil Polytechnic Institute", "district": "Dhaka", "type": "Private" },
+  { "code": "11112", "name": "IDEAL Polytechnic Institute", "district": "Dhaka", "type": "Private" },
+  { "code": "11113", "name": "Tampa Polytechnic Institute", "district": "Dhaka", "type": "Private" },
+  { "code": "11114", "name": "Ahsanullah Polytechnic Institute", "district": "Dhaka", "type": "Private" },
+  { "code": "11115", "name": "Viqarunnisa Polytechnic Institute", "district": "Dhaka", "type": "Private" },
+  { "code": "11116", "name": "Modhumati Polytechnic Institute", "district": "Bagerhat", "type": "Private" },
+  { "code": "11117", "name": "National Polytechnic Institute Manikganj", "district": "Manikganj", "type": "Private" },
+  { "code": "11118", "name": "Life Line Polytechnic Institute", "district": "Thakurgaon", "type": "Private" },
+  { "code": "11119", "name": "Social Polytechnic Institute", "district": "Thakurgaon", "type": "Private" },
+  { "code": "11120", "name": "Keramotia Institute of Science and Technology", "district": "Rangpur", "type": "Private" },
+  { "code": "11121", "name": "Institute of Information Technology Naogaon", "district": "Naogaon", "type": "Private" },
+  { "code": "11122", "name": "Bangladesh Polytechnic Institute", "district": "Dhaka", "type": "Private" },
+  { "code": "11123", "name": "City Polytechnic Institute", "district": "Dhaka", "type": "Private" },
+  { "code": "11124", "name": "Prime Polytechnic Institute", "district": "Dhaka", "type": "Private" },
+  { "code": "11125", "name": "BRTI (Bangladesh RTI) Polytechnic Institute", "district": "Dhaka", "type": "Private" },
+  { "code": "11126", "name": "Ideal Institute of Science and Technology", "district": "Dhaka", "type": "Private" },
+  { "code": "11127", "name": "Sunflower Polytechnic Institute", "district": "Dhaka", "type": "Private" },
+  { "code": "11128", "name": "Muslim Polytechnic Institute", "district": "Dhaka", "type": "Private" },
+  { "code": "11129", "name": "Padma Polytechnic Institute", "district": "Rajbari", "type": "Private" },
+  { "code": "11130", "name": "New Vision Polytechnic Institute", "district": "Dhaka", "type": "Private" }
 ]
