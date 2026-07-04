@@ -33,6 +33,7 @@ import {
   Layers,
   Radar,
   ChevronRight,
+  CheckCircle2,
 } from "lucide-react";
 import { AdSlot } from "@/components/site/ad-slot";
 
@@ -131,69 +132,49 @@ export function HomeView() {
 
   return (
     <div className="flex flex-col">
-      {/* Hero */}
-      <section className="relative overflow-hidden">
-        <div className="pointer-events-none absolute inset-0 bg-grid opacity-40" />
-        <div className="pointer-events-none absolute -right-32 -top-32 h-96 w-96 rounded-full bg-primary/10 blur-3xl" />
-        <div className="pointer-events-none absolute -bottom-32 -left-32 h-96 w-96 rounded-full bg-amber-400/10 blur-3xl" />
+      {/* Hero — split layout with visual result card */}
+      <section className="relative overflow-hidden border-b border-border/60">
+        <div className="pointer-events-none absolute inset-0 bg-dots opacity-40" />
+        <div className="pointer-events-none absolute -right-24 -top-24 h-80 w-80 rounded-full bg-primary/10 blur-3xl" />
+        <div className="pointer-events-none absolute -bottom-24 -left-24 h-80 w-80 rounded-full bg-amber-400/10 blur-3xl" />
 
-        <div className="relative mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
-          <div className="mx-auto max-w-3xl text-center">
-            <motion.div
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4 }}
+        <div className="relative mx-auto grid max-w-7xl items-center gap-10 px-4 py-14 sm:px-6 lg:grid-cols-2 lg:gap-12 lg:px-8 lg:py-20">
+          {/* Left: copy + quick search */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <Badge
+              variant="secondary"
+              className="mb-5 gap-1.5 rounded-full border border-primary/20 bg-primary/5 py-1.5 pl-2 pr-3 text-primary"
             >
-              <Badge
-                variant="secondary"
-                className="mb-5 gap-1.5 rounded-full border border-primary/20 bg-primary/5 py-1.5 pl-2 pr-3 text-primary"
-              >
-                <Sparkles className="h-3.5 w-3.5" />
-                Bangladesh&apos;s #1 BTEB Results Platform
-              </Badge>
-            </motion.div>
-
-            <motion.h1
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.05 }}
-              className="text-balance text-4xl font-extrabold leading-[1.1] tracking-tight sm:text-5xl lg:text-6xl"
-            >
-              Check Your{" "}
+              <Sparkles className="h-3.5 w-3.5" />
+              Bangladesh&apos;s #1 BTEB Results Platform
+            </Badge>
+            <h1 className="text-balance text-4xl font-extrabold leading-[1.08] tracking-tight sm:text-5xl lg:text-6xl">
+              BTEB Results at{" "}
               <span className="relative inline-block">
                 <span className="bg-gradient-to-r from-primary via-teal-500 to-emerald-500 bg-clip-text text-transparent">
-                  BTEB Result
+                  Your Fingertips
                 </span>
                 <svg
-                  className="absolute -bottom-1 left-0 h-2 w-full text-primary/40"
+                  className="absolute -bottom-1.5 left-0 h-2.5 w-full text-primary/40"
                   viewBox="0 0 200 8"
                   preserveAspectRatio="none"
                 >
-                  <path d="M0,4 Q50,0 100,4 T200,4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                  <path d="M0,4 Q50,0 100,4 T200,4" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
                 </svg>
-              </span>{" "}
-              Instantly
-            </motion.h1>
-
-            <motion.p
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="mx-auto mt-5 max-w-2xl text-pretty text-base text-muted-foreground sm:text-lg"
-            >
-              Fast, accurate and free BTEB diploma, polytechnic &amp; technical
-              education results. Search by roll number and see your complete
-              academic history — every semester, GPA and CGPA in one place.
-            </motion.p>
+              </span>
+            </h1>
+            <p className="mt-5 max-w-lg text-pretty text-base text-muted-foreground sm:text-lg">
+              Search your BTEB result instantly — every semester result, GPA and
+              CGPA in one place. Fast, accurate and always free for diploma
+              students across Bangladesh.
+            </p>
 
             {/* Quick search */}
-            <motion.form
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.15 }}
-              onSubmit={onQuickSearch}
-              className="mx-auto mt-7 flex max-w-xl flex-col gap-2 sm:flex-row"
-            >
+            <form onSubmit={onQuickSearch} className="mt-7 flex max-w-md flex-col gap-2 sm:flex-row">
               <div className="relative flex-1">
                 <Search className="pointer-events-none absolute left-3.5 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground" />
                 <Input
@@ -212,14 +193,9 @@ export function HomeView() {
                 <Search className="h-5 w-5" />
                 Check Result
               </Button>
-            </motion.form>
+            </form>
 
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.25 }}
-              className="mt-6 flex flex-wrap items-center justify-center gap-x-5 gap-y-2"
-            >
+            <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2">
               {TRUST.map((t) => (
                 <span
                   key={t.label}
@@ -229,8 +205,117 @@ export function HomeView() {
                   {t.label}
                 </span>
               ))}
+            </div>
+          </motion.div>
+
+          {/* Right: visual result preview card */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.96 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="relative"
+          >
+            <Card className="overflow-hidden border-primary/20 shadow-2xl shadow-primary/10">
+              {/* Card header */}
+              <div className="flex items-center justify-between bg-gradient-to-br from-primary to-teal-600 px-5 py-4 text-primary-foreground">
+                <div className="flex items-center gap-2.5">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-white/20">
+                    <GraduationCap className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <p className="text-sm font-semibold leading-none">BTEB Results Zone</p>
+                    <p className="mt-0.5 text-[10px] opacity-80">Verified Result</p>
+                  </div>
+                </div>
+                <span className="relative flex h-2.5 w-2.5 items-center justify-center">
+                  <span className="absolute h-2.5 w-2.5 animate-ping rounded-full bg-white/60" />
+                  <span className="relative h-2 w-2 rounded-full bg-white" />
+                </span>
+              </div>
+
+              {/* Card body — mock result preview */}
+              <CardContent className="space-y-4 p-5">
+                {/* Student identity */}
+                <div className="flex items-center gap-3">
+                  <div className="flex h-12 w-12 shrink-0 flex-col items-center justify-center rounded-xl bg-emerald-500/15 text-emerald-700 ring-1 ring-emerald-500/20 dark:text-emerald-300">
+                    <span className="text-lg font-bold leading-none">3.44</span>
+                    <span className="text-[8px] font-semibold uppercase">CGPA</span>
+                  </div>
+                  <div className="min-w-0">
+                    <p className="truncate font-bold">MD. Rifat Hossain</p>
+                    <p className="truncate text-xs text-muted-foreground">Computer Technology • 8th Semester</p>
+                  </div>
+                  <Badge className="ml-auto gap-1 bg-emerald-600 hover:bg-emerald-600">
+                    <CheckCircle2 className="h-3 w-3" />
+                    Passed
+                  </Badge>
+                </div>
+
+                {/* Mini stats */}
+                <div className="grid grid-cols-3 gap-2">
+                  <div className="rounded-lg bg-muted/50 p-2.5 text-center">
+                    <p className="text-[9px] font-medium uppercase tracking-wider text-muted-foreground">Roll</p>
+                    <p className="mt-0.5 font-mono text-sm font-bold">449381</p>
+                  </div>
+                  <div className="rounded-lg bg-muted/50 p-2.5 text-center">
+                    <p className="text-[9px] font-medium uppercase tracking-wider text-muted-foreground">GPA</p>
+                    <p className="mt-0.5 text-sm font-bold text-emerald-600 dark:text-emerald-400">3.44</p>
+                  </div>
+                  <div className="rounded-lg bg-muted/50 p-2.5 text-center">
+                    <p className="text-[9px] font-medium uppercase tracking-wider text-muted-foreground">Grade</p>
+                    <p className="mt-0.5 text-sm font-bold text-emerald-600 dark:text-emerald-400">A-</p>
+                  </div>
+                </div>
+
+                {/* Subject list */}
+                <div className="space-y-1.5">
+                  {[
+                    { n: "Programming in Java", g: "A+", c: "66651" },
+                    { n: "Microprocessor & Interfacing", g: "A", c: "66662" },
+                    { n: "Principles of Digital Electronics", g: "A-", c: "66842" },
+                  ].map((s) => (
+                    <div
+                      key={s.c}
+                      className="flex items-center justify-between rounded-lg bg-background px-3 py-2 ring-1 ring-border/60"
+                    >
+                      <div className="flex min-w-0 items-center gap-2">
+                        <span className="font-mono text-[10px] text-muted-foreground">{s.c}</span>
+                        <span className="truncate text-sm font-medium">{s.n}</span>
+                      </div>
+                      <span className="inline-flex h-6 min-w-6 items-center justify-center rounded bg-emerald-500/15 px-1.5 text-xs font-bold text-emerald-700 dark:text-emerald-300">
+                        {s.g}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Footer chip */}
+                <div className="flex items-center justify-between rounded-lg bg-primary/5 px-3 py-2 text-xs">
+                  <span className="font-medium text-primary">National Polytechnic Institute</span>
+                  <span className="text-muted-foreground">Session 2019-2020</span>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Floating accent badges */}
+            <motion.div
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+              className="absolute -right-3 -top-3 hidden rounded-xl bg-amber-400 px-3 py-1.5 text-xs font-bold text-amber-950 shadow-lg sm:block"
+            >
+              ⚡ Lightning Fast
             </motion.div>
-          </div>
+            <motion.div
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.5 }}
+              className="absolute -bottom-3 -left-3 hidden rounded-xl bg-background px-3 py-1.5 text-xs font-semibold text-emerald-600 shadow-lg ring-1 ring-emerald-500/20 sm:block"
+            >
+              <CheckCircle2 className="mr-1 inline h-3.5 w-3.5" />
+              Verified Result
+            </motion.div>
+          </motion.div>
         </div>
       </section>
 

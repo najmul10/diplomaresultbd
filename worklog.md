@@ -437,3 +437,35 @@ Verification:
 Stage Summary:
 - Referred subjects now display properly: red text, subject codes + names, "X subjects yet to pass" warning, "REF" GPA display. Matches the competitor's format from the screenshot.
 - A subject code → name mapping database (200+ subjects) is ready for when referred subject codes are available.
+
+---
+Task ID: 47
+Agent: main
+Task: Redesign hero section — bring back split layout but better
+
+Work Log:
+- User wanted the hero section like before but better.
+- Replaced the centered hero with a split 2-column layout (left: copy + quick search, right: visual result preview card).
+- Left column:
+  * "Bangladesh's #1 BTEB Results Platform" badge
+  * "BTEB Results at Your Fingertips" heading with gradient text + hand-drawn SVG underline
+  * Description paragraph
+  * Quick search bar (roll input + Check Result button)
+  * Trust badges: Secure, Fast, Free, Up to Date
+- Right column — visual result preview card (like a sample result):
+  * Gradient header "BTEB Results Zone / Verified Result" with pulsing live dot
+  * Student identity: CGPA 3.44 badge, "MD. Rifat Hossain", "Computer Technology • 8th Semester", "Passed" badge
+  * Mini stats grid: Roll 449381, GPA 3.44, Grade A-
+  * Subject list: Programming in Java (A+), Microprocessor & Interfacing (A), Principles of Digital Electronics (A-)
+  * Footer chip: "National Polytechnic Institute / Session 2019-2020"
+  * Floating accent badges: "⚡ Lightning Fast" (top-right), "✓ Verified Result" (bottom-left)
+- Added CheckCircle2 to lucide imports.
+
+Agent Browser verification:
+- Desktop (1440px): split layout renders — heading + quick search on left, visual result card on right with all details.
+- Mobile (390px): stacks vertically — hero copy first, then the visual card below.
+- All text content verified: "BTEB Results at Your Fingertips", "MD. Rifat Hossain", "449381", "3.44", "Programming in Java", "⚡ Lightning Fast", "Verified Result", etc.
+- Lint clean.
+
+Stage Summary:
+- Hero section now uses the previous split layout (left copy + right visual) but is significantly better: gradient header card with live pulse, sample result preview with student identity + GPA + subject list, floating accent badges. Responsive on mobile (stacks).
