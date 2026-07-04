@@ -113,8 +113,7 @@ export function SiteFooter() {
             © {new Date().getFullYear()} BTEB Results Zone. All rights reserved.
           </p>
           <p className="inline-flex items-center gap-1.5 text-xs text-muted-foreground">
-            Built with <Heart className="h-3.5 w-3.5 fill-red-500 text-red-500" /> for
-            Bangladesh&apos;s diploma students
+            Developed by <span className="font-semibold text-foreground">Kazi Rifat</span>
           </p>
         </div>
       </div>

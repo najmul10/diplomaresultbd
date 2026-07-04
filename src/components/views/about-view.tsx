@@ -144,6 +144,7 @@ export function AboutView() {
             Built for Bangladesh&apos;s diploma community
           </h2>
           <p className="max-w-xl text-sm text-muted-foreground">
+            Developed by <span className="font-semibold text-foreground">Kazi Rifat</span>.
             Have feedback, found a bug, or have an idea to make the platform
             better? We&apos;d love to hear from you.
           </p>
