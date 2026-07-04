@@ -40,15 +40,26 @@ export async function POST(req: NextRequest) {
 
   const results = findResultsByRolls(rolls);
   const found = new Set(results.map((r) => r.roll));
-  const missing = rolls.filter((r) => !found.has(r.trim().replace(/\s+/g, "")));
+  const missing = rolls.filter((r) => !found.has(r.trim().replace(/\s+/g, "").replace(/^0+/, "")));
+
+  // For each roll, return only the LATEST semester result (group view shows
+  // one card per student, not the full history)
+  const byRoll = new Map<string, typeof results[number]>();
+  for (const r of results) {
+    const existing = byRoll.get(r.roll);
+    if (!existing || r.semester > existing.semester) {
+      byRoll.set(r.roll, r);
+    }
+  }
+  const latestResults = Array.from(byRoll.values());
 
   return NextResponse.json({
     success: true,
     data: {
-      results,
+      results: latestResults,
       missing,
       totalRequested: rolls.length,
-      totalFound: results.length,
+      totalFound: latestResults.length,
     },
   });
 }

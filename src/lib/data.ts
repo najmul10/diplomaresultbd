@@ -9,6 +9,8 @@ import type {
   Institute,
   Publication,
   StudentResult,
+  Student,
+  StudentHistory,
   Routine,
   Booklist,
   PlatformStats,
@@ -26,6 +28,7 @@ let cache: {
   institutes: Institute[];
   publications: Publication[];
   results: StudentResult[];
+  students: Student[];
   routines: Routine[];
   booklists: Booklist[];
   stats: PlatformStats;
@@ -38,6 +41,7 @@ function load() {
     institutes: readJson<Institute[]>("institutes.json"),
     publications: readJson<Publication[]>("publications.json"),
     results: readJson<StudentResult[]>("results.json"),
+    students: readJson<Student[]>("students.json"),
     routines: readJson<Routine[]>("routines.json"),
     booklists: readJson<Booklist[]>("booklists.json"),
     stats: readJson<PlatformStats>("stats.json"),
@@ -61,6 +65,10 @@ export function getResults() {
   return load().results;
 }
 
+export function getStudents() {
+  return load().students;
+}
+
 export function getRoutines() {
   return load().routines;
 }
@@ -75,25 +83,64 @@ export function getStats() {
 
 // ---------------- Query helpers ----------------
 
-export function findResultByRoll(roll: string): StudentResult | undefined {
-  const normalized = roll.trim().replace(/\s+/g, "").toUpperCase();
-  // Also compare with leading zeros stripped so "100001" matches "00100001"
-  const stripped = normalized.replace(/^0+/, "");
-  return load().results.find(
-    (r) =>
-      r.roll === normalized ||
-      r.roll === roll.trim() ||
-      r.registrationNo === normalized ||
-      r.roll.replace(/^0+/, "") === stripped
+function normalizeRoll(roll: string): string {
+  return roll.trim().replace(/\s+/g, "").toUpperCase().replace(/^0+/, "");
+}
+
+/**
+ * Find a student's COMPLETE ACADEMIC HISTORY by roll or registration number.
+ * Returns the student's identity + every semester result they have, plus a
+ * computed CGPA, passed/referred counts, and pending (not-yet-examined)
+ * semesters. Mirrors the original site's "complete academic history" view.
+ */
+export function findStudentHistory(roll: string): StudentHistory | undefined {
+  const norm = normalizeRoll(roll);
+  const data = load();
+  const student = data.students.find(
+    (s) =>
+      normalizeRoll(s.roll) === norm ||
+      s.registrationNo.toUpperCase().replace(/\s+/g, "") ===
+        roll.trim().replace(/\s+/g, "").toUpperCase()
   );
+  if (!student) return undefined;
+
+  const results = data.results
+    .filter((r) => r.roll === student.roll)
+    .sort((a, b) => a.semester - b.semester);
+
+  // CGPA = average of all published passing GPAs (referred semesters count as 0)
+  const cgpa =
+    results.length > 0
+      ? Math.round(
+          (results.reduce((a, b) => a + b.gpa, 0) / results.length) * 100
+        ) / 100
+      : 0;
+
+  const passedSemesters = results.filter((r) => r.result === "PASSED").length;
+  const referredSemesters = results.filter((r) => r.result === "REFERRED").length;
+
+  // Pending = board-exam semesters (start..8) not yet present in results
+  const doneSemesters = new Set(results.map((r) => r.semester));
+  const pendingSemesters: number[] = [];
+  for (let s = student.boardExamStartSemester; s <= 8; s++) {
+    if (!doneSemesters.has(s)) pendingSemesters.push(s);
+  }
+
+  return {
+    student,
+    results,
+    cgpa,
+    totalSemesters: results.length,
+    passedSemesters,
+    referredSemesters,
+    pendingSemesters,
+  };
 }
 
 export function findResultsByRolls(rolls: string[]): StudentResult[] {
-  const data = load().results;
-  const set = new Set(
-    rolls.map((r) => r.trim().replace(/\s+/g, "").replace(/^0+/, ""))
-  );
-  return data.filter((r) => set.has(r.roll) || set.has(r.roll.replace(/^0+/, "")));
+  const data = load();
+  const set = new Set(rolls.map((r) => normalizeRoll(r)));
+  return data.results.filter((r) => set.has(normalizeRoll(r.roll)));
 }
 
 export function getInstituteResults(

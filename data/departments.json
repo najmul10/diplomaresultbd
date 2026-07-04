@@ -1,8 +1,8 @@
 [
   {
-    "code": "CMT",
-    "name": "Computer Technology",
-    "bn": "কম্পিউটার টেকনোলজি"
+    "code": "CST",
+    "name": "Computer Science & Technology",
+    "bn": "কম্পিউটার সায়েন্স ও টেকনোলজি"
   },
   {
     "code": "ET",
@@ -40,14 +40,9 @@
     "bn": "কেমিক্যাল টেকনোলজি"
   },
   {
-    "code": "TT",
-    "name": "Textile Technology",
-    "bn": "টেক্সটাইল টেকনোলজি"
-  },
-  {
-    "code": "TCT",
-    "name": "Telecommunication Technology",
-    "bn": "টেলিকমিউনিকেশন টেকনোলজি"
+    "code": "FT",
+    "name": "Food Technology",
+    "bn": "ফুড টেকনোলজি"
   },
   {
     "code": "ARCH",
@@ -55,8 +50,13 @@
     "bn": "আর্কিটেকচার টেকনোলজি"
   },
   {
-    "code": "GDPM",
-    "name": "Garment Design & Pattern Making Technology",
-    "bn": "গার্মেন্টস ডিজাইন ও প্যাটার্ন মেকিং টেকনোলজি"
+    "code": "GPM",
+    "name": "Garment Design & Pattern Making",
+    "bn": "গার্মেন্টস ডিজাইন ও প্যাটার্ন মেকিং"
+  },
+  {
+    "code": "MET",
+    "name": "Mechatronics Technology",
+    "bn": "মেকাট্রনিক্স টেকনোলজি"
   }
 ]

@@ -14,6 +14,14 @@ export type Institute = {
   type: "Government" | "Private";
 };
 
+export type PublicationFile = {
+  fileId: string;
+  fileName: string;
+  students: number;
+  passed: number;
+  failed: number;
+};
+
 export type Publication = {
   id: string;
   title: string;
@@ -22,8 +30,10 @@ export type Publication = {
   semester: number;
   examYear: number;
   publicationDate: string;
+  batchLabel: string;
   totalStudents: number;
   passRate: number;
+  files: PublicationFile[];
   rollStart: number;
   rollEnd: number;
 };
@@ -35,6 +45,7 @@ export type SubjectResult = {
   marks: number;
   letter: string;
   point: number;
+  referred?: boolean;
 };
 
 export type StudentResult = {
@@ -47,6 +58,9 @@ export type StudentResult = {
   departmentName: string;
   examType: string;
   curriculum: string;
+  regulation: number;
+  batchLabel: string;
+  admissionYear: number;
   semester: number;
   examYear: number;
   publicationId: string;
@@ -54,8 +68,33 @@ export type StudentResult = {
   subjects: SubjectResult[];
   gpa: number;
   letterGrade: string;
-  result: "PASSED" | "FAILED";
+  result: "PASSED" | "FAILED" | "REFERRED";
+  referredSubjects: string[];
+};
+
+export type Student = {
+  roll: string;
+  registrationNo: string;
+  name: string;
+  instituteCode: string;
+  instituteName: string;
+  departmentCode: string;
+  departmentName: string;
+  curriculum: string;
+  regulation: number;
+  admissionYear: number;
+  batchLabel: string;
+  boardExamStartSemester: number;
+};
+
+export type StudentHistory = {
+  student: Student;
+  results: StudentResult[];
   cgpa: number;
+  totalSemesters: number;
+  passedSemesters: number;
+  referredSemesters: number;
+  pendingSemesters: number[];
 };
 
 export type RoutineScheduleItem = {

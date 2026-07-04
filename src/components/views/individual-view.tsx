@@ -12,7 +12,7 @@ import {
   ShieldCheck,
 } from "lucide-react";
 import { SectionHeading } from "@/components/site/section-heading";
-import { ResultCard } from "@/components/site/result-card";
+import { HistoryTimeline } from "@/components/site/history-timeline";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -30,7 +30,7 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
-import type { StudentResult } from "@/lib/types";
+import type { StudentHistory } from "@/lib/types";
 import { toast } from "sonner";
 
 type Options = {
@@ -53,7 +53,7 @@ async function searchResult(params: {
   curriculum?: string;
   semester?: string;
   examYear?: string;
-}): Promise<StudentResult> {
+}): Promise<StudentHistory> {
   const sp = new URLSearchParams();
   sp.set("roll", params.roll);
   if (params.registrationNo) sp.set("registrationNo", params.registrationNo);
@@ -66,7 +66,7 @@ async function searchResult(params: {
   if (!res.ok || !json.success) {
     throw new Error(json.error || "Search failed");
   }
-  return json.data as StudentResult;
+  return json.data as StudentHistory;
 }
 
 export function IndividualView() {
@@ -287,7 +287,7 @@ export function IndividualView() {
                   <Lightbulb className="h-3.5 w-3.5 text-amber-500" />
                   Try:
                 </span>
-                {["100156", "100203", "100318", "100477"].map((r) => (
+                {["440001", "449381", "451234", "455678"].map((r) => (
                   <Button
                     key={r}
                     type="button"
@@ -342,9 +342,11 @@ export function IndividualView() {
           <>
             <div className="mb-3 flex items-center gap-2 text-xs text-muted-foreground">
               <ShieldCheck className="h-3.5 w-3.5 text-emerald-500" />
-              Resolved from BTEB Results Zone mirror of the official archive
+              Resolved from BTEB Results Zone mirror of the official archive —
+              showing complete academic history ({data.results.length} semester
+              result{data.results.length !== 1 ? "s" : ""})
             </div>
-            <ResultCard result={data} />
+            <HistoryTimeline history={data} />
           </>
         ) : (
           <Card className="border-dashed">

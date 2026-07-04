@@ -113,3 +113,47 @@ Stage Summary:
 - Original site architecture fully understood: MongoDB + Redis backend, server-side fetch, crawls official result.bteb.gov.bd archive.
 - Clone now has a working Auto-Hunt crawler that demonstrates the exact "hunt all results" mechanism: pick publication → crawl roll range → store hits → searchable instantly.
 - Vercel-ready: hunt uses in-memory job state (swap _fetchOneRoll with live scrape for production).
+
+---
+Task ID: 19-25
+Agent: main
+Task: Deep-crawl original site fully + rebuild data model for complete academic history
+
+Work Log:
+- Crawled original site sitemap-index.xml + main sitemap.xml: discovered real routes (/results, /point-results, /group-results, /latest-results, /institute-results, /booklists, /cgpa-calculator, /about, /privacy-policy, /terms-of-service) + institute sitemaps (1-6).
+- Read /results page in full: original site's Individual Results shows "Complete Academic History" — all semester results, GPA, CGPA, referred subjects in ONE view. Curriculum dropdown has 18+ types (Diploma in Engineering/Army/Naval/Textile/Agriculture/Fisheries/Forestry/Livestock, HSC Vocational, etc.). Roll is 6 or 10 digits.
+- Read /latest-results: 191 publication dates, each with Files count, Passed/Failed/Total, Curriculums, Semesters, Pass Rate, "View Result Files" → confirms PDF-scraping ingestion from BTEB official archive.
+- Read /group-results: roll range format "921711-921726", regulation 2022.
+- Read /institute-results: 43 featured institutes with student counts.
+- Read /booklists: Regulation 2022, 41 technologies.
+
+REBUILT DATA MODEL (generate-data.ts v2):
+- Students now have STABLE identity (roll, registration, institute, dept, curriculum, regulation, batchLabel, admissionYear, boardExamStartSemester).
+- 5 batches (19-20, 20-21, 21-22, 22-23, 23-24); older batches start board exams at sem 4, newer at sem 1 (matches user's real experience).
+- 1439 students, each with 5-8 semester results (9820 total results), 34 publications, 6 curricula.
+- Publications now have "files" array (PDF-style), batchLabel.
+- Results now have result: PASSED|FAILED|REFERRED + referredSubjects[] + regulation + batchLabel.
+
+NEW DATA ACCESS:
+- findStudentHistory(roll) returns {student, results[], cgpa, passedSemesters, referredSemesters, pendingSemesters[]} — the complete academic history.
+- findResultsByRolls now returns latest semester per roll (for group view).
+
+API UPGRADES:
+- /api/results/search now returns StudentHistory (all semesters), not single result.
+- /api/results/group returns latest semester per roll.
+
+NEW UI:
+- HistoryTimeline component: summary band (CGPA, passed/referred/pending counts, progress), then expandable semester cards (4-8) each showing subject table with referred highlighting. Save/Share/Download actions.
+- IndividualView rebuilt to show HistoryTimeline instead of single ResultCard.
+- ResultCard handles REFERRED state (amber tone).
+- Sample rolls updated to 440001, 449381, 451234, 455678.
+
+Agent Browser verification:
+- Search roll 440001 (batch 19-20, CST, Dhaka Polytechnic): full history renders — Sem 4 (3.17 A-), Sem 5 (3.19 A-), Sem 6 (0.00 F Referred), Sem 7 (3.10 A-), Sem 8 (2.78 B). CGPA 2.45. 4 passed, 1 referred. Subject table expands with codes/marks/grades.
+- Group view: 3 rolls → 2 found (latest semester each), 1 missing. Works correctly with multi-result students.
+- Latest view: 7189 passed / 2631 failed across dataset, charts render.
+- Lint clean. No runtime errors.
+
+Stage Summary:
+- Original site fully understood: it scrapes PDF result files from BTEB official archive (result.bteb.gov.bd), stores per-student complete academic history (all semesters), and shows it all when you search a roll.
+- Clone now replicates this: search a roll → see ALL semester results (history) with GPA/CGPA/referred subjects/pending semesters, exactly like the original.

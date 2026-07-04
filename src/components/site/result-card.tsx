@@ -112,6 +112,7 @@ export function ResultCard({ result }: { result: StudentResult }) {
   };
 
   const passed = result.result === "PASSED";
+  const referred = result.result === "REFERRED";
 
   return (
     <Card className="overflow-hidden">
@@ -121,7 +122,9 @@ export function ResultCard({ result }: { result: StudentResult }) {
           "relative flex flex-col gap-4 p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6",
           passed
             ? "bg-gradient-to-br from-emerald-500/10 via-teal-500/5 to-transparent"
-            : "bg-gradient-to-br from-rose-500/10 via-red-500/5 to-transparent"
+            : referred
+              ? "bg-gradient-to-br from-amber-500/10 via-orange-500/5 to-transparent"
+              : "bg-gradient-to-br from-rose-500/10 via-red-500/5 to-transparent"
         )}
       >
         <div className="flex items-center gap-4">
@@ -130,7 +133,9 @@ export function ResultCard({ result }: { result: StudentResult }) {
               "flex h-16 w-16 shrink-0 flex-col items-center justify-center rounded-2xl text-center ring-1",
               passed
                 ? "bg-emerald-500/15 text-emerald-700 ring-emerald-500/30 dark:text-emerald-300"
-                : "bg-rose-500/15 text-rose-700 ring-rose-500/30 dark:text-rose-300"
+                : referred
+                  ? "bg-amber-500/15 text-amber-700 ring-amber-500/30 dark:text-amber-300"
+                  : "bg-rose-500/15 text-rose-700 ring-rose-500/30 dark:text-rose-300"
             )}
           >
             <span className="text-2xl font-bold leading-none">
@@ -148,10 +153,11 @@ export function ResultCard({ result }: { result: StudentResult }) {
             <div className="mt-2 flex flex-wrap items-center gap-2">
               <GradeBadge grade={result.letterGrade} size="md" />
               <Badge
-                variant={passed ? "default" : "destructive"}
+                variant={passed ? "default" : referred ? "secondary" : "destructive"}
                 className={cn(
                   "gap-1",
-                  passed && "bg-emerald-600 hover:bg-emerald-600"
+                  passed && "bg-emerald-600 hover:bg-emerald-600",
+                  referred && "bg-amber-600 text-white hover:bg-amber-600"
                 )}
               >
                 {passed ? (
