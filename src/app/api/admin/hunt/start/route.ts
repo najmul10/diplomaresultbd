@@ -1,29 +1,28 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getPublications } from "@/lib/data";
+import { OFFICIAL_EXAM_OPTIONS } from "@/lib/bteb-scraper";
 import { createJob, runJob } from "@/lib/hunt";
 
 export const dynamic = "force-dynamic";
 
 /**
- * Start a new auto-hunt crawl job for a publication.
+ * Start a new LIVE auto-hunt crawl job.
  *
  * Body:
- *   - publicationId: string  (which publication to crawl)
- *   - rollStart: number      (first roll in the range)
- *   - rollEnd: number        (last roll in the range)
- *   - source: string         (e.g. "https://result.bteb.gov.bd")
- *   - concurrency?: number   (default 8)
- *   - delayMs?: number       (default 120)
- *
- * This mirrors the original site's ingestion: pick a publication, define
- * a roll range, then crawl every roll and store hits.
+ *   - exam       exam code (e.g. "15")
+ *   - year       exam year (e.g. "2022")
+ *   - sessPart   optional session part
+ *   - rollStart  first roll in the range
+ *   - rollEnd    last roll in the range
+ *   - concurrency (default 6)
+ *   - delayMs    (default 100)
  */
 export async function POST(req: NextRequest) {
   let body: {
-    publicationId?: string;
+    exam?: string;
+    year?: string;
+    sessPart?: string;
     rollStart?: number;
     rollEnd?: number;
-    source?: string;
     concurrency?: number;
     delayMs?: number;
   };
@@ -36,19 +35,12 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  const { publicationId, rollStart, rollEnd, source, concurrency, delayMs } = body;
+  const { exam, year, sessPart, rollStart, rollEnd, concurrency, delayMs } = body;
 
-  if (!publicationId) {
+  if (!exam || !year) {
     return NextResponse.json(
-      { success: false, error: "publicationId is required." },
+      { success: false, error: "exam and year are required." },
       { status: 400 }
-    );
-  }
-  const pub = getPublications().find((p) => p.id === publicationId);
-  if (!pub) {
-    return NextResponse.json(
-      { success: false, error: "Publication not found." },
-      { status: 404 }
     );
   }
 
@@ -60,24 +52,28 @@ export async function POST(req: NextRequest) {
       { status: 400 }
     );
   }
-  // Cap the range so a single job can't run forever
-  const MAX_RANGE = 5000;
+  const MAX_RANGE = 2000;
   if (end - start + 1 > MAX_RANGE) {
     return NextResponse.json(
-      { success: false, error: `Roll range too large. Max ${MAX_RANGE} rolls per job.` },
+      { success: false, error: `Roll range too large. Max ${MAX_RANGE} rolls per job (live crawling is slow).` },
       { status: 400 }
     );
   }
 
+  const examName =
+    OFFICIAL_EXAM_OPTIONS.find((e) => e.code === exam)?.name || `Exam ${exam}`;
+
   const job = createJob({
-    publication: pub,
+    exam,
+    examName,
+    year,
+    sessPart: sessPart && sessPart !== "any" ? sessPart : null,
     rollStart: start,
     rollEnd: end,
-    source: source || "https://result.bteb.gov.bd",
+    source: "http://180.211.162.102:8444/result_arch/result.php",
   });
 
-  // Fire and forget — the job runs in the background
-  runJob(job.id, { concurrency: concurrency ?? 8, delayMs: delayMs ?? 120 }).catch((e) => {
+  runJob(job.id, { concurrency: concurrency ?? 6, delayMs: delayMs ?? 100 }).catch((e) => {
     job.status = "failed";
     job.finishedAt = new Date().toISOString();
     job.log.push({

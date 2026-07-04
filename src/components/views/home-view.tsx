@@ -2,7 +2,6 @@
 
 import * as React from "react";
 import { motion } from "framer-motion";
-import { useQuery } from "@tanstack/react-query";
 import { useRouter, type ViewId } from "@/store/use-router";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -24,9 +23,9 @@ import {
   TrendingUp,
   GraduationCap,
   Layers,
+  Radio,
 } from "lucide-react";
 import { AdSlot } from "@/components/site/ad-slot";
-import type { PlatformStats } from "@/lib/types";
 
 type Feature = {
   view: ViewId;
@@ -41,30 +40,30 @@ const FEATURES: Feature[] = [
   {
     view: "individual",
     icon: Search,
-    title: "Instant Result Search",
-    desc: "Find your BTEB results instantly by roll number. Fast, accurate, and always up-to-date.",
+    title: "Live Result Search",
+    desc: "Search your real BTEB result live from the official government archive by roll, registration, exam type and year.",
     popular: true,
     accent: "from-emerald-500/20 to-teal-500/5 text-emerald-600 dark:text-emerald-400",
   },
   {
     view: "latest",
     icon: BarChart3,
-    title: "Latest Results & Analytics",
-    desc: "Stay updated with the latest BTEB results and comprehensive statistical analysis.",
+    title: "Live Analytics",
+    desc: "Crawl a sample of rolls from the official archive and compute real pass rates, grade distribution and average GPA on demand.",
     accent: "from-amber-500/20 to-orange-500/5 text-amber-600 dark:text-amber-400",
   },
   {
     view: "institute",
     icon: Building2,
-    title: "Institute-wise Results",
-    desc: "View complete results for any institute, semester, and publication date.",
+    title: "Institute Directory",
+    desc: "Browse all polytechnic institutes across Bangladesh, then search any student's live result.",
     accent: "from-teal-500/20 to-cyan-500/5 text-teal-600 dark:text-teal-400",
   },
   {
     view: "group",
     icon: Users,
-    title: "Group Results & Sharing",
-    desc: "Check multiple results together, create groups, and share with friends easily.",
+    title: "Live Group Results",
+    desc: "Compare multiple students' real results — fetched live in parallel from the official archive.",
     accent: "from-violet-500/20 to-purple-500/5 text-violet-600 dark:text-violet-400",
   },
   {
@@ -104,29 +103,13 @@ const TRUST = [
   { icon: TrendingUp, label: "Live & Updated" },
 ];
 
-async function fetchStats(): Promise<PlatformStats> {
-  const res = await fetch("/api/stats");
-  const json = await res.json();
-  return json.data;
-}
-
-function formatCompact(n: number): string {
-  if (n >= 1_000_000) return (n / 1_000_000).toFixed(1).replace(/\.0$/, "") + "M+";
-  if (n >= 1_000) return (n / 1_000).toFixed(1).replace(/\.0$/, "") + "K+";
-  return String(n);
-}
-
 export function HomeView() {
   const navigate = useRouter((s) => s.navigate);
-  const { data: stats } = useQuery({
-    queryKey: ["stats"],
-    queryFn: fetchStats,
-  });
 
   const statCards = [
-    { label: "Students Served", value: "2.3M+", sub: "Across Bangladesh" },
-    { label: "Years of Service", value: "5+", sub: "Trusted & reliable" },
-    { label: "Uptime", value: "99.9%", sub: "Always available" },
+    { label: "Data Source", value: "Live", sub: "Official BTEB archive" },
+    { label: "Exam Types", value: "37+", sub: "All BTEB curricula" },
+    { label: "Years", value: "2005-25", sub: "Full archive coverage" },
     { label: "Price", value: "Free", sub: "Always & forever" },
   ];
 
@@ -146,21 +129,21 @@ export function HomeView() {
           >
             <Badge
               variant="secondary"
-              className="mb-5 gap-1.5 rounded-full border border-primary/20 bg-primary/5 py-1.5 pl-2 pr-3 text-primary"
+              className="mb-5 gap-1.5 rounded-full border border-emerald-500/20 bg-emerald-500/5 py-1.5 pl-2 pr-3 text-emerald-600 dark:text-emerald-400"
             >
-              <Sparkles className="h-3.5 w-3.5" />
-              Trusted by 2.3M+ Students
+              <Radio className="h-3.5 w-3.5" />
+              Live from official BTEB archive
             </Badge>
             <h1 className="text-balance text-4xl font-extrabold leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl">
-              BTEB Results at{" "}
+              BTEB Results{" "}
               <span className="bg-gradient-to-r from-primary to-teal-500 bg-clip-text text-transparent">
-                Your Fingertips
+                Live &amp; Free
               </span>
             </h1>
             <p className="mt-5 max-w-xl text-pretty text-base text-muted-foreground sm:text-lg">
-              Bangladesh&apos;s most trusted platform for BTEB exam results. Get
-              instant access to diploma, polytechnic, and technical education
-              results — fast, accurate, and always free.
+              Search your real BTEB result live — fetched in real time from the
+              official Bangladesh Technical Education Board archive. No stored
+              data, no demo: every search hits the government source.
             </p>
             <div className="mt-7 flex flex-col gap-3 sm:flex-row">
               <Button

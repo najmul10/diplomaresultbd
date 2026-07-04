@@ -1,10 +1,25 @@
 import { NextRequest, NextResponse } from "next/server";
-import { findResultsByRolls } from "@/lib/data";
+import { searchLiveBatch } from "@/lib/bteb-scraper";
 
 export const dynamic = "force-dynamic";
 
+/**
+ * LIVE Group result search — fetches each roll in parallel from the official
+ * BTEB archive (http://180.211.162.102:8444/result_arch/).
+ *
+ * Body:
+ *   - exam      (required) exam code, e.g. "15"
+ *   - year      (required) exam year, e.g. "2022"
+ *   - rolls     (string|string[]) roll numbers, or a string to parse
+ *   - sessPart  (optional) session part code
+ */
 export async function POST(req: NextRequest) {
-  let body: { rolls?: string[] | string };
+  let body: {
+    exam?: string;
+    year?: string;
+    rolls?: string[] | string;
+    sessPart?: string;
+  };
   try {
     body = await req.json();
   } catch {
@@ -14,14 +29,33 @@ export async function POST(req: NextRequest) {
     );
   }
 
+  const exam = body.exam;
+  const year = body.year;
+  const sessPart = body.sessPart && body.sessPart !== "any" ? body.sessPart : undefined;
+
+  if (!exam || !year) {
+    return NextResponse.json(
+      { success: false, error: "Exam type and year are required." },
+      { status: 400 }
+    );
+  }
+
   let rolls: string[] = [];
   if (Array.isArray(body.rolls)) {
     rolls = body.rolls;
   } else if (typeof body.rolls === "string") {
-    rolls = body.rolls
-      .split(/[\s,]+/)
-      .map((s) => s.trim())
-      .filter(Boolean);
+    // support range format "921711-921726" and comma/space separated
+    const parts = body.rolls.split(/[\s,]+/).filter(Boolean);
+    for (const part of parts) {
+      const range = part.match(/^(\d+)\s*-\s*(\d+)$/);
+      if (range) {
+        const start = parseInt(range[1], 10);
+        const end = Math.min(parseInt(range[2], 10), start + 60); // cap ranges
+        for (let r = start; r <= end; r++) rolls.push(String(r));
+      } else {
+        rolls.push(part);
+      }
+    }
   }
 
   if (rolls.length === 0) {
@@ -38,28 +72,20 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  const results = findResultsByRolls(rolls);
-  const found = new Set(results.map((r) => r.roll));
-  const missing = rolls.filter((r) => !found.has(r.trim().replace(/\s+/g, "").replace(/^0+/, "")));
-
-  // For each roll, return only the LATEST semester result (group view shows
-  // one card per student, not the full history)
-  const byRoll = new Map<string, typeof results[number]>();
-  for (const r of results) {
-    const existing = byRoll.get(r.roll);
-    if (!existing || r.semester > existing.semester) {
-      byRoll.set(r.roll, r);
-    }
-  }
-  const latestResults = Array.from(byRoll.values());
+  const results = await searchLiveBatch({ exam, year, sessPart }, rolls);
+  const found = results.filter((r) => r.result !== null).map((r) => r.result!);
+  const missing = results.filter((r) => r.result === null).map((r) => r.roll);
+  const errored = results.filter((r) => r.error).map((r) => ({ roll: r.roll, error: r.error }));
 
   return NextResponse.json({
     success: true,
     data: {
-      results: latestResults,
+      results: found,
       missing,
+      errored,
       totalRequested: rolls.length,
-      totalFound: latestResults.length,
+      totalFound: found.length,
+      source: "official-archive",
     },
   });
 }

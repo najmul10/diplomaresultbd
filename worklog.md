@@ -192,3 +192,40 @@ Stage Summary:
 - Real students with real roll+reg+exam+year WILL get their real results.
 - Google AdSense fully integrated — just replace the publisher ID with the user's own.
 - Honest note: the seed/demo data still powers the analytics, latest, group, and institute views (aggregate stats). The individual search is the live path.
+
+---
+Task ID: 33-40
+Agent: main
+Task: Make EVERYTHING live — remove all copied/demo data
+
+Work Log:
+- Deleted bundled fake data: results.json, students.json, publications.json, stats.json. Only reference catalogs remain (departments, institutes, booklists, routines — public info, NOT student results).
+- Rewrote src/lib/data.ts to only load reference catalogs.
+- Deleted API routes that served bundled data: /api/stats, /api/publications, /api/analytics, /api/results/institute, /api/results/latest, /api/results/options, /api/results/search.
+- Enhanced src/lib/bteb-scraper.ts: added searchLiveBatch() for parallel live crawling + fetchLiveCurricula() that pulls the REAL curriculum list from the official new archive API (https://result.bteb.gov.bd/api/public/curriculums) — returns 39 real curricula.
+- /api/results/live-options now returns LIVE curricula (39 exam types) + 21 years + 7 session parts, with a `live: true` flag.
+- Group Results: rebuilt to use LIVE batch search. Form requires exam type + year (same for all rolls), supports roll ranges (100001-100010), fetches each roll live in parallel (6-way concurrency) from official archive.
+- /api/results/group: rewritten to call searchLiveBatch live.
+- Latest Results & Analytics: rebuilt as LIVE sample crawler. User picks exam + year + session part + start roll + sample size, clicks "Run Live Analysis" → crawls up to 80 rolls live, computes REAL pass rate, grade distribution, avg GPA, result split from whatever comes back. Clearly labeled "100% live — no stored data".
+- /api/results/live-analytics: new endpoint that does the live sample crawl + computes stats.
+- Institute Results: rebuilt as a directory (removes fake per-institute results). Shows all polytechnic institutes with search, links each to live individual search. Honest note: "The official BTEB archive doesn't offer institute-wise batch search — it searches per student."
+- Hunt: completely rewritten to use the LIVE scraper. Jobs now take exam + year + sessPart (not publicationId). Each roll fetched live from official archive. Max 2000 rolls per job.
+- Home view: removed fake "2.3M students" stats. New stats: "Data Source: Live (Official BTEB archive)", "Exam Types: 37+", "Years: 2005-25", "Price: Free". Hero badge now "Live from official BTEB archive". Feature descs updated to reflect live nature.
+- /api root: documents the live endpoints + official source.
+
+Agent Browser verification (all LIVE):
+- Home: "BTEB Results Live & Free" heading, live badge.
+- Individual: form with 39 real exam types (fetched live from result.bteb.gov.bd/api). Live search roll 449381 → 404 (correct, demo roll not in archive). Server hit official archive in 770ms.
+- Group API: 3 rolls crawled live, source "official-archive".
+- Live analytics API: crawled 10 rolls live, found 1 real result, computed real stats. source "official-archive (live sample)".
+- Hunt: started live hunt for rolls 100001-100020, completed, found 1, server alive.
+- Institute: directory renders, search works.
+- Lint clean. All views verified live.
+
+Stage Summary:
+- ZERO demo/copied data in the result path. Every result shown is fetched LIVE from the official BTEB government archive (http://180.211.162.102:8444/result_arch/).
+- Curriculum list fetched live from official API (result.bteb.gov.bd/api/public/curriculums) — 39 real exam types.
+- Individual, Group, Latest/Analytics, Hunt all hit the official archive in real time.
+- Institute view is now an honest directory (no fake batch results).
+- Reference catalogs (departments, institutes, booklists, routines) kept as public info.
+- Google AdSense still integrated on all result views.

@@ -278,3 +278,71 @@ export async function searchLive(params: LiveSearchParams): Promise<LiveSearchRe
     };
   }
 }
+
+/**
+ * Batch live search — fetch multiple rolls in parallel from the official
+ * archive. Used by Group Results. Returns one result per roll (null = not
+ * found). Concurrency-limited to be polite to the government server.
+ */
+export async function searchLiveBatch(
+  base: Omit<LiveSearchParams, "roll">,
+  rolls: string[]
+): Promise<Array<{ roll: string; result: StudentResult | null; error?: string }>> {
+  const CONCURRENCY = 6;
+  const out: Array<{ roll: string; result: StudentResult | null; error?: string }> = [];
+  for (let i = 0; i < rolls.length; i += CONCURRENCY) {
+    const batch = rolls.slice(i, i + CONCURRENCY);
+    const results = await Promise.all(
+      batch.map(async (roll) => {
+        try {
+          const r = await searchLive({ ...base, roll });
+          return { roll, result: r.success ? r.data : null, error: r.success ? undefined : r.error };
+        } catch (e) {
+          return { roll, result: null, error: e instanceof Error ? e.message : "error" };
+        }
+      })
+    );
+    out.push(...results);
+  }
+  return out;
+}
+
+/**
+ * Fetch the REAL curriculum list from the official new archive's public API.
+ * Falls back to OFFICIAL_EXAM_OPTIONS if the API is unreachable.
+ */
+export async function fetchLiveCurricula(): Promise<
+  Array<{ code: string; name: string; totalSemesters: number }>
+> {
+  try {
+    const res = await fetch("https://result.bteb.gov.bd/api/public/curriculums", {
+      headers: {
+        Accept: "application/json",
+        "User-Agent": "Mozilla/5.0",
+        Referer: "https://result.bteb.gov.bd/result-search",
+      },
+      // @ts-expect-error next fetch option
+      next: { revalidate: 3600 },
+    });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const data = (await res.json()) as Array<{
+      curriculumCode: string;
+      curriculumName: string;
+      totalSemesters: number;
+    }>;
+    return data
+      .filter((c) => c.curriculumCode !== "99")
+      .map((c) => ({
+        code: c.curriculumCode,
+        name: c.curriculumName.replace(/-/g, " ").replace(/\s+/g, " ").trim(),
+        totalSemesters: c.totalSemesters,
+      }));
+  } catch {
+    // Fallback to the legacy archive's exam list
+    return OFFICIAL_EXAM_OPTIONS.map((e) => ({
+      code: e.code,
+      name: e.name,
+      totalSemesters: 8,
+    }));
+  }
+}

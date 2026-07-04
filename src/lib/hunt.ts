@@ -1,20 +1,13 @@
 /**
- * Auto-Hunt Crawler Job Manager (in-memory).
+ * Auto-Hunt Crawler Job Manager (LIVE).
  *
- * This mirrors how the original btebresultszone.com "auto hunts" all
- * results: when BTEB publishes a new batch on the official archive
- * (result.bteb.gov.bd), a crawl job iterates through the roll-number
- * range for that publication, fetches each result, and stores it.
- *
- * Here we simulate that crawl against our bundled dataset. Each "fetch"
- * resolves a roll against results.json — a hit is "found", otherwise the
- * roll is marked "not_published". The job runs in the background with
- * configurable concurrency + delay, and exposes live progress.
- *
- * Swap `_fetchOneRoll` with a real scraper call to result.bteb.gov.bd
- * (with captcha solving) to turn this into a production crawler.
+ * Each hunt job crawls a roll-number range against the OFFICIAL BTEB archive
+ * (http://180.211.162.102:8444/result_arch/) in real time. No bundled data —
+ * every roll is fetched live. Jobs run in the background with concurrency +
+ * politeness delay, and expose live progress.
  */
-import type { StudentResult, Publication } from "@/lib/types";
+import { searchLive } from "@/lib/bteb-scraper";
+import type { StudentResult } from "@/lib/types";
 
 export type HuntStatus = "queued" | "running" | "paused" | "completed" | "failed" | "stopped";
 
@@ -29,11 +22,10 @@ export type HuntLogEntry = {
 
 export type HuntJob = {
   id: string;
-  publicationId: string;
-  publicationTitle: string;
-  curriculum: string;
-  semester: number;
-  examYear: number;
+  exam: string;
+  examName: string;
+  year: string;
+  sessPart: string | null;
   rollStart: number;
   rollEnd: number;
   total: number;
@@ -44,7 +36,7 @@ export type HuntJob = {
   status: HuntStatus;
   startedAt: string;
   finishedAt: string | null;
-  throughput: number; // rolls/sec
+  throughput: number;
   etaSeconds: number;
   source: string;
   log: HuntLogEntry[];
@@ -65,7 +57,10 @@ export function listJobs(): HuntJob[] {
 }
 
 export function createJob(opts: {
-  publication: Publication;
+  exam: string;
+  examName: string;
+  year: string;
+  sessPart: string | null;
   rollStart: number;
   rollEnd: number;
   source: string;
@@ -74,11 +69,10 @@ export function createJob(opts: {
   const total = opts.rollEnd - opts.rollStart + 1;
   const job: HuntJob = {
     id,
-    publicationId: opts.publication.id,
-    publicationTitle: opts.publication.title,
-    curriculum: opts.publication.curriculum,
-    semester: opts.publication.semester,
-    examYear: opts.publication.examYear,
+    exam: opts.exam,
+    examName: opts.examName,
+    year: opts.year,
+    sessPart: opts.sessPart,
     rollStart: opts.rollStart,
     rollEnd: opts.rollEnd,
     total,
@@ -99,28 +93,6 @@ export function createJob(opts: {
   return job;
 }
 
-// Load results lazily (server-side only)
-let _results: StudentResult[] | null = null;
-async function getResultsData(): Promise<StudentResult[]> {
-  if (_results) return _results;
-  const { getResults } = await import("@/lib/data");
-  _results = getResults();
-  return _results!;
-}
-
-function _resolveRoll(
-  data: StudentResult[],
-  rollInt: number,
-  publicationId: string
-): StudentResult | undefined {
-  const padded = String(rollInt).padStart(8, "0");
-  return data.find(
-    (r) =>
-      r.publicationId === publicationId &&
-      (r.roll === padded || r.roll.replace(/^0+/, "") === String(rollInt))
-  );
-}
-
 function pushLog(job: HuntJob, entry: HuntLogEntry) {
   job.log.push(entry);
   if (job.log.length > MAX_LOG) {
@@ -129,8 +101,8 @@ function pushLog(job: HuntJob, entry: HuntLogEntry) {
 }
 
 /**
- * Run a hunt job in the background. Processes rolls in small batches
- * with a delay to mimic a polite crawl of the official archive.
+ * Run a hunt job in the background. Processes rolls in small batches in
+ * parallel, each fetched LIVE from the official BTEB archive.
  */
 export async function runJob(
   id: string,
@@ -138,46 +110,45 @@ export async function runJob(
 ): Promise<void> {
   const job = jobs.get(id);
   if (!job) return;
-  const { concurrency = 8, delayMs = 120 } = opts;
+  const { concurrency = 6, delayMs = 100 } = opts;
 
   job.status = "running";
-  const data = await getResultsData();
   const started = Date.now();
 
   let cursor = job.rollStart;
-  // keep going until we cover the range or job is stopped/paused/failed
   while (cursor <= job.rollEnd && job.status === "running") {
     const batch: number[] = [];
     for (let i = 0; i < concurrency && cursor <= job.rollEnd; i++) {
       batch.push(cursor);
       cursor++;
     }
-    // process batch in parallel
     await Promise.all(
       batch.map(async (rollInt) => {
         try {
-          // simulate network fetch latency per roll
-          await new Promise((r) => setTimeout(r, 20 + Math.random() * 60));
-          const res = _resolveRoll(data, rollInt, job.publicationId);
-          if (res) {
+          const r = await searchLive({
+            exam: job.exam,
+            year: job.year,
+            roll: String(rollInt),
+            sessPart: job.sessPart || undefined,
+          });
+          if (r.success && r.data) {
             job.found += 1;
-            job.results.push(res);
+            job.results.push(r.data);
             pushLog(job, {
               t: new Date().toISOString(),
-              roll: String(rollInt).padStart(8, "0"),
+              roll: String(rollInt),
               status: "found",
-              gpa: res.gpa,
-              grade: res.letterGrade,
+              gpa: r.data.gpa,
+              grade: r.data.letterGrade,
             });
           } else {
             job.notFound += 1;
-            // Only log some not_found entries to keep the log readable
-            if (Math.random() < 0.25) {
+            if (Math.random() < 0.3) {
               pushLog(job, {
                 t: new Date().toISOString(),
-                roll: String(rollInt).padStart(8, "0"),
+                roll: String(rollInt),
                 status: "not_found",
-                msg: "roll not in published range",
+                msg: "roll not in archive",
               });
             }
           }
@@ -185,7 +156,7 @@ export async function runJob(
           job.errors += 1;
           pushLog(job, {
             t: new Date().toISOString(),
-            roll: String(rollInt).padStart(8, "0"),
+            roll: String(rollInt),
             status: "error",
             msg: e instanceof Error ? e.message : "unknown error",
           });

@@ -23,14 +23,12 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ success: true, data: job });
   }
 
-  // list view (omit heavy log/results arrays)
   const jobs = listJobs().map((j) => ({
     id: j.id,
-    publicationId: j.publicationId,
-    publicationTitle: j.publicationTitle,
-    curriculum: j.curriculum,
-    semester: j.semester,
-    examYear: j.examYear,
+    exam: j.exam,
+    examName: j.examName,
+    year: j.year,
+    sessPart: j.sessPart,
     rollStart: j.rollStart,
     rollEnd: j.rollEnd,
     total: j.total,

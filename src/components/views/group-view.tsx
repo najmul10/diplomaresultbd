@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import {
   Users,
   Loader2,
@@ -10,45 +10,84 @@ import {
   XCircle,
   Trash2,
   Plus,
+  Radio,
+  ExternalLink,
 } from "lucide-react";
 import { SectionHeading } from "@/components/site/section-heading";
 import { ResultCard } from "@/components/site/result-card";
+import { AdSlot } from "@/components/site/ad-slot";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import type { StudentResult } from "@/lib/types";
 import { toast } from "sonner";
+
+type ExamOption = { code: string; name: string; totalSemesters?: number };
+type SessionPart = { code: string; name: string };
+type Options = {
+  exams: ExamOption[];
+  years: string[];
+  sessionParts: SessionPart[];
+  live?: boolean;
+};
 
 type GroupResponse = {
   results: StudentResult[];
   missing: string[];
+  errored: Array<{ roll: string; error: string }>;
   totalRequested: number;
   totalFound: number;
+  source: string;
 };
 
-async function fetchGroup(rolls: string[]): Promise<GroupResponse> {
+async function fetchOptions(): Promise<Options> {
+  const res = await fetch("/api/results/live-options");
+  const j = await res.json();
+  return j.data;
+}
+
+async function fetchGroup(payload: {
+  exam: string;
+  year: string;
+  rolls: string;
+  sessPart?: string;
+}): Promise<GroupResponse> {
   const res = await fetch("/api/results/group", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ rolls }),
+    body: JSON.stringify(payload),
   });
-  const json = await res.json();
-  if (!res.ok || !json.success) {
-    throw new Error(json.error || "Failed to fetch group results");
-  }
-  return json.data as GroupResponse;
+  const j = await res.json();
+  if (!j.success) throw new Error(j.error || "Failed");
+  return j.data as GroupResponse;
 }
 
 export function GroupView() {
+  const { data: options } = useQuery({
+    queryKey: ["live-options"],
+    queryFn: fetchOptions,
+  });
+
+  const [exam, setExam] = React.useState("15");
+  const [year, setYear] = React.useState("2022");
+  const [sessPart, setSessPart] = React.useState("any");
   const [rollsText, setRollsText] = React.useState("");
   const [singleRoll, setSingleRoll] = React.useState("");
   const [rolls, setRolls] = React.useState<string[]>([]);
 
   const mutation = useMutation({
     mutationFn: fetchGroup,
-    onSuccess: () => toast.success("Group results loaded"),
+    onSuccess: () => toast.success("Live group results loaded"),
     onError: (e: Error) => toast.error(e.message),
   });
 
@@ -72,7 +111,19 @@ export function GroupView() {
       .split(/[\s,]+/)
       .map((s) => s.trim())
       .filter(Boolean);
-    const merged = Array.from(new Set([...rolls, ...parsed]));
+    // expand ranges
+    const expanded: string[] = [];
+    for (const part of parsed) {
+      const range = part.match(/^(\d+)\s*-\s*(\d+)$/);
+      if (range) {
+        const start = parseInt(range[1], 10);
+        const end = Math.min(parseInt(range[2], 10), start + 60);
+        for (let r = start; r <= end; r++) expanded.push(String(r));
+      } else {
+        expanded.push(part);
+      }
+    }
+    const merged = Array.from(new Set([...rolls, ...expanded])).slice(0, 50);
     setRolls(merged);
     setRollsText("");
     toast.success(`Added ${merged.length - rolls.length} roll(s)`);
@@ -88,29 +139,108 @@ export function GroupView() {
       toast.error("Add at least one roll number");
       return;
     }
-    mutation.mutate(rolls);
+    mutation.mutate({
+      exam,
+      year,
+      rolls: rolls.join(", "),
+      sessPart: sessPart !== "any" ? sessPart : undefined,
+    });
   };
 
-  const avgGpa = data && data.results.length > 0
-    ? data.results.filter(r => r.result === "PASSED").reduce((a, b) => a + b.gpa, 0) /
-      Math.max(1, data.results.filter((r) => r.result === "PASSED").length)
-    : 0;
+  const avgGpa =
+    data && data.results.length > 0
+      ? data.results.filter((r) => r.result === "PASSED").reduce((a, b) => a + b.gpa, 0) /
+        Math.max(1, data.results.filter((r) => r.result === "PASSED").length)
+      : 0;
 
   return (
     <div className="mx-auto w-full max-w-5xl px-4 py-8 sm:px-6 lg:py-12">
       <SectionHeading
         title="Group Results"
-        description="Check multiple students' results together. Add roll numbers, then fetch all at once."
+        description="Compare multiple students' real BTEB results — fetched live from the official archive."
         icon={Users}
+        badge="Live"
       />
 
-      <div className="mt-6 grid gap-6 lg:grid-cols-[320px_1fr]">
+      <Card className="mt-6 border-emerald-500/30 bg-emerald-500/5">
+        <CardContent className="flex items-start gap-3 p-4">
+          <Radio className="mt-0.5 h-5 w-5 shrink-0 text-emerald-600 dark:text-emerald-400" />
+          <div className="text-sm">
+            <p className="font-semibold text-emerald-700 dark:text-emerald-300">
+              Live from official BTEB archive
+            </p>
+            <p className="mt-0.5 text-muted-foreground">
+              Each roll is fetched in real time from{" "}
+              <a
+                href="http://180.211.162.102:8444/result_arch/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-0.5 font-medium text-emerald-700 underline-offset-2 hover:underline dark:text-emerald-300"
+              >
+                the official BTEB archive
+                <ExternalLink className="h-3 w-3" />
+              </a>
+              . Select the same exam type + year for all rolls, then add roll numbers
+              (supports ranges like <span className="font-mono">100001-100010</span>).
+            </p>
+          </div>
+        </CardContent>
+      </Card>
+
+      <div className="mt-6 grid gap-6 lg:grid-cols-[360px_1fr]">
         {/* Left: input panel */}
         <div className="flex flex-col gap-4">
           <Card>
             <CardContent className="p-5">
-              <h3 className="text-sm font-semibold">Add roll numbers</h3>
-              <div className="mt-3 flex gap-2">
+              <div className="grid grid-cols-2 gap-3">
+                <div className="space-y-1.5">
+                  <Label className="text-xs">Exam Type</Label>
+                  <Select value={exam} onValueChange={setExam}>
+                    <SelectTrigger className="h-10">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {options?.exams.map((x) => (
+                        <SelectItem key={x.code} value={x.code}>
+                          {x.name}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div className="space-y-1.5">
+                  <Label className="text-xs">Year</Label>
+                  <Select value={year} onValueChange={setYear}>
+                    <SelectTrigger className="h-10">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {options?.years.map((y) => (
+                        <SelectItem key={y} value={y}>
+                          {y}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
+              <div className="mt-3 space-y-1.5">
+                <Label className="text-xs">Session Part (optional)</Label>
+                <Select value={sessPart} onValueChange={setSessPart}>
+                  <SelectTrigger className="h-10">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {options?.sessionParts.map((s) => (
+                      <SelectItem key={s.code || "any"} value={s.code || "any"}>
+                        {s.name}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+
+              <div className="mt-4 flex gap-2">
                 <Input
                   value={singleRoll}
                   onChange={(e) => setSingleRoll(e.target.value)}
@@ -122,6 +252,7 @@ export function GroupView() {
                   }}
                   placeholder="Roll number"
                   inputMode="numeric"
+                  className="font-mono"
                 />
                 <Button type="button" onClick={addRoll} size="icon" aria-label="Add roll">
                   <Plus className="h-4 w-4" />
@@ -129,14 +260,14 @@ export function GroupView() {
               </div>
 
               <div className="mt-4">
-                <label className="text-xs font-medium text-muted-foreground">
-                  Or paste many (comma / space / newline separated)
-                </label>
+                <Label className="text-xs text-muted-foreground">
+                  Or paste rolls (comma / space / range, e.g. 100001-100010)
+                </Label>
                 <Textarea
                   value={rollsText}
                   onChange={(e) => setRollsText(e.target.value)}
-                  placeholder={"100156\n100203, 100318\n100477"}
-                  className="mt-1.5 min-h-24 font-mono text-sm"
+                  placeholder={"100001\n100002, 100003\n100010-100015"}
+                  className="mt-1.5 min-h-20 font-mono text-sm"
                 />
                 <Button
                   type="button"
@@ -165,7 +296,7 @@ export function GroupView() {
                   </Button>
                 ) : null}
               </div>
-              <div className="mt-3 max-h-52 space-y-1.5 overflow-y-auto scrollbar-thin">
+              <div className="mt-3 max-h-48 space-y-1.5 overflow-y-auto scrollbar-thin">
                 {rolls.length === 0 ? (
                   <p className="py-6 text-center text-xs text-muted-foreground">
                     No rolls added yet
@@ -200,7 +331,9 @@ export function GroupView() {
                 ) : (
                   <UsersRound className="h-4 w-4" />
                 )}
-                Check {rolls.length > 0 ? `${rolls.length} ` : ""}Results
+                {mutation.isPending
+                  ? "Fetching live..."
+                  : `Check ${rolls.length > 0 ? `${rolls.length} ` : ""}Results (Live)`}
               </Button>
             </CardContent>
           </Card>
@@ -208,9 +341,9 @@ export function GroupView() {
 
         {/* Right: results */}
         <div className="flex flex-col gap-4">
+          <AdSlot slot="individual-inline" />
           {data ? (
             <>
-              {/* Summary */}
               <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
                 <SummaryPill label="Requested" value={String(data.totalRequested)} icon={Users} />
                 <SummaryPill label="Found" value={String(data.totalFound)} icon={CheckCircle2} tone="emerald" />
@@ -222,37 +355,47 @@ export function GroupView() {
                 <Card className="border-amber-500/30">
                   <CardContent className="p-4">
                     <p className="text-sm font-medium text-amber-700 dark:text-amber-300">
-                      {data.missing.length} roll(s) not found:
+                      {data.missing.length} roll(s) not found in the official archive:
                     </p>
                     <div className="mt-2 flex flex-wrap gap-1.5">
-                      {data.missing.map((r) => (
+                      {data.missing.slice(0, 30).map((r) => (
                         <Badge key={r} variant="outline" className="font-mono">
                           {r}
                         </Badge>
                       ))}
+                      {data.missing.length > 30 ? <Badge variant="outline">+{data.missing.length - 30} more</Badge> : null}
                     </div>
                   </CardContent>
                 </Card>
               ) : null}
 
-              <div className="grid gap-4 xl:grid-cols-2">
-                {data.results.map((r) => (
-                  <ResultCard key={r.roll} result={r} />
-                ))}
-              </div>
+              {data.results.length === 0 ? (
+                <Card className="border-dashed">
+                  <CardContent className="py-12 text-center text-sm text-muted-foreground">
+                    No results found for any of the {data.totalRequested} roll(s). Verify the
+                    exam type and year match.
+                  </CardContent>
+                </Card>
+              ) : (
+                <div className="grid gap-4 xl:grid-cols-2">
+                  {data.results.map((r) => (
+                    <ResultCard key={r.roll} result={r} />
+                  ))}
+                </div>
+              )}
             </>
           ) : (
             <Card className="border-dashed">
               <CardContent className="flex flex-col items-center justify-center gap-3 py-20 text-center">
-                <span className="flex h-14 w-14 items-center justify-center rounded-full bg-primary/10 text-primary">
+                <span className="flex h-14 w-14 items-center justify-center rounded-full bg-emerald-500/10 text-emerald-600">
                   <UsersRound className="h-7 w-7" />
                 </span>
                 <div>
-                  <p className="font-semibold">No group results yet</p>
+                  <p className="font-semibold">Live group results</p>
                   <p className="mt-1 max-w-sm text-sm text-muted-foreground">
-                    Add roll numbers on the left, then click{" "}
-                    <span className="font-semibold">Check Results</span> to view them
-                    all together.
+                    Select exam type + year, add roll numbers on the left, then click{" "}
+                    <span className="font-semibold">Check Results</span>. Each roll is
+                    fetched live from the official BTEB archive.
                   </p>
                 </div>
               </CardContent>
@@ -285,9 +428,7 @@ function SummaryPill({
     <div className={`flex items-center gap-3 rounded-xl p-3 ${toneCls}`}>
       <Icon className="h-5 w-5 opacity-80" />
       <div>
-        <p className="text-[11px] font-medium uppercase tracking-wider opacity-80">
-          {label}
-        </p>
+        <p className="text-[11px] font-medium uppercase tracking-wider opacity-80">{label}</p>
         <p className="text-lg font-bold leading-none">{value}</p>
       </div>
     </div>
