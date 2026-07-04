@@ -173,15 +173,17 @@ function parseOfficialHtml(html: string, params: LiveSearchParams): StudentResul
   const resultStatus = getValue("result") || "";
   // CGPA/Division/Grade field — extract the numeric GPA
   const cgpaRaw = getValue("cgpa/division/grade", "cgpa", "gpa", "grade") || "";
-  const gpa = parseFloat(cgpaRaw) || 0;
+  // Handle "ref" (referred) in CGPA — GPA is not published for referred students
+  const isReferredCgpa = cgpaRaw.toLowerCase().includes("ref");
+  const gpa = isReferredCgpa ? 0 : parseFloat(cgpaRaw) || 0;
   const cgpa = gpa; // in the official archive, this is the overall CGPA
 
-  // Determine result status
+  // Determine result status — official archive uses PASSED, REFERRED, FAILED
   const statusUpper = resultStatus.toUpperCase().trim();
   const result: StudentResult["result"] =
     statusUpper === "PASSED" || statusUpper === "PASS"
       ? "PASSED"
-      : statusUpper === "REFERRED" || statusUpper === "REFER"
+      : statusUpper === "REFERRED" || statusUpper === "REFER" || isReferredCgpa
         ? "REFERRED"
         : statusUpper === "FAILED" || statusUpper === "FAIL"
           ? "FAILED"
@@ -189,13 +191,45 @@ function parseOfficialHtml(html: string, params: LiveSearchParams): StudentResul
             ? "PASSED"
             : "FAILED";
 
-  // Letter grade from GPA (BTEB standard scale)
-  const letterGrade =
-    gpa >= 4 ? "A+" : gpa >= 3.5 ? "A" : gpa >= 3 ? "A-" : gpa >= 2.5 ? "B" : gpa >= 2 ? "C" : gpa > 0 ? "D" : "F";
+  // Letter grade from GPA (BTEB standard scale). For referred, show "REF".
+  const letterGrade = isReferredCgpa || result === "REFERRED"
+    ? "REF"
+    : gpa >= 4 ? "A+" : gpa >= 3.5 ? "A" : gpa >= 3 ? "A-" : gpa >= 2.5 ? "B" : gpa >= 2 ? "C" : gpa > 0 ? "D" : "F";
+
+  // Try to extract subject-wise details from HTML comments (the official
+  // archive has a PHP bug that puts the subject table inside a comment).
+  // Also try the visible subject table.
+  const subjects: SubjectResult[] = [];
+  const referredSubjects: string[] = [];
+
+  // Search both the cleaned HTML and the comments for subject data
+  const comments = [...html.matchAll(/<!--([\s\S]*?)-->/gi)].map((m) => m[1]);
+  const subjectSearchHtml = cleaned + " " + comments.join(" ");
+
+  // Look for subject rows in any table (commented or not)
+  // Format: <tr><td>CODE</td><td>Subject Name</td><td>Grade</td></tr>
+  const subjectRowRegex = /<tr[^>]*>[\s\S]*?(\d{5,6})[\s\S]*?<\/tr>/gi;
+  let subMatch: RegExpExecArray | null;
+  while ((subMatch = subjectRowRegex.exec(subjectSearchHtml)) !== null) {
+    const row = subMatch[0];
+    const cells = [...row.matchAll(/<t[dh][^>]*>([\s\S]*?)<\/t[dh]>/gi)].map((m) => decodeHtml(m[1]));
+    if (cells.length >= 3) {
+      const code = cells[0].trim();
+      const subName = cells[1].trim();
+      const grade = cells[2].trim().toUpperCase();
+      if (/^\d{5,6}$/.test(code) && subName && grade) {
+        const point =
+          grade === "A+" ? 4.0 : grade === "A" ? 3.5 : grade === "A-" ? 3.0 :
+          grade === "B" ? 2.5 : grade === "C" ? 2.0 : grade === "D" ? 1.0 : 0.0;
+        const isRef = grade === "F" || grade === "REF";
+        subjects.push({ code, name: subName, credit: 0, marks: 0, letter: grade, point, referred: isRef });
+        if (isRef) referredSubjects.push(`${code} - ${subName}`);
+      }
+    }
+  }
 
   // The official archive doesn't always show subject-wise marks in the HTML
   // (it's in a comment block). So subjects may be empty — that's OK.
-  const subjects: SubjectResult[] = [];
 
   return {
     roll: rollNo,
@@ -219,7 +253,7 @@ function parseOfficialHtml(html: string, params: LiveSearchParams): StudentResul
     cgpa,
     letterGrade,
     result,
-    referredSubjects: [],
+    referredSubjects,
   };
 }
 

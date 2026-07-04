@@ -506,6 +506,16 @@ function SemesterCard({ result }: { result: StudentResult }) {
       )}
     >
       <CardContent className="p-4 sm:p-5">
+        {/* "X subjects yet to pass" banner for referred results */}
+        {referred && result.referredSubjects && result.referredSubjects.length > 0 ? (
+          <div className="mb-3 flex items-center gap-2 rounded-lg bg-rose-500/10 px-3 py-2 text-sm font-medium text-rose-700 dark:text-rose-300">
+            <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-rose-500 text-[10px] font-bold text-white">
+              {result.referredSubjects.length}
+            </span>
+            subject{result.referredSubjects.length > 1 ? "s" : ""} yet to pass
+          </div>
+        ) : null}
+
         <div className="flex items-center gap-4">
           {/* Semester icon */}
           <span
@@ -514,7 +524,7 @@ function SemesterCard({ result }: { result: StudentResult }) {
               passed
                 ? "bg-emerald-500/15 text-emerald-600 dark:text-emerald-400"
                 : referred
-                  ? "bg-amber-500/15 text-amber-600 dark:text-amber-400"
+                  ? "bg-rose-500/15 text-rose-600 dark:text-rose-400"
                   : "bg-rose-500/15 text-rose-600 dark:text-rose-400"
             )}
           >
@@ -528,11 +538,11 @@ function SemesterCard({ result }: { result: StudentResult }) {
                 {result.examYear ? `Result of ${result.examYear}` : "Result"}
               </p>
               <Badge
-                variant={passed ? "default" : referred ? "secondary" : "destructive"}
+                variant={passed ? "default" : "destructive"}
                 className={cn(
                   "gap-1",
                   passed && "bg-emerald-600 hover:bg-emerald-600",
-                  referred && "bg-amber-600 text-white hover:bg-amber-600"
+                  referred && "bg-rose-600 hover:bg-rose-600"
                 )}
               >
                 {passed ? (
@@ -549,26 +559,47 @@ function SemesterCard({ result }: { result: StudentResult }) {
             </p>
           </div>
 
-          {/* GPA display */}
+          {/* GPA display — for referred, show "REF" instead of 0.00 */}
           <div className="flex items-center gap-3">
             <div className="text-right">
               <p className="text-[10px] font-medium uppercase tracking-wider text-muted-foreground">
                 GPA
               </p>
-              <p className={cn("text-2xl font-bold leading-none", gpaColor(gpa))}>
-                {gpa.toFixed(2)}
+              <p className={cn("text-2xl font-bold leading-none", referred ? "text-rose-600 dark:text-rose-400" : gpaColor(gpa))}>
+                {referred ? "REF" : gpa.toFixed(2)}
               </p>
             </div>
             <GradeBadge grade={grade} size="lg" />
           </div>
         </div>
 
-        {/* Referred subjects warning */}
+        {/* Referred subjects list — red text, each subject on its own line */}
         {result.referredSubjects && result.referredSubjects.length > 0 ? (
-          <div className="mt-3 rounded-lg bg-amber-500/10 px-3 py-2 text-xs text-amber-700 dark:text-amber-300">
-            <AlertTriangle className="mr-1 inline h-3.5 w-3.5" />
-            {result.referredSubjects.length} referred subject(s):{" "}
-            {result.referredSubjects.join(", ")}
+          <div className="mt-3 space-y-1.5 border-t border-rose-500/20 pt-3">
+            {result.referredSubjects.map((sub, i) => {
+              // Parse "CODE - Subject Name" format
+              const parts = sub.split(" - ");
+              const code = parts[0] || "";
+              const subName = parts.slice(1).join(" - ") || sub;
+              return (
+                <div key={i} className="flex items-center gap-2 text-sm">
+                  <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded bg-rose-500/10 text-[10px] font-bold text-rose-600 dark:text-rose-400">
+                    {code.slice(-3)}
+                  </span>
+                  <span className="text-rose-600 dark:text-rose-400">
+                    <span className="font-mono text-xs">{code}</span>
+                    <span className="mx-1.5 text-muted-foreground/50">·</span>
+                    <span className="font-medium">{subName}</span>
+                  </span>
+                  <Badge variant="outline" className="ml-auto border-rose-500/30 text-[10px] text-rose-600 dark:text-rose-400">
+                    Referred
+                  </Badge>
+                </div>
+              );
+            })}
+            <p className="pt-1 text-xs text-muted-foreground">
+              You must clear all referred subjects to receive your GPA for this semester.
+            </p>
           </div>
         ) : null}
       </CardContent>
