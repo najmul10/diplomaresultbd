@@ -1,0 +1,62 @@
+[
+  {
+    "id": "pub-2025-1sem",
+    "title": "1st Semester Diploma in Engineering Result 2025",
+    "examType": "Diploma in Engineering",
+    "semester": 1,
+    "examYear": 2025,
+    "publicationDate": "2025-03-15",
+    "totalStudents": 141,
+    "passRate": 74.5
+  },
+  {
+    "id": "pub-2025-3sem",
+    "title": "3rd Semester Diploma in Engineering Result 2025",
+    "examType": "Diploma in Engineering",
+    "semester": 3,
+    "examYear": 2025,
+    "publicationDate": "2025-05-20",
+    "totalStudents": 139,
+    "passRate": 69.8
+  },
+  {
+    "id": "pub-2024-5sem",
+    "title": "5th Semester Diploma in Engineering Result 2024",
+    "examType": "Diploma in Engineering",
+    "semester": 5,
+    "examYear": 2024,
+    "publicationDate": "2024-11-10",
+    "totalStudents": 106,
+    "passRate": 70.8
+  },
+  {
+    "id": "pub-2024-7sem",
+    "title": "7th Semester Diploma in Engineering Result 2024",
+    "examType": "Diploma in Engineering",
+    "semester": 7,
+    "examYear": 2024,
+    "publicationDate": "2024-09-05",
+    "totalStudents": 100,
+    "passRate": 71
+  },
+  {
+    "id": "pub-2024-8sem",
+    "title": "8th Semester (Final) Diploma in Engineering Result 2024",
+    "examType": "Diploma in Engineering",
+    "semester": 8,
+    "examYear": 2024,
+    "publicationDate": "2024-12-28",
+    "totalStudents": 127,
+    "passRate": 71.7
+  },
+  {
+    "id": "pub-2025-2sem",
+    "title": "2nd Semester Diploma in Engineering Result 2025",
+    "examType": "Diploma in Engineering",
+    "semester": 2,
+    "examYear": 2025,
+    "publicationDate": "2025-06-30",
+    "totalStudents": 155,
+    "passRate": 68.4
+  }
+]

@@ -1,0 +1,17 @@
+{
+  "name": "BTEB Results Zone",
+  "short_name": "BTEB Results",
+  "description": "Bangladesh's #1 BTEB results platform. Instant access to diploma, polytechnic, and technical education results.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0f766e",
+  "icons": [
+    {
+      "src": "/logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+[
+  {
+    "code": "CMT",
+    "name": "Computer Technology",
+    "bn": "কম্পিউটার টেকনোলজি"
+  },
+  {
+    "code": "ET",
+    "name": "Electrical Technology",
+    "bn": "ইলেকট্রিক্যাল টেকনোলজি"
+  },
+  {
+    "code": "ENT",
+    "name": "Electronics Technology",
+    "bn": "ইলেকট্রনিক্স টেকনোলজি"
+  },
+  {
+    "code": "MT",
+    "name": "Mechanical Technology",
+    "bn": "মেকানিক্যাল টেকনোলজি"
+  },
+  {
+    "code": "CT",
+    "name": "Civil Technology",
+    "bn": "সিভিল টেকনোলজি"
+  },
+  {
+    "code": "RAC",
+    "name": "Refrigeration & Air Conditioning Technology",
+    "bn": "রেফ্রিজারেশন ও এয়ার কন্ডিশনিং টেকনোলজি"
+  },
+  {
+    "code": "AT",
+    "name": "Automobile Technology",
+    "bn": "অটোমোবাইল টেকনোলজি"
+  },
+  {
+    "code": "CHT",
+    "name": "Chemical Technology",
+    "bn": "কেমিক্যাল টেকনোলজি"
+  },
+  {
+    "code": "TT",
+    "name": "Textile Technology",
+    "bn": "টেক্সটাইল টেকনোলজি"
+  },
+  {
+    "code": "TCT",
+    "name": "Telecommunication Technology",
+    "bn": "টেলিকমিউনিকেশন টেকনোলজি"
+  },
+  {
+    "code": "ARCH",
+    "name": "Architecture Technology",
+    "bn": "আর্কিটেকচার টেকনোলজি"
+  },
+  {
+    "code": "GDPM",
+    "name": "Garment Design & Pattern Making Technology",
+    "bn": "গার্মেন্টস ডিজাইন ও প্যাটার্ন মেকিং টেকনোলজি"
+  }
+]

@@ -1,0 +1,12 @@
+{
+  "totalStudentsServed": 2300000,
+  "totalResults": 768,
+  "totalInstitutes": 50,
+  "totalDepartments": 12,
+  "totalPublications": 6,
+  "totalRoutines": 6,
+  "overallPassRate": 71,
+  "yearsOfService": 5,
+  "uptime": 99.9,
+  "uniqueStudentsInDataset": 768
+}
