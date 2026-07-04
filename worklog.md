@@ -503,3 +503,31 @@ Stage Summary:
 - Home hero now has buttons only (no search box) per user request.
 - Data accuracy confirmed: the parser correctly extracts all fields from the official archive.
 - New Performance Insights feature: auto-computes trend, best year, pass rate, and referred count from a student's result history.
+
+---
+Task ID: 49
+Agent: main
+Task: Rewrite About page — remove fake stats and claims
+
+Work Log:
+- About page had fake/incorrect claims:
+  * "2.3M+ Students Served" — not true for this new site
+  * "5+ Years" of service — not true
+  * "Launched in 2021" / timeline milestones (2022, 2023, 2024, 2025) — fabricated history
+  * "Built by diploma students, for diploma students" — misleading
+- Rewrote About page to be honest and accurate:
+  * New description: "A fast, clean and free platform for checking BTEB diploma, polytechnic and technical education results."
+  * Mission section: describes the problem (slow portals, scattered data) and the solution (one clean platform).
+  * Stats: "Exam Types 37+", "Institutes 50+", "Years 20+", "Price Free" — all true.
+  * "What you can do here" section: 6 feature cards (Individual Results, Group Results, Institute Directory, Booklists & Routines, CGPA Calculator, Performance Insights).
+  * "What we stand for": 4 values (Privacy First, Fast & Reliable, Always Free, Student-Focused) with honest descriptions.
+  * CTA: "Built for Bangladesh's diploma community" (removed "built by diploma students").
+  * Removed the fabricated timeline entirely.
+
+Agent Browser verification:
+- About page renders correctly with all new content.
+- No fake stats (2.3M, 5+ years, 2021 launch) visible.
+- Lint clean.
+
+Stage Summary:
+- About page now honest and accurate. Removed fabricated stats, timeline, and misleading "built by students" claim. Added a features overview section instead.
