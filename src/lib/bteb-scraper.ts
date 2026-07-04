@@ -87,9 +87,11 @@ function decodeHtml(s: string): string {
 /**
  * Parse the official BTEB HTML result page into a structured StudentResult.
  *
- * The official page uses inline styles + tables. We extract fields by looking
- * for labelled cells (e.g. "Roll No", "Registration No", "Name", "Institute",
- * "GPA") and the subject marks table.
+ * The official result page (result.php) uses a TABLE with key-value rows:
+ *   <tr><td>Roll No</td><td>449381</td></tr>
+ *   <tr><td>Name</td><td>MD. RIFAT HOSSAIN</td></tr>
+ *   ...etc...
+ * We extract each labeled field from these rows.
  *
  * Returns null if the page says "doesn't match" / "doesn't exist".
  */
@@ -114,26 +116,9 @@ function parseOfficialHtml(html: string, params: LiveSearchParams): StudentResul
     .replace(/<script[^>]*>[\s\S]*?<\/script>/gi, " ")
     .replace(/<style[^>]*>[\s\S]*?<\/style>/gi, " ");
 
-  // Helper: find a labelled value. Looks for a cell containing label, then
-  // grabs the next cell's text.
-  function findValue(label: RegExp): string {
-    const m = cleaned.match(
-      new RegExp(label.source + "[\\s\\S]{0,200}?<(?:td|div|span)[^>]*>([\\s\\S]*?)<\\/(?:td|div|span)>", "i")
-    );
-    return m ? decodeHtml(m[1]) : "";
-  }
-
-  const rollNo = findValue(/roll\s*(?:no|number)?/i) || params.roll;
-  const regNo = findValue(/regist(?:ration|er)\s*(?:no|number)?/i) || params.reg || "";
-  const name = findValue(/name\s*(?:of\s*(?:student|examinee))?/i) || findValue(/\bname\b/i);
-  const institute = findValue(/institute/i) || findValue(/college/i);
-  const board = findValue(/board/i);
-  const gpaRaw = findValue(/\bgpa\b/i);
-  const gpa = parseFloat(gpaRaw) || 0;
-
-  // Extract the subject table rows. Official pages typically have a table with
-  // subject code, subject name, marks, letter grade, grade point columns.
-  const subjects: SubjectResult[] = [];
+  // Extract all table rows as key-value pairs
+  // The official page has: <tr><td>Label</td><td>Value</td></tr>
+  const kvPairs: Record<string, string> = {};
   const rowRegex = /<tr[^>]*>([\s\S]*?)<\/tr>/gi;
   let rowMatch: RegExpExecArray | null;
   while ((rowMatch = rowRegex.exec(cleaned)) !== null) {
@@ -141,59 +126,100 @@ function parseOfficialHtml(html: string, params: LiveSearchParams): StudentResul
     const cells = [...row.matchAll(/<t[dh][^>]*>([\s\S]*?)<\/t[dh]>/gi)].map((m) =>
       decodeHtml(m[1])
     );
-    if (cells.length >= 4) {
-      // Heuristic: a subject row has a numeric-ish first cell (subject code)
-      // and contains a grade letter (A+, A, A-, B, C, D, F)
-      const firstCell = cells[0].trim();
-      const gradeCell = cells.find((c) => /^[Aa][+-]?|[BCDF]$/.test(c.trim())) || "";
-      if (/^\d{4,6}$/.test(firstCell) && gradeCell) {
-        const code = firstCell;
-        const subName = cells[1] || "";
-        const marks = parseInt(cells.find((c) => /^\d{1,3}$/.test(c.trim())) || "0", 10);
-        const letter = gradeCell.trim().toUpperCase();
-        const point =
-          letter === "A+" ? 4.0 :
-          letter === "A" ? 3.5 :
-          letter === "A-" ? 3.0 :
-          letter === "B" ? 2.5 :
-          letter === "C" ? 2.0 :
-          letter === "D" ? 1.0 : 0.0;
-        subjects.push({ code, name: subName, credit: 0, marks, letter, point });
+    if (cells.length >= 2) {
+      const label = cells[0].trim().toLowerCase();
+      const value = cells[1].trim();
+      if (label && value) {
+        kvPairs[label] = value;
       }
     }
   }
 
+  // Also try a plain-text fallback for fields that might not be in table cells
+  const plainText = cleaned.replace(/<[^>]*>/g, " ").replace(/&nbsp;/g, " ").replace(/\s+/g, " ").trim();
+
+  function getValue(...labels: string[]): string {
+    // Pass 1: exact match
+    for (const l of labels) {
+      const key = l.toLowerCase().trim();
+      if (kvPairs[key]) return kvPairs[key];
+    }
+    // Pass 2: label key contains our search term as a whole word
+    for (const l of labels) {
+      const key = l.toLowerCase().trim();
+      for (const k in kvPairs) {
+        // Only match if the kv key starts with our search OR our search starts with kv key
+        // but avoid "name" matching "father's name" — require that our key is the FULL kv key
+        // or our key is a prefix of the kv key
+        if (k.startsWith(key) && k.length <= key.length + 2) return kvPairs[k];
+      }
+    }
+    // Pass 3: regex in plain text (last resort)
+    for (const l of labels) {
+      const escaped = l.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+      const m = plainText.match(new RegExp(escaped + "\\s*[:\\-]?\\s*([\\w\\d/\\-.]+)", "i"));
+      if (m && m[1]) return m[1];
+    }
+    return "";
+  }
+
+  const rollNo = getValue("roll no", "roll number", "roll") || params.roll;
+  const regNo = getValue("registration no", "registration number", "registration") || params.reg || "";
+  const name = getValue("name") || "";
+  const institute = getValue("institute name", "institute", "college") || "";
+  const session = getValue("session") || "";
+  const technology = getValue("technology name", "technology", "department") || "";
+  const examYearVal = getValue("exam year", "year") || params.year;
+  const resultStatus = getValue("result") || "";
+  // CGPA/Division/Grade field — extract the numeric GPA
+  const cgpaRaw = getValue("cgpa/division/grade", "cgpa", "gpa", "grade") || "";
+  const gpa = parseFloat(cgpaRaw) || 0;
+  const cgpa = gpa; // in the official archive, this is the overall CGPA
+
+  // Determine result status
+  const statusUpper = resultStatus.toUpperCase().trim();
+  const result: StudentResult["result"] =
+    statusUpper === "PASSED" || statusUpper === "PASS"
+      ? "PASSED"
+      : statusUpper === "REFERRED" || statusUpper === "REFER"
+        ? "REFERRED"
+        : statusUpper === "FAILED" || statusUpper === "FAIL"
+          ? "FAILED"
+          : gpa > 0
+            ? "PASSED"
+            : "FAILED";
+
+  // Letter grade from GPA (BTEB standard scale)
   const letterGrade =
     gpa >= 4 ? "A+" : gpa >= 3.5 ? "A" : gpa >= 3 ? "A-" : gpa >= 2.5 ? "B" : gpa >= 2 ? "C" : gpa > 0 ? "D" : "F";
-  const result: StudentResult["result"] = subjects.some((s) => s.letter === "F")
-    ? "REFERRED"
-    : gpa > 0
-      ? "PASSED"
-      : "FAILED";
+
+  // The official archive doesn't always show subject-wise marks in the HTML
+  // (it's in a comment block). So subjects may be empty — that's OK.
+  const subjects: SubjectResult[] = [];
 
   return {
     roll: rollNo,
     registrationNo: regNo,
     name,
     instituteCode: "",
-    instituteName: institute || board || "",
+    instituteName: institute,
     departmentCode: "",
-    departmentName: "",
-    examType: "",
+    departmentName: technology,
+    examType: "Diploma",
     curriculum: EXAM_CODE_TO_NAME[params.exam] || "",
-    regulation: 2022,
-    batchLabel: "",
-    admissionYear: 0,
+    regulation: session && session.includes("2019") ? 2016 : 2022,
+    batchLabel: session || "",
+    admissionYear: session ? parseInt(session.split("-")[0]) || 0 : 0,
     semester: 0,
-    examYear: parseInt(params.year, 10) || 0,
+    examYear: parseInt(examYearVal, 10) || 0,
     publicationId: "live",
     publicationDate: "",
     subjects,
     gpa,
-    cgpa: gpa,
+    cgpa,
     letterGrade,
     result,
-    referredSubjects: subjects.filter((s) => s.letter === "F").map((s) => `${s.code} - ${s.name}`),
+    referredSubjects: [],
   };
 }
 

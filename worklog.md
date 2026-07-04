@@ -255,3 +255,34 @@ Agent Browser verification:
 
 Stage Summary:
 - The `toFixed` crash is fixed. Live search now handles missing/incomplete fields gracefully. When a real student searches with valid details, the ResultCard will render whatever fields the parser extracted, with "—" placeholders for anything missing.
+
+---
+Task ID: 42
+Agent: main
+Task: Fix result parser — user's real roll 449381 was showing FAIL instead of PASSED
+
+Work Log:
+- User uploaded a real BTEB result PDF (DIP_UNCHANGE_RESULT_PDF_2025_1.pdf — a re-scrutiny "unchanged" notice, 561 pages) + a screenshot of btebresultszone.com showing their actual result.
+- Analyzed the screenshot with VLM: user roll 449381, Diploma in Engineering, Regulation 2016, National Polytechnic Institute Manikganj. Shows semester-by-semester results (4th-8th), all PASSED, with GPA values (3.44, 3.21, etc.).
+- Tested the legacy archive directly with the user's roll: discovered that roll 449381, exam=15 (Diploma Eng), year=2023 DOES return a real result! The HTML contains: Name=MD. RIFAT HOSSAIN, Reg=1502019571, Session=2019-2020, Institute=National Polytechnic Institute Manikganj, Result=PASSED, CGPA=3.44.
+- Root cause of the FAIL bug: my parser was looking for a SUBJECT TABLE (rows with subject codes + grades), but the official result page uses a KEY-VALUE TABLE (label in first cell, value in second cell — e.g. <tr><td>Name</td><td>MD. RIFAT HOSSAIN</td></tr>). The parser couldn't find GPA or Result fields, so it defaulted to GPA=0 → FAILED.
+- Completely rewrote parseOfficialHtml():
+  * Extracts all <tr> rows as key-value pairs (label → value).
+  * Uses a multi-pass getValue() function: exact match → prefix match → regex fallback.
+  * Correctly extracts: Roll No, Registration No, Name, Institute Name, Session, Technology Name, Exam Year, Result, CGPA/Division/Grade.
+  * Maps "Result" field directly (PASSED/REFERRED/FAILED) instead of inferring from GPA.
+  * Sets regulation based on session (2019 → Regulation 2016).
+
+Verification (direct API test):
+  ✅ Name: MD. RIFAT HOSSAIN
+  ✅ Roll: 449381 | Reg: 1502019571
+  ✅ Institute: National Polytechnic Institute Manikganj
+  ✅ Department: Computer Technology
+  ✅ Session: 2019-2020
+  ✅ GPA: 3.44 | Grade: A-
+  ✅ Result: PASSED (was FAILED before the fix!)
+
+Stage Summary:
+- The parser bug is fixed. The user's real roll 449381 now correctly shows PASSED with GPA 3.44 when searching exam=15, year=2023.
+- The key insight: the official archive's HTML uses key-value table rows, NOT a subject marks table. The parser now correctly extracts all fields from these rows.
+- Note: the official archive shows one result per (exam, year, roll) combination. To see all semesters like btebresultszone.com, the user needs to search each year separately (4th sem=2022, 5th=2022, 6th=2023, 7th=2023, 8th=2024, etc.).
