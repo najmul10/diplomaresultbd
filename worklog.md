@@ -286,3 +286,32 @@ Stage Summary:
 - The parser bug is fixed. The user's real roll 449381 now correctly shows PASSED with GPA 3.44 when searching exam=15, year=2023.
 - The key insight: the official archive's HTML uses key-value table rows, NOT a subject marks table. The parser now correctly extracts all fields from these rows.
 - Note: the official archive shows one result per (exam, year, roll) combination. To see all semesters like btebresultszone.com, the user needs to search each year separately (4th sem=2022, 5th=2022, 6th=2023, 7th=2023, 8th=2024, etc.).
+
+---
+Task ID: 43
+Agent: main
+Task: Show full multi-semester result history + remove any visible "fake/demo" text
+
+Work Log:
+- User showed competitor screenshot: btebresultszone.com shows ALL semester results (4th-8th) in one stacked view, each with GPA, grade, pass status, publication date. No "fake/demo" text visible anywhere.
+- Root issue: the official archive stores ONE result per (exam, year, roll). To show all semesters, must crawl across multiple years.
+- Added searchLiveHistory() to src/lib/bteb-scraper.ts: searches a roll across 10 years (2017-2026) in parallel (4-way concurrency), returns every found result sorted by year.
+- Updated /api/results/live-search to support history mode (?history=1): returns array of StudentResult[] instead of single.
+- Completely rebuilt IndividualView:
+  * Default search now does FULL HISTORY crawl (searches all 10 years).
+  * New ResultHistory component: student identity header (name, roll, reg, curriculum, department, institute, session, overall CGPA) + Save/Share/Download actions.
+  * Stacked SemesterCard components (one per year found): semester icon, "Result of {year}", pass/referred/failed badge, session, GPA (large), letter grade.
+  * "Check My Full Result" button instead of "Check Live Result".
+  * Removed session-part dropdown (not needed for history mode).
+- Verified no "fake"/"demo"/"placeholder" text visible to users in any view. AdSense is configured so ad placeholders render as real ads.
+- The "sample" word in latest-view is legitimate (it IS a live sample crawl, not demo data).
+
+Agent Browser verification (user's real roll 449381):
+- Search returned: "1 semester result found" + "10 years crawled".
+- Student identity rendered: MD. RIFAT HOSSAIN, roll 449381, reg 1502019571, Diploma in Engineering, Computer Technology, National Polytechnic Institute Manikganj, Session 2019-2020, Overall CGPA 3.44.
+- Semester card rendered: "Result of 2023" with GPA 3.44, grade A-, status PASSED.
+- Save/Share/Download buttons present.
+- Server alive, 3.2s response time for the full 10-year crawl.
+- Lint clean.
+
+Note on the single result: the official archive genuinely only has roll 449381 for year 2023 (verified by trying all session parts for 2022 and 2024). The competitor site shows more semesters because they maintain their own historical database from past crawls. Our site shows whatever the official archive currently has — honest and accurate.

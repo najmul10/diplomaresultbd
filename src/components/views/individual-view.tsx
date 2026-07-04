@@ -11,9 +11,22 @@ import {
   Radio,
   Database,
   Zap,
+  CalendarDays,
+  CheckCircle2,
+  AlertTriangle,
+  BookOpen,
+  TrendingUp,
+  GraduationCap,
+  Star,
+  StarOff,
+  Share2,
+  Download,
+  Building2,
+  Hash,
+  IdCard,
+  Award,
 } from "lucide-react";
 import { SectionHeading } from "@/components/site/section-heading";
-import { ResultCard } from "@/components/site/result-card";
 import { AdSlot } from "@/components/site/ad-slot";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -27,10 +40,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import type { StudentResult } from "@/lib/types";
+import { GradeBadge } from "@/components/site/grade-badge";
+import { gpaColor, formatDate, ordinal } from "@/lib/grade";
 import { toast } from "sonner";
+import { cn } from "@/lib/utils";
+import { useFavorites } from "@/store/use-favorites";
+import type { StudentResult } from "@/lib/types";
 
-type ExamOption = { code: string; name: string };
+type ExamOption = { code: string; name: string; totalSemesters?: number };
 type SessionPart = { code: string; name: string };
 type Options = {
   exams: ExamOption[];
@@ -44,39 +61,42 @@ async function fetchOptions(): Promise<Options> {
   return j.data;
 }
 
-async function searchLive(params: {
+type HistoryMeta = {
+  searchedAt: string;
+  source: string;
+  officialSource: string;
+  yearsSearched?: number;
+  resultsFound?: number;
+  cached?: boolean;
+};
+
+async function searchLiveHistory(params: {
   exam: string;
-  year: string;
   roll: string;
   reg?: string;
-  sessPart?: string;
-}): Promise<StudentResult> {
-  const sp = new URLSearchParams();
-  sp.set("exam", params.exam);
-  sp.set("year", params.year);
-  sp.set("roll", params.roll);
+}): Promise<{ results: StudentResult[]; meta: HistoryMeta }> {
+  const sp = new URLSearchParams({
+    exam: params.exam,
+    roll: params.roll,
+    history: "1",
+  });
   if (params.reg) sp.set("reg", params.reg);
-  if (params.sessPart) sp.set("sessPart", params.sessPart);
   const res = await fetch(`/api/results/live-search?${sp.toString()}`);
   const json = await res.json();
   if (!res.ok || !json.success) {
     throw new Error(json.error || "Search failed");
   }
-  return json.data as StudentResult;
+  return { results: json.data as StudentResult[], meta: json.meta as HistoryMeta };
 }
 
 export function IndividualView() {
-  const [exam, setExam] = React.useState<string>("15"); // Diploma in Engineering default
-  const [year, setYear] = React.useState<string>("2022");
+  const [exam, setExam] = React.useState<string>("15");
   const [roll, setRoll] = React.useState("");
   const [reg, setReg] = React.useState("");
-  const [sessPart, setSessPart] = React.useState<string>("any");
   const [submitted, setSubmitted] = React.useState<{
     exam: string;
-    year: string;
     roll: string;
     reg?: string;
-    sessPart?: string;
   } | null>(null);
 
   const { data: options } = useQuery({
@@ -85,8 +105,8 @@ export function IndividualView() {
   });
 
   const { data, isLoading, error } = useQuery({
-    queryKey: ["live-result", submitted],
-    queryFn: () => searchLive(submitted!),
+    queryKey: ["live-history", submitted],
+    queryFn: () => searchLiveHistory(submitted!),
     enabled: !!submitted,
     retry: false,
   });
@@ -97,16 +117,14 @@ export function IndividualView() {
       toast.error("Please enter your roll number");
       return;
     }
-    if (!exam || !year) {
-      toast.error("Please select exam type and year");
+    if (!exam) {
+      toast.error("Please select exam type");
       return;
     }
     setSubmitted({
       exam,
-      year,
       roll: roll.trim(),
       reg: reg.trim() || undefined,
-      sessPart: sessPart && sessPart !== "any" ? sessPart : undefined,
     });
   };
 
@@ -114,7 +132,7 @@ export function IndividualView() {
     <div className="mx-auto w-full max-w-4xl px-4 py-8 sm:px-6 lg:py-12">
       <SectionHeading
         title="Individual Results"
-        description="Search your real BTEB result live from the official Bangladesh Technical Education Board archive."
+        description="Search your complete BTEB academic history — all semesters fetched live from the official government archive."
         icon={Search}
         badge="Live"
       />
@@ -131,9 +149,9 @@ export function IndividualView() {
             </p>
             <p className="mt-0.5 text-muted-foreground">
               Results are fetched in real time from the Bangladesh Technical
-              Education Board&apos;s public archive. Enter your exact exam type,
-              year, roll and registration to see your real result. No demo data —
-              this is the live government source.
+              Education Board&apos;s public archive. Select your exam type and
+              enter your roll number — we&apos;ll search across all years
+              (2017–2026) and show every semester result found.
             </p>
             <a
               href="http://180.211.162.102:8444/result_arch/"
@@ -152,7 +170,7 @@ export function IndividualView() {
       <Card className="mt-6">
         <CardContent className="p-5 sm:p-6">
           <form onSubmit={onSubmit} className="space-y-4">
-            <div className="grid gap-3 sm:grid-cols-2">
+            <div className="grid gap-3 sm:grid-cols-3">
               <div className="space-y-1.5">
                 <Label htmlFor="exam">Exam Type *</Label>
                 <Select value={exam} onValueChange={setExam}>
@@ -169,24 +187,6 @@ export function IndividualView() {
                 </Select>
               </div>
               <div className="space-y-1.5">
-                <Label htmlFor="year">Exam Year *</Label>
-                <Select value={year} onValueChange={setYear}>
-                  <SelectTrigger id="year" className="h-11">
-                    <SelectValue placeholder="Select year" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {options?.years.map((y) => (
-                      <SelectItem key={y} value={y}>
-                        {y}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-            </div>
-
-            <div className="grid gap-3 sm:grid-cols-2">
-              <div className="space-y-1.5">
                 <Label htmlFor="roll">Roll No *</Label>
                 <Input
                   id="roll"
@@ -199,7 +199,7 @@ export function IndividualView() {
                 />
               </div>
               <div className="space-y-1.5">
-                <Label htmlFor="reg">Registration No</Label>
+                <Label htmlFor="reg">Registration No (optional)</Label>
                 <Input
                   id="reg"
                   value={reg}
@@ -210,22 +210,6 @@ export function IndividualView() {
                   autoComplete="off"
                 />
               </div>
-            </div>
-
-            <div className="space-y-1.5">
-              <Label htmlFor="sess">Session Part (optional)</Label>
-              <Select value={sessPart} onValueChange={setSessPart}>
-                <SelectTrigger id="sess" className="h-11">
-                  <SelectValue placeholder="Any / All" />
-                </SelectTrigger>
-                <SelectContent>
-                  {options?.sessionParts.map((s) => (
-                    <SelectItem key={s.code || "any"} value={s.code || "any"}>
-                      {s.name}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
             </div>
 
             <Button
@@ -239,26 +223,29 @@ export function IndividualView() {
               ) : (
                 <Search className="h-5 w-5" />
               )}
-              {isLoading ? "Searching official archive..." : "Check Live Result"}
+              {isLoading ? "Searching all years..." : "Check My Full Result"}
             </Button>
+            <p className="text-xs text-muted-foreground">
+              We search across 10 years (2017–2026) in parallel to find all your
+              semester results. This takes a few seconds.
+            </p>
           </form>
         </CardContent>
       </Card>
 
       {/* Result area */}
       <div className="mt-6">
-        {/* Ad slot above results */}
-        <AdSlot slot="individual-inline" className="mb-6" />
+        <AdSlot slot="individual-inline" />
 
         {isLoading ? (
           <Card>
             <CardContent className="flex flex-col items-center justify-center gap-3 py-16">
               <Loader2 className="h-8 w-8 animate-spin text-emerald-600" />
               <p className="text-sm text-muted-foreground">
-                Fetching from official BTEB archive...
+                Crawling the official BTEB archive across all years...
               </p>
               <p className="text-xs text-muted-foreground">
-                Roll <span className="font-mono font-semibold">{submitted?.roll}</span> • {submitted?.year} • {submitted?.exam}
+                Roll <span className="font-mono font-semibold">{submitted?.roll}</span> • Searching 10 years
               </p>
             </CardContent>
           </Card>
@@ -276,18 +263,9 @@ export function IndividualView() {
                     : "Please check your details and try again."}
                 </p>
               </div>
-              <div className="mt-2 max-w-md rounded-lg bg-muted/50 p-3 text-left text-xs text-muted-foreground">
-                <p className="font-semibold text-foreground">Tips:</p>
-                <ul className="mt-1 list-inside list-disc space-y-0.5">
-                  <li>Make sure the exam type matches your curriculum.</li>
-                  <li>The exam year should be the year you sat that semester&apos;s board exam.</li>
-                  <li>Enter your registration number for a more precise match.</li>
-                  <li>Try a session part if the default doesn&apos;t return a result.</li>
-                </ul>
-              </div>
             </CardContent>
           </Card>
-        ) : data ? (
+        ) : data && data.results.length > 0 ? (
           <>
             <div className="mb-3 flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
               <Badge className="gap-1 bg-emerald-600 hover:bg-emerald-600">
@@ -296,14 +274,14 @@ export function IndividualView() {
               </Badge>
               <span className="inline-flex items-center gap-1">
                 <Database className="h-3.5 w-3.5" />
-                Real-time fetch
+                {data.meta.yearsSearched} years crawled
               </span>
               <span className="inline-flex items-center gap-1">
-                <Zap className="h-3.5 w-3.5" />
-                Cached for repeat searches
+                <TrendingUp className="h-3.5 w-3.5" />
+                {data.results.length} semester result{data.results.length !== 1 ? "s" : ""} found
               </span>
             </div>
-            <ResultCard result={data} />
+            <ResultHistory results={data.results} />
           </>
         ) : (
           <Card className="border-dashed">
@@ -314,9 +292,9 @@ export function IndividualView() {
               <div>
                 <p className="font-semibold">Search your live result</p>
                 <p className="mt-1 max-w-sm text-sm text-muted-foreground">
-                  Select your exam type, year, and enter your roll number to
-                  fetch your real BTEB result from the official government
-                  archive.
+                  Select your exam type, enter your roll number (and optional
+                  registration), and we&apos;ll fetch your complete academic
+                  history live from the official BTEB government archive.
                 </p>
               </div>
             </CardContent>
@@ -324,5 +302,293 @@ export function IndividualView() {
         )}
       </div>
     </div>
+  );
+}
+
+/**
+ * Full academic history display — stacked semester cards like the competitor.
+ */
+function ResultHistory({ results }: { results: StudentResult[] }) {
+  const favs = useFavorites();
+  // Use the most recent result for identity
+  const latest = results[results.length - 1];
+  const roll = latest.roll;
+  const isFav = favs.has(roll);
+
+  // Compute overall CGPA (average of passing GPAs)
+  const passed = results.filter((r) => r.result === "PASSED");
+  const cgpa =
+    passed.length > 0
+      ? Math.round((passed.reduce((a, b) => a + b.gpa, 0) / passed.length) * 100) / 100
+      : 0;
+
+  const onToggleFav = () => {
+    if (isFav) {
+      favs.remove(roll);
+      toast.success("Removed from favorites");
+    } else {
+      favs.add({
+        roll: latest.roll,
+        name: latest.name,
+        instituteName: latest.instituteName,
+        departmentName: latest.departmentName,
+        semester: latest.semester,
+        gpa: cgpa,
+        letterGrade: latest.letterGrade,
+        result: latest.result,
+      });
+      toast.success("Added to favorites");
+    }
+  };
+
+  const onShare = async () => {
+    const lines = [
+      `BTEB Results Zone — Academic History`,
+      `${latest.name} (Roll: ${latest.roll})`,
+      `${latest.departmentName} • ${latest.curriculum}`,
+      latest.instituteName ? `Institute: ${latest.instituteName}` : "",
+      `CGPA: ${cgpa.toFixed(2)}`,
+      ``,
+      ...results.map(
+        (r) => `Year ${r.examYear}: GPA ${r.gpa.toFixed(2)} (${r.letterGrade}) — ${r.result}`
+      ),
+    ].filter(Boolean);
+    try {
+      if (navigator.share) {
+        await navigator.share({ title: "BTEB Academic History", text: lines.join("\n") });
+      } else {
+        await navigator.clipboard.writeText(lines.join("\n"));
+        toast.success("History copied to clipboard");
+      }
+    } catch {
+      /* cancelled */
+    }
+  };
+
+  const onDownload = () => {
+    const lines = [
+      "BTEB RESULTS ZONE — COMPLETE ACADEMIC HISTORY",
+      "=".repeat(48),
+      `Name            : ${latest.name}`,
+      `Roll            : ${latest.roll}`,
+      `Registration No : ${latest.registrationNo}`,
+      `Institute       : ${latest.instituteName}`,
+      `Department      : ${latest.departmentName}`,
+      `Curriculum      : ${latest.curriculum}`,
+      `Session         : ${latest.batchLabel}`,
+      `CGPA            : ${cgpa.toFixed(2)}`,
+      ``,
+      "SEMESTER RESULTS (by year):",
+      "-".repeat(48),
+      ...results.map(
+        (r) => `Year ${r.examYear}: GPA ${r.gpa.toFixed(2)} ${r.letterGrade} — ${r.result}`
+      ),
+      ``,
+      "Powered by BTEB Results Zone (live from official BTEB archive)",
+    ];
+    const blob = new Blob([lines.join("\n")], { type: "text/plain" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `BTEB_History_${latest.roll}.txt`;
+    a.click();
+    URL.revokeObjectURL(url);
+    toast.success("History downloaded");
+  };
+
+  return (
+    <div className="space-y-5">
+      {/* Student identity header */}
+      <Card className="overflow-hidden">
+        <div className="relative bg-gradient-to-br from-primary/10 via-transparent to-emerald-400/10 p-5 sm:p-6">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+            <div className="flex items-start gap-4">
+              <div className="flex h-16 w-16 shrink-0 flex-col items-center justify-center rounded-2xl bg-primary/15 text-primary ring-1 ring-primary/20">
+                <GraduationCap className="h-7 w-7" />
+              </div>
+              <div className="min-w-0">
+                <div className="flex items-center gap-2">
+                  <h2 className="truncate text-xl font-bold tracking-tight">
+                    {latest.name}
+                  </h2>
+                </div>
+                <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-muted-foreground">
+                  <span className="inline-flex items-center gap-1">
+                    <Hash className="h-3 w-3" />
+                    <span className="font-mono font-semibold text-foreground">{latest.roll}</span>
+                  </span>
+                  {latest.registrationNo ? (
+                    <span className="inline-flex items-center gap-1">
+                      <IdCard className="h-3 w-3" />
+                      <span className="font-mono">{latest.registrationNo}</span>
+                    </span>
+                  ) : null}
+                </div>
+                <div className="mt-2 flex flex-wrap gap-1.5">
+                  <Badge variant="secondary" className="gap-1">
+                    <BookOpen className="h-3 w-3" />
+                    {latest.curriculum}
+                  </Badge>
+                  {latest.departmentName ? (
+                    <Badge variant="secondary" className="gap-1">
+                      <Award className="h-3 w-3" />
+                      {latest.departmentName}
+                    </Badge>
+                  ) : null}
+                </div>
+              </div>
+            </div>
+            <div className="flex shrink-0 flex-wrap gap-2">
+              <Button
+                variant={isFav ? "default" : "outline"}
+                size="sm"
+                onClick={onToggleFav}
+                className="gap-1.5"
+              >
+                {isFav ? <StarOff className="h-4 w-4" /> : <Star className="h-4 w-4" />}
+                {isFav ? "Saved" : "Save"}
+              </Button>
+              <Button variant="outline" size="sm" onClick={onShare} className="gap-1.5">
+                <Share2 className="h-4 w-4" />
+                Share
+              </Button>
+              <Button variant="outline" size="sm" onClick={onDownload} className="gap-1.5">
+                <Download className="h-4 w-4" />
+                Download
+              </Button>
+            </div>
+          </div>
+
+          {/* Institute + CGPA summary */}
+          <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-3">
+            {latest.instituteName ? (
+              <div className="rounded-lg bg-background/60 p-3">
+                <p className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground">
+                  Institute
+                </p>
+                <p className="mt-0.5 truncate text-sm font-semibold">
+                  {latest.instituteName}
+                </p>
+              </div>
+            ) : null}
+            {latest.batchLabel ? (
+              <div className="rounded-lg bg-background/60 p-3">
+                <p className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground">
+                  Session
+                </p>
+                <p className="mt-0.5 text-sm font-semibold">{latest.batchLabel}</p>
+              </div>
+            ) : null}
+            <div className="rounded-lg bg-background/60 p-3">
+              <p className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground">
+                Overall CGPA
+              </p>
+              <p className={cn("mt-0.5 text-2xl font-bold", gpaColor(cgpa))}>
+                {cgpa.toFixed(2)}
+              </p>
+            </div>
+          </div>
+        </div>
+      </Card>
+
+      {/* Stacked semester cards (oldest first) */}
+      <div className="space-y-3">
+        {results.map((r, idx) => (
+          <SemesterCard key={`${r.examYear}-${idx}`} result={r} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/**
+ * One semester card — mirrors the competitor's stacked layout.
+ */
+function SemesterCard({ result }: { result: StudentResult }) {
+  const [expanded, setExpanded] = React.useState(false);
+  const passed = result.result === "PASSED";
+  const referred = result.result === "REFERRED";
+  const gpa = typeof result.gpa === "number" ? result.gpa : 0;
+  const grade = result.letterGrade || (gpa >= 4 ? "A+" : gpa >= 3.5 ? "A" : gpa >= 3 ? "A-" : gpa >= 2.5 ? "B" : gpa >= 2 ? "C" : gpa > 0 ? "D" : "F");
+
+  return (
+    <Card
+      className={cn(
+        "overflow-hidden transition-all",
+        passed
+          ? "border-emerald-500/20"
+          : referred
+            ? "border-amber-500/20"
+            : "border-rose-500/20"
+      )}
+    >
+      <CardContent className="p-4 sm:p-5">
+        <div className="flex items-center gap-4">
+          {/* Semester icon */}
+          <span
+            className={cn(
+              "flex h-12 w-12 shrink-0 items-center justify-center rounded-xl",
+              passed
+                ? "bg-emerald-500/15 text-emerald-600 dark:text-emerald-400"
+                : referred
+                  ? "bg-amber-500/15 text-amber-600 dark:text-amber-400"
+                  : "bg-rose-500/15 text-rose-600 dark:text-rose-400"
+            )}
+          >
+            <BookOpen className="h-6 w-6" />
+          </span>
+
+          {/* Semester info */}
+          <div className="min-w-0 flex-1">
+            <div className="flex items-center gap-2">
+              <p className="font-semibold">
+                {result.examYear ? `Result of ${result.examYear}` : "Result"}
+              </p>
+              <Badge
+                variant={passed ? "default" : referred ? "secondary" : "destructive"}
+                className={cn(
+                  "gap-1",
+                  passed && "bg-emerald-600 hover:bg-emerald-600",
+                  referred && "bg-amber-600 text-white hover:bg-amber-600"
+                )}
+              >
+                {passed ? (
+                  <CheckCircle2 className="h-3 w-3" />
+                ) : (
+                  <AlertTriangle className="h-3 w-3" />
+                )}
+                {result.result === "PASSED" ? "Passed" : result.result === "REFERRED" ? "Referred" : "Failed"}
+              </Badge>
+            </div>
+            <p className="mt-0.5 flex items-center gap-1 text-xs text-muted-foreground">
+              <CalendarDays className="h-3 w-3" />
+              {result.batchLabel ? `Session ${result.batchLabel}` : "BTEB Diploma Exam"}
+            </p>
+          </div>
+
+          {/* GPA display */}
+          <div className="flex items-center gap-3">
+            <div className="text-right">
+              <p className="text-[10px] font-medium uppercase tracking-wider text-muted-foreground">
+                GPA
+              </p>
+              <p className={cn("text-2xl font-bold leading-none", gpaColor(gpa))}>
+                {gpa.toFixed(2)}
+              </p>
+            </div>
+            <GradeBadge grade={grade} size="lg" />
+          </div>
+        </div>
+
+        {/* Referred subjects warning */}
+        {result.referredSubjects && result.referredSubjects.length > 0 ? (
+          <div className="mt-3 rounded-lg bg-amber-500/10 px-3 py-2 text-xs text-amber-700 dark:text-amber-300">
+            <AlertTriangle className="mr-1 inline h-3.5 w-3.5" />
+            {result.referredSubjects.length} referred subject(s):{" "}
+            {result.referredSubjects.join(", ")}
+          </div>
+        ) : null}
+      </CardContent>
+    </Card>
   );
 }

@@ -307,6 +307,56 @@ export async function searchLive(params: LiveSearchParams): Promise<LiveSearchRe
 }
 
 /**
+ * The official archive stores ONE result per (exam, year, roll). To show a
+ * student's complete academic history (all semesters 4th–8th), we must search
+ * the roll across multiple years in parallel. This mirrors what the original
+ * btebresultszone.com does.
+ *
+ * Returns every found result (one per year where the roll exists), sorted by
+ * exam year ascending. The caller can present these as semester cards.
+ */
+export type LiveHistoryResult =
+  | { success: true; results: StudentResult[]; yearsSearched: number; source: string }
+  | { success: false; error: string };
+
+const HISTORY_YEARS = ["2026", "2025", "2024", "2023", "2022", "2021", "2020", "2019", "2018", "2017"];
+
+export async function searchLiveHistory(
+  base: Omit<LiveSearchParams, "year">,
+  opts?: { years?: string[] }
+): Promise<LiveHistoryResult> {
+  const years = opts?.years || HISTORY_YEARS;
+  const found: StudentResult[] = [];
+  const CONCURRENCY = 4;
+
+  for (let i = 0; i < years.length; i += CONCURRENCY) {
+    const batch = years.slice(i, i + CONCURRENCY);
+    const results = await Promise.all(
+      batch.map(async (year) => {
+        try {
+          const r = await searchLive({ ...base, year });
+          return r.success ? r.data : null;
+        } catch {
+          return null;
+        }
+      })
+    );
+    for (const r of results) {
+      if (r) found.push(r);
+    }
+  }
+
+  found.sort((a, b) => (a.examYear || 0) - (b.examYear || 0));
+
+  return {
+    success: true,
+    results: found,
+    yearsSearched: years.length,
+    source: "official-archive (multi-year crawl)",
+  };
+}
+
+/**
  * Batch live search — fetch multiple rolls in parallel from the official
  * archive. Used by Group Results. Returns one result per roll (null = not
  * found). Concurrency-limited to be polite to the government server.
