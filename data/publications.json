@@ -2,61 +2,105 @@
   {
     "id": "pub-2025-1sem",
     "title": "1st Semester Diploma in Engineering Result 2025",
-    "examType": "Diploma in Engineering",
+    "examType": "Diploma",
+    "curriculum": "Diploma in Engineering",
     "semester": 1,
     "examYear": 2025,
     "publicationDate": "2025-03-15",
     "totalStudents": 141,
-    "passRate": 74.5
+    "passRate": 74.5,
+    "rollStart": 99987,
+    "rollEnd": 100156
   },
   {
     "id": "pub-2025-3sem",
     "title": "3rd Semester Diploma in Engineering Result 2025",
-    "examType": "Diploma in Engineering",
+    "examType": "Diploma",
+    "curriculum": "Diploma in Engineering",
     "semester": 3,
     "examYear": 2025,
     "publicationDate": "2025-05-20",
     "totalStudents": 139,
-    "passRate": 69.8
+    "passRate": 69.8,
+    "rollStart": 100128,
+    "rollEnd": 100300
   },
   {
     "id": "pub-2024-5sem",
     "title": "5th Semester Diploma in Engineering Result 2024",
-    "examType": "Diploma in Engineering",
+    "examType": "Diploma",
+    "curriculum": "Diploma in Engineering",
     "semester": 5,
     "examYear": 2024,
     "publicationDate": "2024-11-10",
     "totalStudents": 106,
-    "passRate": 70.8
+    "passRate": 70.8,
+    "rollStart": 100272,
+    "rollEnd": 100393
   },
   {
     "id": "pub-2024-7sem",
     "title": "7th Semester Diploma in Engineering Result 2024",
-    "examType": "Diploma in Engineering",
+    "examType": "Diploma",
+    "curriculum": "Diploma in Engineering",
     "semester": 7,
     "examYear": 2024,
     "publicationDate": "2024-09-05",
     "totalStudents": 100,
-    "passRate": 71
+    "passRate": 71,
+    "rollStart": 100377,
+    "rollEnd": 100503
   },
   {
     "id": "pub-2024-8sem",
     "title": "8th Semester (Final) Diploma in Engineering Result 2024",
-    "examType": "Diploma in Engineering",
+    "examType": "Diploma",
+    "curriculum": "Diploma in Engineering",
     "semester": 8,
     "examYear": 2024,
     "publicationDate": "2024-12-28",
     "totalStudents": 127,
-    "passRate": 71.7
+    "passRate": 71.7,
+    "rollStart": 100472,
+    "rollEnd": 100621
   },
   {
     "id": "pub-2025-2sem",
     "title": "2nd Semester Diploma in Engineering Result 2025",
-    "examType": "Diploma in Engineering",
+    "examType": "Diploma",
+    "curriculum": "Diploma in Engineering",
     "semester": 2,
     "examYear": 2025,
     "publicationDate": "2025-06-30",
     "totalStudents": 155,
-    "passRate": 68.4
+    "passRate": 68.4,
+    "rollStart": 100600,
+    "rollEnd": 100788
+  },
+  {
+    "id": "pub-2025-textile-1",
+    "title": "1st Semester Diploma in Textile Result 2025",
+    "examType": "Diploma",
+    "curriculum": "Diploma in Textile",
+    "semester": 1,
+    "examYear": 2025,
+    "publicationDate": "2025-04-02",
+    "totalStudents": 125,
+    "passRate": 72,
+    "rollStart": 100756,
+    "rollEnd": 100900
+  },
+  {
+    "id": "pub-2024-agri-3",
+    "title": "3rd Semester Diploma in Agriculture Result 2024",
+    "examType": "Diploma",
+    "curriculum": "Diploma in Agriculture",
+    "semester": 3,
+    "examYear": 2024,
+    "publicationDate": "2024-10-18",
+    "totalStudents": 130,
+    "passRate": 66.9,
+    "rollStart": 100887,
+    "rollEnd": 101029
   }
 ]

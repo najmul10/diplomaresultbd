@@ -13,6 +13,7 @@ import { CgpaView } from "@/components/views/cgpa-view";
 import { BooklistsView } from "@/components/views/booklists-view";
 import { RoutinesView } from "@/components/views/routines-view";
 import { FavoritesView } from "@/components/views/favorites-view";
+import { HuntView } from "@/components/views/hunt-view";
 import { AboutView } from "@/components/views/about-view";
 import { ContactView } from "@/components/views/contact-view";
 import { motion, AnimatePresence } from "framer-motion";
@@ -39,6 +40,8 @@ function ViewSwitch({ view }: { view: ViewId }) {
       return <RoutinesView />;
     case "favorites":
       return <FavoritesView />;
+    case "hunt":
+      return <HuntView />;
     case "about":
       return <AboutView />;
     case "contact":

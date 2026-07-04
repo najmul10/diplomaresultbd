@@ -82,6 +82,8 @@ export function ResultCard({ result }: { result: StudentResult }) {
       `Registration No : ${result.registrationNo}`,
       `Institute       : ${result.instituteName} (${result.instituteCode})`,
       `Department      : ${result.departmentName} (${result.departmentCode})`,
+      `Curriculum      : ${result.curriculum || "—"}`,
+      `Exam Type       : ${result.examType || "—"}`,
       `Semester        : ${ordinal(result.semester)}`,
       `Exam Year       : ${result.examYear}`,
       `Published On    : ${formatDate(result.publicationDate)}`,
@@ -188,7 +190,7 @@ export function ResultCard({ result }: { result: StudentResult }) {
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
           <InfoRow icon={Hash} label="Roll Number" value={result.roll} mono />
           <InfoRow icon={IdCard} label="Registration No" value={result.registrationNo} mono />
-          <InfoRow icon={GraduationCap} label="Department" value={result.departmentCode} />
+          <InfoRow icon={GraduationCap} label="Curriculum" value={result.curriculum || result.departmentName} />
           <InfoRow icon={Building2} label="Institute" value={result.instituteName} />
           <InfoRow
             icon={CalendarDays}

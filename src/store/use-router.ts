@@ -13,6 +13,7 @@ export type ViewId =
   | "booklists"
   | "routines"
   | "favorites"
+  | "hunt"
   | "about"
   | "contact";
 
@@ -46,6 +47,7 @@ export function initFromHash(): ViewId {
     "booklists",
     "routines",
     "favorites",
+    "hunt",
     "about",
     "contact",
   ];

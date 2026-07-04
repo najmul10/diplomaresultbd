@@ -18,11 +18,14 @@ export type Publication = {
   id: string;
   title: string;
   examType: string;
+  curriculum: string;
   semester: number;
   examYear: number;
   publicationDate: string;
   totalStudents: number;
   passRate: number;
+  rollStart: number;
+  rollEnd: number;
 };
 
 export type SubjectResult = {
@@ -42,6 +45,8 @@ export type StudentResult = {
   instituteName: string;
   departmentCode: string;
   departmentName: string;
+  examType: string;
+  curriculum: string;
   semester: number;
   examYear: number;
   publicationId: string;

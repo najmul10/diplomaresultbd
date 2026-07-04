@@ -303,19 +303,27 @@ const pick = <T,>(arr: readonly T[]) => arr[Math.floor(rand() * arr.length)];
 const randInt = (min: number, max: number) => Math.floor(rand() * (max - min + 1)) + min;
 
 // ---------------- Publications ----------------
+// Matches the official BTEB Archive System (result.bteb.gov.bd) form:
+//   Name of Examination  -> examType (Diploma, SSC VOC, HSC VOC, Short Course)
+//   Name of Curriculum   -> curriculum (Diploma in Engineering / Textile / Agriculture...)
+//   Semester / Class     -> semester
+//   Exam Year            -> examYear
 const publications = [
-  { id: "pub-2025-1sem", title: "1st Semester Diploma in Engineering Result 2025", examType: "Diploma in Engineering", semester: 1, examYear: 2025, publicationDate: "2025-03-15", totalStudents: 0, passRate: 0 },
-  { id: "pub-2025-3sem", title: "3rd Semester Diploma in Engineering Result 2025", examType: "Diploma in Engineering", semester: 3, examYear: 2025, publicationDate: "2025-05-20", totalStudents: 0, passRate: 0 },
-  { id: "pub-2024-5sem", title: "5th Semester Diploma in Engineering Result 2024", examType: "Diploma in Engineering", semester: 5, examYear: 2024, publicationDate: "2024-11-10", totalStudents: 0, passRate: 0 },
-  { id: "pub-2024-7sem", title: "7th Semester Diploma in Engineering Result 2024", examType: "Diploma in Engineering", semester: 7, examYear: 2024, publicationDate: "2024-09-05", totalStudents: 0, passRate: 0 },
-  { id: "pub-2024-8sem", title: "8th Semester (Final) Diploma in Engineering Result 2024", examType: "Diploma in Engineering", semester: 8, examYear: 2024, publicationDate: "2024-12-28", totalStudents: 0, passRate: 0 },
-  { id: "pub-2025-2sem", title: "2nd Semester Diploma in Engineering Result 2025", examType: "Diploma in Engineering", semester: 2, examYear: 2025, publicationDate: "2025-06-30", totalStudents: 0, passRate: 0 },
+  { id: "pub-2025-1sem", title: "1st Semester Diploma in Engineering Result 2025", examType: "Diploma", curriculum: "Diploma in Engineering", semester: 1, examYear: 2025, publicationDate: "2025-03-15", totalStudents: 0, passRate: 0 },
+  { id: "pub-2025-3sem", title: "3rd Semester Diploma in Engineering Result 2025", examType: "Diploma", curriculum: "Diploma in Engineering", semester: 3, examYear: 2025, publicationDate: "2025-05-20", totalStudents: 0, passRate: 0 },
+  { id: "pub-2024-5sem", title: "5th Semester Diploma in Engineering Result 2024", examType: "Diploma", curriculum: "Diploma in Engineering", semester: 5, examYear: 2024, publicationDate: "2024-11-10", totalStudents: 0, passRate: 0 },
+  { id: "pub-2024-7sem", title: "7th Semester Diploma in Engineering Result 2024", examType: "Diploma", curriculum: "Diploma in Engineering", semester: 7, examYear: 2024, publicationDate: "2024-09-05", totalStudents: 0, passRate: 0 },
+  { id: "pub-2024-8sem", title: "8th Semester (Final) Diploma in Engineering Result 2024", examType: "Diploma", curriculum: "Diploma in Engineering", semester: 8, examYear: 2024, publicationDate: "2024-12-28", totalStudents: 0, passRate: 0 },
+  { id: "pub-2025-2sem", title: "2nd Semester Diploma in Engineering Result 2025", examType: "Diploma", curriculum: "Diploma in Engineering", semester: 2, examYear: 2025, publicationDate: "2025-06-30", totalStudents: 0, passRate: 0 },
+  { id: "pub-2025-textile-1", title: "1st Semester Diploma in Textile Result 2025", examType: "Diploma", curriculum: "Diploma in Textile", semester: 1, examYear: 2025, publicationDate: "2025-04-02", totalStudents: 0, passRate: 0 },
+  { id: "pub-2024-agri-3", title: "3rd Semester Diploma in Agriculture Result 2024", examType: "Diploma", curriculum: "Diploma in Agriculture", semester: 3, examYear: 2024, publicationDate: "2024-10-18", totalStudents: 0, passRate: 0 },
 ];
 
 type SubjectResult = { code: string; name: string; credit: number; marks: number; letter: string; point: number };
 type StudentResult = {
   roll: string; registrationNo: string; name: string; instituteCode: string; instituteName: string;
-  departmentCode: string; departmentName: string; semester: number; examYear: number;
+  departmentCode: string; departmentName: string; examType: string; curriculum: string;
+  semester: number; examYear: number;
   publicationId: string; publicationDate: string; subjects: SubjectResult[]; gpa: number;
   letterGrade: string; result: "PASSED" | "FAILED"; cgpa: number;
 };
@@ -374,7 +382,9 @@ for (const pub of publications) {
 
     results.push({
       roll, registrationNo, name, instituteCode: inst.code, instituteName: inst.name,
-      departmentCode: dept.code, departmentName: dept.name, semester: pub.semester, examYear: pub.examYear,
+      departmentCode: dept.code, departmentName: dept.name,
+      examType: pub.examType, curriculum: pub.curriculum,
+      semester: pub.semester, examYear: pub.examYear,
       publicationId: pub.id, publicationDate: pub.publicationDate, subjects: subResults, gpa,
       letterGrade, result, cgpa,
     });
@@ -392,6 +402,22 @@ for (const pub of publications) {
   const st = pubStats[pub.id];
   pub.totalStudents = st.total;
   pub.passRate = Math.round((st.passed / st.total) * 1000) / 10;
+  // Assign the official BTEB roll range for this publication.
+  // It spans the actual stored rolls plus padding to simulate absent /
+  // invalid rolls that the crawler would encounter on the official archive.
+  const pubRolls = results
+    .filter((r) => r.publicationId === pub.id)
+    .map((r) => parseInt(r.roll, 10));
+  if (pubRolls.length > 0) {
+    const minRoll = Math.min(...pubRolls);
+    const maxRoll = Math.max(...pubRolls);
+    // pad both ends so the crawl finds "not in published range" gaps
+    pub.rollStart = minRoll - randInt(5, 15);
+    pub.rollEnd = maxRoll + randInt(5, 20);
+  } else {
+    pub.rollStart = 100001;
+    pub.rollEnd = 100200;
+  }
 }
 
 // ---------------- Routines ----------------
