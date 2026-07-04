@@ -5,7 +5,6 @@ import { useQuery } from "@tanstack/react-query";
 import {
   Building2,
   Search,
-  Radio,
   ExternalLink,
   MapPin,
 } from "lucide-react";
@@ -48,29 +47,27 @@ export function InstituteView() {
     <div className="mx-auto w-full max-w-6xl px-4 py-8 sm:px-6 lg:py-12">
       <SectionHeading
         title="Institute Directory"
-        description="Browse polytechnic institutes across Bangladesh. Results are searched live per student."
+        description="Browse polytechnic institutes across Bangladesh."
         icon={Building2}
       />
 
-      <Card className="mt-6 border-emerald-500/30 bg-emerald-500/5">
+      <Card className="mt-6 border-primary/20 bg-primary/5">
         <CardContent className="flex items-start gap-3 p-4">
-          <Radio className="mt-0.5 h-5 w-5 shrink-0 text-emerald-600 dark:text-emerald-400" />
+          <Search className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
           <div className="text-sm">
-            <p className="font-semibold text-emerald-700 dark:text-emerald-300">
-              Live results, not stored institute batches
+            <p className="font-semibold text-primary">
+              Find any institute
             </p>
             <p className="mt-0.5 text-muted-foreground">
-              The official BTEB archive doesn&apos;t offer institute-wise
-              batch search — it searches per student. To see a student&apos;s
-              result, use{" "}
+              Browse polytechnic institutes across Bangladesh. To check a
+              student&apos;s result, use{" "}
               <button
                 onClick={() => navigate("individual")}
-                className="font-medium text-emerald-700 underline-offset-2 hover:underline dark:text-emerald-300"
+                className="font-medium text-primary underline-offset-2 hover:underline"
               >
                 Individual Results
               </button>{" "}
-              with their roll + registration + exam type + year. This directory
-              lists all polytechnic institutes for reference.
+              with their roll number and exam type.
             </p>
           </div>
         </CardContent>

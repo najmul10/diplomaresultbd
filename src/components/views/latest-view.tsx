@@ -10,8 +10,6 @@ import {
   CheckCircle2,
   XCircle,
   Award,
-  Radio,
-  ExternalLink,
   Database,
 } from "lucide-react";
 import {
@@ -146,25 +144,22 @@ export function LatestView() {
     <div className="mx-auto w-full max-w-6xl px-4 py-8 sm:px-6 lg:py-12">
       <SectionHeading
         title="Latest Results & Analytics"
-        description="Live aggregate statistics computed by crawling the official BTEB archive on demand."
+        description="Browse aggregate statistics — pass rates, grade distribution and average GPA across BTEB results."
         icon={BarChart3}
         badge="Live"
       />
 
-      <Card className="mt-6 border-emerald-500/30 bg-emerald-500/5">
+      <Card className="mt-6 border-primary/20 bg-primary/5">
         <CardContent className="flex items-start gap-3 p-4">
-          <Radio className="mt-0.5 h-5 w-5 shrink-0 text-emerald-600 dark:text-emerald-400" />
+          <BarChart3 className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
           <div className="text-sm">
-            <p className="font-semibold text-emerald-700 dark:text-emerald-300">
-              100% live — no stored data
+            <p className="font-semibold text-primary">
+              Real-time statistics
             </p>
             <p className="mt-0.5 text-muted-foreground">
-              Pick an exam type, year and a roll range. We crawl that sample
-              live from the official BTEB archive
-              (<a href="http://180.211.162.102:8444/result_arch/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-0.5 font-medium text-emerald-700 underline-offset-2 hover:underline dark:text-emerald-300">180.211.162.102:8444/result_arch <ExternalLink className="h-3 w-3" /></a>)
-              and compute real pass rates, grade distribution and average GPA
-              from whatever results come back. Larger samples = more accurate
-              stats but slower.
+              Pick an exam type, year and a roll range to compute pass rates,
+              grade distribution and average GPA from the results. Larger ranges
+              = more accurate stats but slower.
             </p>
           </div>
         </CardContent>
@@ -244,7 +239,7 @@ export function LatestView() {
             disabled={isLoading}
           >
             {isLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Database className="h-4 w-4" />}
-            {isLoading ? "Crawling official archive..." : "Run Live Analysis"}
+            {isLoading ? "Analyzing..." : "Generate Statistics"}
           </Button>
         </CardContent>
       </Card>
@@ -252,7 +247,7 @@ export function LatestView() {
       {error ? (
         <Card className="mt-6 border-rose-500/30">
           <CardContent className="py-10 text-center text-sm text-rose-600 dark:text-rose-400">
-            {error instanceof Error ? error.message : "Live crawl failed. Try a smaller sample."}
+            {error instanceof Error ? error.message : "Analysis failed. Try a smaller range."}
           </CardContent>
         </Card>
       ) : null}
@@ -262,23 +257,23 @@ export function LatestView() {
           <CardContent className="flex flex-col items-center justify-center gap-3 py-16">
             <Loader2 className="h-8 w-8 animate-spin text-emerald-600" />
             <p className="text-sm text-muted-foreground">
-              Crawling {count} rolls live from the official BTEB archive...
+              Processing {count} results...
             </p>
-            <p className="text-xs text-muted-foreground">This takes ~{Math.ceil(Number(count) / 6)} seconds</p>
+            <p className="text-xs text-muted-foreground">This takes a few seconds</p>
           </CardContent>
         </Card>
       ) : data ? (
         <>
           <div className="mt-3 flex items-center gap-2 text-xs text-muted-foreground">
             <Badge className="gap-1 bg-emerald-600 hover:bg-emerald-600">
-              <Radio className="h-3.5 w-3.5" /> Live
+              <CheckCircle2 className="h-3.5 w-3.5" /> Verified
             </Badge>
             {data.note}
           </div>
 
           {/* Summary stats */}
           <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
-            <StatCard icon={Users} label="Rolls Crawled" value={String(data.totalRequested)} />
+            <StatCard icon={Users} label="Total Checked" value={String(data.totalRequested)} />
             <StatCard icon={CheckCircle2} label="Found" value={String(data.found)} tone="emerald" />
             <StatCard icon={TrendingUp} label="Pass Rate" value={`${data.passRate}%`} tone="teal" />
             <StatCard icon={Award} label="Avg GPA" value={data.avgGpa.toFixed(2)} tone="amber" />
@@ -355,7 +350,7 @@ export function LatestView() {
           ) : (
             <Card className="mt-5 border-dashed">
               <CardContent className="py-12 text-center text-sm text-muted-foreground">
-                No results found in the crawled sample. Try a different roll range, year, or session part.
+                No results found in the selected range. Try a different roll range, year, or session part.
               </CardContent>
             </Card>
           )}
@@ -368,7 +363,7 @@ export function LatestView() {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2 text-base">
                   <Users className="h-4 w-4 text-emerald-600" />
-                  Sample Results Found
+                  Sample Results
                 </CardTitle>
               </CardHeader>
               <CardContent className="p-0">
@@ -411,11 +406,11 @@ export function LatestView() {
               <Database className="h-7 w-7" />
             </span>
             <div>
-              <p className="font-semibold">Run a live analysis</p>
+              <p className="font-semibold">Generate statistics</p>
               <p className="mt-1 max-w-sm text-sm text-muted-foreground">
-                Select an exam type, year and sample size above, then click{" "}
-                <span className="font-semibold">Run Live Analysis</span>. We&apos;ll
-                crawl the official BTEB archive and compute real stats.
+                Select an exam type, year and range above, then click{" "}
+                <span className="font-semibold">Generate Statistics</span> to
+                compute real-time stats.
               </p>
             </div>
           </CardContent>

@@ -23,7 +23,6 @@ import {
   TrendingUp,
   GraduationCap,
   Layers,
-  Radio,
 } from "lucide-react";
 import { AdSlot } from "@/components/site/ad-slot";
 
@@ -41,7 +40,7 @@ const FEATURES: Feature[] = [
     view: "individual",
     icon: Search,
     title: "Live Result Search",
-    desc: "Search your real BTEB result live from the official government archive by roll, registration, exam type and year.",
+    desc: "Search your BTEB result by roll, registration, exam type and year — all semester results in one place.",
     popular: true,
     accent: "from-emerald-500/20 to-teal-500/5 text-emerald-600 dark:text-emerald-400",
   },
@@ -49,7 +48,7 @@ const FEATURES: Feature[] = [
     view: "latest",
     icon: BarChart3,
     title: "Live Analytics",
-    desc: "Crawl a sample of rolls from the official archive and compute real pass rates, grade distribution and average GPA on demand.",
+    desc: "Browse aggregate statistics — pass rates, grade distribution and average GPA across a roll range.",
     accent: "from-amber-500/20 to-orange-500/5 text-amber-600 dark:text-amber-400",
   },
   {
@@ -63,7 +62,7 @@ const FEATURES: Feature[] = [
     view: "group",
     icon: Users,
     title: "Live Group Results",
-    desc: "Compare multiple students' real results — fetched live in parallel from the official archive.",
+    desc: "Compare multiple students' results side by side in seconds.",
     accent: "from-violet-500/20 to-purple-500/5 text-violet-600 dark:text-violet-400",
   },
   {
@@ -107,9 +106,9 @@ export function HomeView() {
   const navigate = useRouter((s) => s.navigate);
 
   const statCards = [
-    { label: "Data Source", value: "Live", sub: "Official BTEB archive" },
+    { label: "Data Source", value: "BTEB", sub: "Verified results" },
     { label: "Exam Types", value: "37+", sub: "All BTEB curricula" },
-    { label: "Years", value: "2005-25", sub: "Full archive coverage" },
+    { label: "Years", value: "2005-25", sub: "Full coverage" },
     { label: "Price", value: "Free", sub: "Always & forever" },
   ];
 
@@ -131,19 +130,18 @@ export function HomeView() {
               variant="secondary"
               className="mb-5 gap-1.5 rounded-full border border-emerald-500/20 bg-emerald-500/5 py-1.5 pl-2 pr-3 text-emerald-600 dark:text-emerald-400"
             >
-              <Radio className="h-3.5 w-3.5" />
-              Live from official BTEB archive
+              <Sparkles className="h-3.5 w-3.5" />
+              Fast &amp; reliable results
             </Badge>
             <h1 className="text-balance text-4xl font-extrabold leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl">
-              BTEB Results{" "}
+              BTEB Results at{" "}
               <span className="bg-gradient-to-r from-primary to-teal-500 bg-clip-text text-transparent">
-                Live &amp; Free
+                Your Fingertips
               </span>
             </h1>
             <p className="mt-5 max-w-xl text-pretty text-base text-muted-foreground sm:text-lg">
-              Search your real BTEB result live — fetched in real time from the
-              official Bangladesh Technical Education Board archive. No stored
-              data, no demo: every search hits the government source.
+              Search your BTEB result instantly — every semester result,
+              GPA and CGPA in one place. Fast, accurate, and always free.
             </p>
             <div className="mt-7 flex flex-col gap-3 sm:flex-row">
               <Button

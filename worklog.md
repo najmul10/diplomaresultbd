@@ -315,3 +315,47 @@ Agent Browser verification (user's real roll 449381):
 - Lint clean.
 
 Note on the single result: the official archive genuinely only has roll 449381 for year 2023 (verified by trying all session parts for 2022 and 2024). The competitor site shows more semesters because they maintain their own historical database from past crawls. Our site shows whatever the official archive currently has — honest and accurate.
+
+---
+Task ID: 44
+Agent: main
+Task: Remove all scraping-revealing text ("Live from official BTEB archive", "crawling", "180.211.162.102", etc.)
+
+Work Log:
+- User: don't show text that reveals we're scraping from the official archive — visitors shouldn't know the data source mechanism.
+- Searched all views + components for: "official archive", "scrap", "crawl", "180.211.162.102", "official source", "government source", "fetched in real time", "fetched live", "years crawled", "Live hunt", "Live from official", "crawling the official".
+- Replaced in all 5 views (individual, group, latest, hunt, institute) + home + site-header:
+  * "Live from official BTEB archive" → "Verified result" / "Fast & reliable results"
+  * "Connected to the official BTEB archive" → "Fast & reliable BTEB results"
+  * "Results are fetched in real time from the Bangladesh Technical Education Board's public archive" → neutral descriptions about viewing results
+  * "Official source: 180.211.162.102:8444/result_arch" links → REMOVED entirely
+  * "Crawling the official BTEB archive across all years..." → "Fetching your results..."
+  * "years crawled" → removed
+  * "Crawling official archive..." → "Analyzing..."
+  * "Run Live Analysis" → "Generate Statistics"
+  * "Rolls Crawled" → "Total Checked"
+  * "Crawl log" → "Search log"
+  * "Auto-Hunt Crawler" → "Bulk Result Finder"
+  * "Start Live Hunt" → "Start Search"
+  * "Live crawl jobs" → "Search jobs"
+  * "Hunted results" → "Results Found"
+  * "Crawling rolls X–Y from official BTEB archive" → "Searching rolls X–Y..."
+  * "Live from official BTEB archive" badge → "Verified" badge
+  * "Data Source: Live, Official BTEB archive" stat → "Data Source: BTEB, Verified results"
+  * Home hero heading: "BTEB Results Live & Free" → "BTEB Results at Your Fingertips"
+  * Nav menu: "Auto-Hunt Crawler / Bulk-crawl results from BTEB archive" → "Bulk Result Finder / Search a roll range at once"
+- Removed unused imports (Radio, ExternalLink) from individual, group, latest, hunt, institute views.
+- Lint clean.
+
+Agent Browser verification (all 5 views):
+- home: ✅ no scraping text
+- individual: ✅ no scraping text — search roll 449381 shows "Verified result", "MD. RIFAT HOSSAIN", PASSED
+- latest: ✅ no scraping text
+- group: ✅ no scraping text
+- hunt: ✅ no scraping text
+- institute: ✅ no scraping text
+
+Stage Summary:
+- All text that revealed the scraping mechanism has been replaced with neutral, professional language.
+- Visitors now see "Verified result", "Fast & reliable results", "Fetching your results..." — no mention of scraping, crawling, or the official archive URL.
+- The site looks like a self-contained results platform.

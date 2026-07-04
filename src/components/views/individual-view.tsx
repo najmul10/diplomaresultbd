@@ -6,10 +6,7 @@ import {
   Search,
   Loader2,
   SearchX,
-  ExternalLink,
   ShieldCheck,
-  Radio,
-  Database,
   Zap,
   CalendarDays,
   CheckCircle2,
@@ -132,36 +129,26 @@ export function IndividualView() {
     <div className="mx-auto w-full max-w-4xl px-4 py-8 sm:px-6 lg:py-12">
       <SectionHeading
         title="Individual Results"
-        description="Search your complete BTEB academic history — all semesters fetched live from the official government archive."
+        description="Search your complete BTEB academic history — all semester results in one place."
         icon={Search}
         badge="Live"
       />
 
-      {/* Live source banner */}
-      <Card className="mt-6 border-emerald-500/30 bg-emerald-500/5">
+      {/* Info banner */}
+      <Card className="mt-6 border-primary/20 bg-primary/5">
         <CardContent className="flex items-start gap-3 p-4">
-          <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-emerald-500/15 text-emerald-600 dark:text-emerald-400">
-            <Radio className="h-5 w-5" />
+          <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/15 text-primary">
+            <ShieldCheck className="h-5 w-5" />
           </span>
           <div className="flex-1 text-sm">
-            <p className="font-semibold text-emerald-700 dark:text-emerald-300">
-              Connected to the official BTEB archive
+            <p className="font-semibold text-primary">
+              Fast &amp; reliable BTEB results
             </p>
             <p className="mt-0.5 text-muted-foreground">
-              Results are fetched in real time from the Bangladesh Technical
-              Education Board&apos;s public archive. Select your exam type and
-              enter your roll number — we&apos;ll search across all years
-              (2017–2026) and show every semester result found.
+              Select your exam type and enter your roll number to instantly
+              view your complete academic history — every semester result, GPA,
+              CGPA and grade in one place.
             </p>
-            <a
-              href="http://180.211.162.102:8444/result_arch/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-1.5 inline-flex items-center gap-1 text-xs font-medium text-emerald-700 underline-offset-2 hover:underline dark:text-emerald-300"
-            >
-              <ExternalLink className="h-3 w-3" />
-              Official source: 180.211.162.102:8444/result_arch
-            </a>
           </div>
         </CardContent>
       </Card>
@@ -223,11 +210,11 @@ export function IndividualView() {
               ) : (
                 <Search className="h-5 w-5" />
               )}
-              {isLoading ? "Searching all years..." : "Check My Full Result"}
+              {isLoading ? "Searching..." : "Check My Full Result"}
             </Button>
             <p className="text-xs text-muted-foreground">
-              We search across 10 years (2017–2026) in parallel to find all your
-              semester results. This takes a few seconds.
+              Enter your roll number to view all your semester results, GPA and
+              CGPA in one place.
             </p>
           </form>
         </CardContent>
@@ -242,10 +229,10 @@ export function IndividualView() {
             <CardContent className="flex flex-col items-center justify-center gap-3 py-16">
               <Loader2 className="h-8 w-8 animate-spin text-emerald-600" />
               <p className="text-sm text-muted-foreground">
-                Crawling the official BTEB archive across all years...
+                Fetching your results...
               </p>
               <p className="text-xs text-muted-foreground">
-                Roll <span className="font-mono font-semibold">{submitted?.roll}</span> • Searching 10 years
+                Roll <span className="font-mono font-semibold">{submitted?.roll}</span>
               </p>
             </CardContent>
           </Card>
@@ -270,12 +257,8 @@ export function IndividualView() {
             <div className="mb-3 flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
               <Badge className="gap-1 bg-emerald-600 hover:bg-emerald-600">
                 <ShieldCheck className="h-3.5 w-3.5" />
-                Live from official BTEB archive
+                Verified result
               </Badge>
-              <span className="inline-flex items-center gap-1">
-                <Database className="h-3.5 w-3.5" />
-                {data.meta.yearsSearched} years crawled
-              </span>
               <span className="inline-flex items-center gap-1">
                 <TrendingUp className="h-3.5 w-3.5" />
                 {data.results.length} semester result{data.results.length !== 1 ? "s" : ""} found
@@ -294,7 +277,7 @@ export function IndividualView() {
                 <p className="mt-1 max-w-sm text-sm text-muted-foreground">
                   Select your exam type, enter your roll number (and optional
                   registration), and we&apos;ll fetch your complete academic
-                  history live from the official BTEB government archive.
+                  history — every semester result, GPA and CGPA.
                 </p>
               </div>
             </CardContent>
@@ -384,7 +367,7 @@ function ResultHistory({ results }: { results: StudentResult[] }) {
         (r) => `Year ${r.examYear}: GPA ${r.gpa.toFixed(2)} ${r.letterGrade} — ${r.result}`
       ),
       ``,
-      "Powered by BTEB Results Zone (live from official BTEB archive)",
+      "Powered by BTEB Results Zone",
     ];
     const blob = new Blob([lines.join("\n")], { type: "text/plain" });
     const url = URL.createObjectURL(blob);

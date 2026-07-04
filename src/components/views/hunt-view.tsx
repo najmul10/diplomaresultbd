@@ -17,7 +17,6 @@ import {
   Activity,
   Clock,
   ExternalLink,
-  Radio,
 } from "lucide-react";
 import { SectionHeading } from "@/components/site/section-heading";
 import { AdSlot } from "@/components/site/ad-slot";
@@ -183,7 +182,7 @@ export function HuntView() {
   const startMut = useMutation({
     mutationFn: startHunt,
     onSuccess: (data) => {
-      toast.success(`Live hunt started — ${data.total} rolls to crawl`);
+      toast.success(`Search started — ${data.total} rolls to process`);
       setSelectedJob(data.jobId);
       qc.invalidateQueries({ queryKey: ["hunt-jobs"] });
     },
@@ -234,7 +233,7 @@ export function HuntView() {
       return;
     }
     if (e - s + 1 > 2000) {
-      toast.error("Max 2000 rolls per live hunt");
+      toast.error("Max 2000 rolls per search");
       return;
     }
     startMut.mutate({
@@ -249,22 +248,20 @@ export function HuntView() {
   return (
     <div className="mx-auto w-full max-w-6xl px-4 py-8 sm:px-6 lg:py-12">
       <SectionHeading
-        title="Auto-Hunt Crawler"
-        description="Crawl a roll-number range LIVE against the official BTEB archive and collect every result."
+        title="Bulk Result Finder"
+        description="Search an entire roll-number range at once and collect every result found."
         icon={Radar}
         badge="Live"
       />
 
-      <Card className="mt-6 border-emerald-500/30 bg-emerald-500/5">
+      <Card className="mt-6 border-primary/20 bg-primary/5">
         <CardContent className="flex items-start gap-3 p-4">
-          <Radio className="mt-0.5 h-5 w-5 shrink-0 text-emerald-600 dark:text-emerald-400" />
+          <Radar className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
           <div className="text-sm">
-            <p className="font-semibold text-emerald-700 dark:text-emerald-300">
-              100% live crawling
+            <p className="font-semibold text-primary">
+              Search a full roll range
             </p>
             <p className="mt-0.5 text-muted-foreground">
-              Every roll is fetched in real time from the official BTEB archive
-              (<a href="http://180.211.162.102:8444/result_arch/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-0.5 font-medium text-emerald-700 underline-offset-2 hover:underline dark:text-emerald-300">180.211.162.102:8444/result_arch <ExternalLink className="h-3 w-3" /></a>).
               Pick an exam type + year, define a roll range, and start. Found
               results are collected and shown live. Max 2000 rolls per job.
             </p>
@@ -278,7 +275,7 @@ export function HuntView() {
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-base">
               <Target className="h-4 w-4 text-emerald-600" />
-              Start a live hunt
+              Start a search
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
@@ -340,7 +337,7 @@ export function HuntView() {
               </div>
             </div>
             <div className="rounded-lg bg-muted/50 p-3 text-xs text-muted-foreground">
-              Will crawl{" "}
+              Will search{" "}
               <span className="font-mono font-semibold text-foreground">
                 {Math.max(0, (Number(rollEnd) || 0) - (Number(rollStart) || 0) + 1)}
               </span>{" "}
@@ -348,7 +345,7 @@ export function HuntView() {
             </div>
             <Button className="w-full gap-2" onClick={onSubmit} disabled={startMut.isPending}>
               {startMut.isPending ? <Loader2 className="h-4 w-4 animate-spin" /> : <Play className="h-4 w-4" />}
-              {startMut.isPending ? "Starting..." : "Start Live Hunt"}
+              {startMut.isPending ? "Starting..." : "Start Search"}
             </Button>
           </CardContent>
         </Card>
@@ -360,7 +357,7 @@ export function HuntView() {
             <CardHeader className="flex-row items-center justify-between space-y-0">
               <CardTitle className="flex items-center gap-2 text-base">
                 <Activity className="h-4 w-4 text-emerald-600" />
-                Live crawl jobs
+                Search jobs
                 {hasRunning ? (
                   <Badge className="gap-1 bg-emerald-600 hover:bg-emerald-600">
                     <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-white" />
@@ -433,7 +430,7 @@ export function HuntView() {
                 </div>
               ) : (
                 <div className="py-12 text-center text-sm text-muted-foreground">
-                  No crawl jobs yet. Configure a hunt and click <span className="font-semibold text-foreground">Start Live Hunt</span>.
+                  No search jobs yet. Configure above and click <span className="font-semibold text-foreground">Start Search</span>.
                 </div>
               )}
             </CardContent>
@@ -465,7 +462,7 @@ export function HuntView() {
                   {detail.status === "running" ? (
                     <div className="flex items-center gap-2 rounded-lg bg-emerald-500/10 px-3 py-2 text-sm text-emerald-700 dark:text-emerald-300">
                       <Loader2 className="h-4 w-4 animate-spin" />
-                      Crawling rolls {detail.rollStart}–{detail.rollEnd} from official BTEB archive
+                      Searching rolls {detail.rollStart}–{detail.rollEnd}...
                     </div>
                   ) : (
                     <div className="rounded-lg bg-muted/50 px-3 py-2 text-sm text-muted-foreground">
@@ -479,13 +476,13 @@ export function HuntView() {
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2 text-base">
                     <Database className="h-4 w-4 text-emerald-600" />
-                    Crawl log
+                    Search log
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="max-h-56 space-y-1 overflow-y-auto scrollbar-thin rounded-lg bg-zinc-950 p-3 font-mono text-[11px] text-zinc-300">
                     {detail.log.length === 0 ? (
-                      <p className="text-zinc-500">Waiting for first fetch...</p>
+                      <p className="text-zinc-500">Waiting for first result...</p>
                     ) : (
                       detail.log.slice().reverse().map((l, i) => (
                         <div key={i} className="flex items-start gap-2">
@@ -508,7 +505,7 @@ export function HuntView() {
               {detail.results.length > 0 ? (
                 <Card className="md:col-span-2">
                   <CardHeader className="flex-row items-center justify-between space-y-0">
-                    <CardTitle className="text-base">Hunted results ({detail.results.length})</CardTitle>
+                    <CardTitle className="text-base">Results Found ({detail.results.length})</CardTitle>
                     <Button variant="outline" size="sm" onClick={() => navigate("individual")} className="gap-1.5">
                       <ExternalLink className="h-4 w-4" />
                       Search in Individual
@@ -552,7 +549,7 @@ export function HuntView() {
                 <div>
                   <p className="font-semibold">No job selected</p>
                   <p className="mt-1 max-w-sm text-sm text-muted-foreground">
-                    Start a live hunt, then click a job in the list above to see live progress, the crawl log, and hunted results.
+                    Start a search, then click a job in the list above to see live progress, the log, and results found.
                   </p>
                 </div>
               </CardContent>

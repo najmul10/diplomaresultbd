@@ -69,7 +69,7 @@ const NAV: NavGroup[] = [
   {
     label: "More",
     items: [
-      { view: "hunt", label: "Auto-Hunt Crawler", desc: "Bulk-crawl results from BTEB archive", icon: Radar },
+      { view: "hunt", label: "Bulk Result Finder", desc: "Search a roll range at once", icon: Radar },
       { view: "about", label: "About Us", desc: "Our story & mission", icon: Info },
       { view: "contact", label: "Contact Us", desc: "Get in touch", icon: Mail },
     ],

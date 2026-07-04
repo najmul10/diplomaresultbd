@@ -10,8 +10,6 @@ import {
   XCircle,
   Trash2,
   Plus,
-  Radio,
-  ExternalLink,
 } from "lucide-react";
 import { SectionHeading } from "@/components/site/section-heading";
 import { ResultCard } from "@/components/site/result-card";
@@ -157,30 +155,20 @@ export function GroupView() {
     <div className="mx-auto w-full max-w-5xl px-4 py-8 sm:px-6 lg:py-12">
       <SectionHeading
         title="Group Results"
-        description="Compare multiple students' real BTEB results — fetched live from the official archive."
+        description="Compare multiple students' BTEB results side by side."
         icon={Users}
         badge="Live"
       />
 
-      <Card className="mt-6 border-emerald-500/30 bg-emerald-500/5">
+      <Card className="mt-6 border-primary/20 bg-primary/5">
         <CardContent className="flex items-start gap-3 p-4">
-          <Radio className="mt-0.5 h-5 w-5 shrink-0 text-emerald-600 dark:text-emerald-400" />
+          <UsersRound className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
           <div className="text-sm">
-            <p className="font-semibold text-emerald-700 dark:text-emerald-300">
-              Live from official BTEB archive
+            <p className="font-semibold text-primary">
+              Compare results instantly
             </p>
             <p className="mt-0.5 text-muted-foreground">
-              Each roll is fetched in real time from{" "}
-              <a
-                href="http://180.211.162.102:8444/result_arch/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-0.5 font-medium text-emerald-700 underline-offset-2 hover:underline dark:text-emerald-300"
-              >
-                the official BTEB archive
-                <ExternalLink className="h-3 w-3" />
-              </a>
-              . Select the same exam type + year for all rolls, then add roll numbers
+              Select the same exam type + year for all rolls, then add roll numbers
               (supports ranges like <span className="font-mono">100001-100010</span>).
             </p>
           </div>
@@ -355,7 +343,7 @@ export function GroupView() {
                 <Card className="border-amber-500/30">
                   <CardContent className="p-4">
                     <p className="text-sm font-medium text-amber-700 dark:text-amber-300">
-                      {data.missing.length} roll(s) not found in the official archive:
+                      {data.missing.length} roll(s) not found. Please verify the roll numbers and exam details:
                     </p>
                     <div className="mt-2 flex flex-wrap gap-1.5">
                       {data.missing.slice(0, 30).map((r) => (
@@ -394,8 +382,8 @@ export function GroupView() {
                   <p className="font-semibold">Live group results</p>
                   <p className="mt-1 max-w-sm text-sm text-muted-foreground">
                     Select exam type + year, add roll numbers on the left, then click{" "}
-                    <span className="font-semibold">Check Results</span>. Each roll is
-                    fetched live from the official BTEB archive.
+                    <span className="font-semibold">Check Results</span> to compare
+                    all students side by side.
                   </p>
                 </div>
               </CardContent>
