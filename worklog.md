@@ -469,3 +469,37 @@ Agent Browser verification:
 
 Stage Summary:
 - Hero section now uses the previous split layout (left copy + right visual) but is significantly better: gradient header card with live pulse, sample result preview with student identity + GPA + subject list, floating accent badges. Responsive on mobile (stacks).
+
+---
+Task ID: 48
+Agent: main
+Task: Remove home search box, verify data accuracy, add Performance Insights feature
+
+Work Log:
+- Removed search box from home hero — now only CTA buttons: "Check Your Result" + "View Statistics".
+- Removed unused quickRoll state, onQuickSearch function, Input/Select imports.
+- Data accuracy verified:
+  * Roll 449381 (exam 15, year 2023): MD. RIFAT HOSSAIN, Reg 1502019571, National Polytechnic Institute Manikganj, Computer Technology, Session 2019-2020, GPA 3.44, A-, PASSED — ALL fields correct.
+  * Parser correctly extracts all 11 key-value rows from the official HTML table (Exam Year, Technology, Roll No, Registration No, Session, Name, Father's Name, Mother's Name, Institute, Result, CGPA).
+  * The official archive only has this roll for 2023 (2022 and 2024 return "Doesn't match" — verified directly).
+  * PDF-sourced rolls (2022 Regulation, 2026 re-scrutiny) are NOT in the legacy archive — they're in the new archive which doesn't have result tables populated yet.
+
+- New feature: Performance Insights card (in ResultHistory, individual view):
+  * Auto-computed from the student's result history.
+  * Trend: ↑/↓/→ with delta (improvement/decline from first to last semester).
+  * Best Year: highest GPA semester + year.
+  * Passed: X/Y semesters passed.
+  * Referred: count of referred semesters (or "None / all clear").
+  * Only shows when there's at least 1 passed result.
+
+Agent Browser verification:
+- Home: "Check Your Result" + "View Statistics" buttons only, no search box. ✅
+- Individual search roll 449381: "Verified result", "1 semester result found", MD. RIFAT HOSSAIN, PASSED.
+- Performance Insights card rendered: Trend "→ Stable", Best Year "3.44 / 2023", Passed "1/1 semesters", Referred "None / all clear". ✅
+- Mobile (390px): buttons stack, menu works. ✅
+- Lint clean.
+
+Stage Summary:
+- Home hero now has buttons only (no search box) per user request.
+- Data accuracy confirmed: the parser correctly extracts all fields from the official archive.
+- New Performance Insights feature: auto-computes trend, best year, pass rate, and referred count from a student's result history.

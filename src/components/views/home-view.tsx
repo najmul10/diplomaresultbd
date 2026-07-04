@@ -6,14 +6,6 @@ import { useRouter, type ViewId } from "@/store/use-router";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Input } from "@/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import {
   Search,
   Users,
@@ -122,13 +114,6 @@ const STATS = [
 
 export function HomeView() {
   const navigate = useRouter((s) => s.navigate);
-  const [quickRoll, setQuickRoll] = React.useState("");
-
-  const onQuickSearch = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!quickRoll.trim()) return;
-    navigate("individual");
-  };
 
   return (
     <div className="flex flex-col">
@@ -173,27 +158,26 @@ export function HomeView() {
               students across Bangladesh.
             </p>
 
-            {/* Quick search */}
-            <form onSubmit={onQuickSearch} className="mt-7 flex max-w-md flex-col gap-2 sm:flex-row">
-              <div className="relative flex-1">
-                <Search className="pointer-events-none absolute left-3.5 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground" />
-                <Input
-                  value={quickRoll}
-                  onChange={(e) => setQuickRoll(e.target.value)}
-                  placeholder="Enter your roll number..."
-                  className="h-12 border-2 pl-11 text-base shadow-sm"
-                  inputMode="numeric"
-                />
-              </div>
+            {/* CTA buttons */}
+            <div className="mt-7 flex flex-col gap-3 sm:flex-row">
               <Button
-                type="submit"
                 size="lg"
                 className="h-12 gap-2 px-7 text-base shadow-lg shadow-primary/25"
+                onClick={() => navigate("individual")}
               >
                 <Search className="h-5 w-5" />
-                Check Result
+                Check Your Result
               </Button>
-            </form>
+              <Button
+                size="lg"
+                variant="outline"
+                className="h-12 gap-2 px-7 text-base"
+                onClick={() => navigate("latest")}
+              >
+                <BarChart3 className="h-5 w-5" />
+                View Statistics
+              </Button>
+            </div>
 
             <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2">
               {TRUST.map((t) => (

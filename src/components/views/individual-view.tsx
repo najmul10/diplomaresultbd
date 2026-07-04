@@ -305,6 +305,21 @@ function ResultHistory({ results }: { results: StudentResult[] }) {
       ? Math.round((passed.reduce((a, b) => a + b.gpa, 0) / passed.length) * 100) / 100
       : 0;
 
+  // Compute performance insights
+  const insights = (() => {
+    if (passed.length === 0) return null;
+    const gpas = passed.map((r) => r.gpa);
+    const best = passed.reduce((a, b) => (b.gpa > a.gpa ? b : a));
+    const worst = passed.reduce((a, b) => (b.gpa < a.gpa ? b : a));
+    const firstGpa = gpas[0];
+    const lastGpa = gpas[gpas.length - 1];
+    const trend = lastGpa > firstGpa ? "up" : lastGpa < firstGpa ? "down" : "stable";
+    const trendDelta = Math.round(Math.abs(lastGpa - firstGpa) * 100) / 100;
+    const referredCount = results.filter((r) => r.result === "REFERRED").length;
+    const totalResults = results.length;
+    return { best, worst, trend, trendDelta, referredCount, totalResults, passedCount: passed.length };
+  })();
+
   const onToggleFav = () => {
     if (isFav) {
       favs.remove(roll);
@@ -473,6 +488,59 @@ function ResultHistory({ results }: { results: StudentResult[] }) {
           </div>
         </div>
       </Card>
+
+      {/* Performance Insights card */}
+      {insights && insights.passedCount > 0 ? (
+        <Card className="border-primary/20 bg-gradient-to-br from-primary/5 to-transparent">
+          <CardContent className="p-5">
+            <div className="mb-4 flex items-center gap-2">
+              <TrendingUp className="h-5 w-5 text-primary" />
+              <h3 className="text-base font-bold">Performance Insights</h3>
+            </div>
+            <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+              {/* Trend */}
+              <div className="rounded-lg bg-background/60 p-3">
+                <p className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground">Trend</p>
+                <div className="mt-1 flex items-center gap-1">
+                  {insights.trend === "up" ? (
+                    <>
+                      <TrendingUp className="h-4 w-4 text-emerald-500" />
+                      <span className="text-lg font-bold text-emerald-600 dark:text-emerald-400">↑ {insights.trendDelta.toFixed(2)}</span>
+                    </>
+                  ) : insights.trend === "down" ? (
+                    <>
+                      <TrendingUp className="h-4 w-4 rotate-180 text-rose-500" />
+                      <span className="text-lg font-bold text-rose-600 dark:text-rose-400">↓ {insights.trendDelta.toFixed(2)}</span>
+                    </>
+                  ) : (
+                    <span className="text-lg font-bold text-muted-foreground">→ Stable</span>
+                  )}
+                </div>
+              </div>
+              {/* Best semester */}
+              <div className="rounded-lg bg-background/60 p-3">
+                <p className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground">Best Year</p>
+                <p className="mt-1 text-lg font-bold text-emerald-600 dark:text-emerald-400">{insights.best.gpa.toFixed(2)}</p>
+                <p className="text-[10px] text-muted-foreground">{insights.best.examYear}</p>
+              </div>
+              {/* Total passed */}
+              <div className="rounded-lg bg-background/60 p-3">
+                <p className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground">Passed</p>
+                <p className="mt-1 text-lg font-bold">{insights.passedCount}/{insights.totalResults}</p>
+                <p className="text-[10px] text-muted-foreground">semesters</p>
+              </div>
+              {/* Referred */}
+              <div className="rounded-lg bg-background/60 p-3">
+                <p className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground">Referred</p>
+                <p className={cn("mt-1 text-lg font-bold", insights.referredCount > 0 ? "text-amber-600 dark:text-amber-400" : "text-emerald-600 dark:text-emerald-400")}>
+                  {insights.referredCount > 0 ? insights.referredCount : "None"}
+                </p>
+                <p className="text-[10px] text-muted-foreground">{insights.referredCount > 0 ? "semester(s)" : "all clear"}</p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      ) : null}
 
       {/* Stacked semester cards (oldest first) */}
       <div className="space-y-3">
