@@ -68,7 +68,8 @@ export function gradeColor(grade: string): {
   }
 }
 
-export function gpaColor(gpa: number): string {
+export function gpaColor(gpa: number | undefined | null): string {
+  if (typeof gpa !== "number" || isNaN(gpa)) return "text-muted-foreground";
   if (gpa >= 3.5) return "text-emerald-600 dark:text-emerald-400";
   if (gpa >= 3) return "text-teal-600 dark:text-teal-400";
   if (gpa >= 2.5) return "text-amber-600 dark:text-amber-400";

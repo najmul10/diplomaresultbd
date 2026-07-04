@@ -54,7 +54,7 @@ export function FavoritesView() {
       items
         .map(
           (i) =>
-            `• ${i.name} — ${i.roll} — ${ordinal(i.semester)} Sem — GPA ${i.gpa.toFixed(2)} (${i.letterGrade})`
+            `• ${i.name} — ${i.roll} — ${ordinal(i.semester)} Sem — GPA ${typeof i.gpa === "number" ? i.gpa.toFixed(2) : "—"} (${i.letterGrade || "—"})`
         )
         .join("\n");
     try {
@@ -180,13 +180,13 @@ function FavoriteRow({
               : "bg-rose-500/10 text-rose-700 ring-rose-500/20 dark:text-rose-300"
           }`}
         >
-          <span className="text-lg font-bold leading-none">{item.gpa.toFixed(2)}</span>
+          <span className="text-lg font-bold leading-none">{typeof item.gpa === "number" ? item.gpa.toFixed(2) : "—"}</span>
           <span className="text-[9px] font-semibold uppercase">GPA</span>
         </div>
         <div className="min-w-0 flex-1">
           <div className="flex items-center gap-2">
             <p className="truncate font-semibold">{item.name}</p>
-            <GradeBadge grade={item.letterGrade} size="sm" />
+            <GradeBadge grade={item.letterGrade || "F"} size="sm" />
           </div>
           <p className="mt-0.5 truncate text-xs text-muted-foreground">
             {item.instituteName}
@@ -196,7 +196,7 @@ function FavoriteRow({
             <span>{item.departmentName}</span>
             <span>{ordinal(item.semester)} Sem</span>
             <span className={`font-semibold ${gpaColor(item.gpa)}`}>
-              GPA {item.gpa.toFixed(2)}
+              GPA {typeof item.gpa === "number" ? item.gpa.toFixed(2) : "—"}
             </span>
           </div>
         </div>

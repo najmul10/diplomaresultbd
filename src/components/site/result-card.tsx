@@ -51,8 +51,8 @@ export function ResultCard({ result }: { result: StudentResult }) {
         instituteName: result.instituteName,
         departmentName: result.departmentName,
         semester: result.semester,
-        gpa: result.gpa,
-        letterGrade: result.letterGrade,
+        gpa,
+        letterGrade,
         result: result.result,
       });
       toast.success("Added to favorites");
@@ -60,7 +60,7 @@ export function ResultCard({ result }: { result: StudentResult }) {
   };
 
   const onShare = async () => {
-    const text = `BTEB Result — ${result.name}\nRoll: ${result.roll}\n${result.departmentName}, ${ordinal(result.semester)} Semester\nGPA: ${result.gpa.toFixed(2)} (${result.letterGrade}) — ${result.result}`;
+    const text = `BTEB Result — ${result.name}\nRoll: ${result.roll}\n${result.departmentName || result.curriculum || "BTEB"}${result.semester ? ", " + ordinal(result.semester) + " Semester" : ""}\nGPA: ${gpa.toFixed(2)} (${letterGrade}) — ${result.result}`;
     try {
       if (navigator.share) {
         await navigator.share({ title: "BTEB Result", text });
@@ -87,16 +87,16 @@ export function ResultCard({ result }: { result: StudentResult }) {
       `Semester        : ${ordinal(result.semester)}`,
       `Exam Year       : ${result.examYear}`,
       `Published On    : ${formatDate(result.publicationDate)}`,
-      `GPA             : ${result.gpa.toFixed(2)}`,
-      `Letter Grade    : ${result.letterGrade}`,
-      `CGPA            : ${result.cgpa.toFixed(2)}`,
+      `GPA             : ${gpa.toFixed(2)}`,
+      `Letter Grade    : ${letterGrade}`,
+      `CGPA            : ${cgpa.toFixed(2)}`,
       `Result          : ${result.result}`,
       "",
       "Subject Results:",
       "--------------------------------------",
-      ...result.subjects.map(
+      ...subjects.map(
         (s) =>
-          `${s.code}  ${s.name.padEnd(38)}  Marks:${String(s.marks).padStart(3)}  ${s.letter} (${s.point.toFixed(2)})`
+          `${s.code || "—"}  ${(s.name || "—").padEnd(38)}  Marks:${String(s.marks ?? "—").padStart(3)}  ${s.letter || "—"} (${typeof s.point === "number" ? s.point.toFixed(2) : "—"})`
       ),
       "",
       "Powered by BTEB Results Zone",
@@ -113,6 +113,12 @@ export function ResultCard({ result }: { result: StudentResult }) {
 
   const passed = result.result === "PASSED";
   const referred = result.result === "REFERRED";
+
+  // Defensive: live-parsed results may have missing/undefined numeric fields
+  const gpa = typeof result.gpa === "number" ? result.gpa : 0;
+  const cgpa = typeof result.cgpa === "number" ? result.cgpa : gpa;
+  const subjects = Array.isArray(result.subjects) ? result.subjects : [];
+  const letterGrade = result.letterGrade || (gpa >= 4 ? "A+" : gpa >= 3.5 ? "A" : gpa >= 3 ? "A-" : gpa >= 2.5 ? "B" : gpa >= 2 ? "C" : gpa > 0 ? "D" : "F");
 
   return (
     <Card className="overflow-hidden">
@@ -139,7 +145,7 @@ export function ResultCard({ result }: { result: StudentResult }) {
             )}
           >
             <span className="text-2xl font-bold leading-none">
-              {result.gpa.toFixed(2)}
+              {gpa.toFixed(2)}
             </span>
             <span className="mt-0.5 text-[10px] font-semibold uppercase tracking-wider">
               GPA
@@ -147,11 +153,11 @@ export function ResultCard({ result }: { result: StudentResult }) {
           </div>
           <div className="min-w-0">
             <h2 className="truncate text-xl font-bold tracking-tight">{result.name}</h2>
-            <p className="mt-0.5 text-sm text-muted-foreground">
-              {result.departmentName}
+            <p className="mt-0.5 truncate text-sm text-muted-foreground">
+              {result.departmentName || result.curriculum || result.instituteName || "BTEB Result"}
             </p>
             <div className="mt-2 flex flex-wrap items-center gap-2">
-              <GradeBadge grade={result.letterGrade} size="md" />
+              <GradeBadge grade={letterGrade} size="md" />
               <Badge
                 variant={passed ? "default" : referred ? "secondary" : "destructive"}
                 className={cn(
@@ -212,10 +218,10 @@ export function ResultCard({ result }: { result: StudentResult }) {
 
         {/* CGPA summary */}
         <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-4">
-          <SummaryStat label="Semester GPA" value={result.gpa.toFixed(2)} accent={gpaColor(result.gpa)} />
-          <SummaryStat label="Letter Grade" value={result.letterGrade} />
-          <SummaryStat label="Cumulative CGPA" value={result.cgpa.toFixed(2)} accent={gpaColor(result.cgpa)} />
-          <SummaryStat label="Subjects" value={String(result.subjects.length)} />
+          <SummaryStat label="Semester GPA" value={gpa.toFixed(2)} accent={gpaColor(gpa)} />
+          <SummaryStat label="Letter Grade" value={letterGrade} />
+          <SummaryStat label="Cumulative CGPA" value={cgpa.toFixed(2)} accent={gpaColor(cgpa)} />
+          <SummaryStat label="Subjects" value={String(subjects.length)} />
         </div>
 
         {/* Subjects table */}
@@ -237,16 +243,18 @@ export function ResultCard({ result }: { result: StudentResult }) {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {result.subjects.map((s) => (
-                    <TableRow key={s.code}>
-                      <TableCell className="font-mono text-xs">{s.code}</TableCell>
-                      <TableCell className="font-medium">{s.name}</TableCell>
-                      <TableCell className="text-center text-muted-foreground">{s.credit}</TableCell>
-                      <TableCell className="text-center">{s.marks}</TableCell>
+                  {subjects.map((s, i) => (
+                    <TableRow key={s.code || i}>
+                      <TableCell className="font-mono text-xs">{s.code || "—"}</TableCell>
+                      <TableCell className="font-medium">{s.name || "—"}</TableCell>
+                      <TableCell className="text-center text-muted-foreground">{s.credit || "—"}</TableCell>
+                      <TableCell className="text-center">{s.marks ?? "—"}</TableCell>
                       <TableCell className="text-center">
-                        <GradeBadge grade={s.letter} size="sm" />
+                        <GradeBadge grade={s.letter || "F"} size="sm" />
                       </TableCell>
-                      <TableCell className="text-center font-mono text-sm">{s.point.toFixed(2)}</TableCell>
+                      <TableCell className="text-center font-mono text-sm">
+                        {typeof s.point === "number" ? s.point.toFixed(2) : "—"}
+                      </TableCell>
                     </TableRow>
                   ))}
                 </TableBody>

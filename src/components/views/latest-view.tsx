@@ -390,9 +390,9 @@ export function LatestView() {
                             <td className="px-3 py-2 font-mono text-xs">{r.roll}</td>
                             <td className="px-3 py-2 font-medium">{r.name || "—"}</td>
                             <td className="hidden px-3 py-2 text-xs text-muted-foreground sm:table-cell">{r.instituteName || "—"}</td>
-                            <td className={`px-3 py-2 text-center font-mono font-semibold ${gpaColor(r.gpa)}`}>{r.gpa.toFixed(2)}</td>
+                            <td className={`px-3 py-2 text-center font-mono font-semibold ${gpaColor(r.gpa)}`}>{typeof r.gpa === "number" ? r.gpa.toFixed(2) : "—"}</td>
                             <td className="px-3 py-2 text-center">
-                              <GradeBadge grade={r.letterGrade} size="sm" />
+                              <GradeBadge grade={r.letterGrade || "F"} size="sm" />
                             </td>
                           </tr>
                         ))}

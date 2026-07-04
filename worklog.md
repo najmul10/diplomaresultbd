@@ -229,3 +229,29 @@ Stage Summary:
 - Institute view is now an honest directory (no fake batch results).
 - Reference catalogs (departments, institutes, booklists, routines) kept as public info.
 - Google AdSense still integrated on all result views.
+
+---
+Task ID: 41
+Agent: main
+Task: Fix runtime TypeError — Cannot read properties of undefined (reading 'toFixed') in ResultCard
+
+Work Log:
+- Root cause: the live scraper (parseOfficialHtml) returned a StudentResult WITHOUT the `cgpa` field (only set `gpa`). ResultCard called `result.cgpa.toFixed(2)` → undefined.toFixed → crash.
+- Fix 1: src/lib/bteb-scraper.ts — added `cgpa: gpa` to the returned StudentResult so it's always present.
+- Fix 2: src/components/site/result-card.tsx — made fully defensive:
+  * Local vars `gpa`, `cgpa`, `subjects`, `letterGrade` with typeof checks + sensible defaults.
+  * Replaced all `result.gpa.toFixed(2)` / `result.cgpa.toFixed(2)` / `result.subjects` / `result.letterGrade` references with the defensive locals.
+  * Subject table cells now use `s.code || "—"`, `s.marks ?? "—"`, `typeof s.point === "number" ? s.point.toFixed(2) : "—"`.
+  * Download function also made defensive for undefined point.
+  * departmentName fallback chain: departmentName || curriculum || instituteName || "BTEB Result".
+- Fix 3: src/lib/grade.ts — gpaColor() now accepts `number | undefined | null` and returns muted color for non-numbers.
+- Fix 4: src/components/views/group-view.tsx — avgGpa calculation filters for numeric gpa before reduce.
+- Fix 5: src/components/views/latest-view.tsx + hunt-view.tsx — table cells use `typeof r.gpa === "number" ? r.gpa.toFixed(2) : "—"` and `r.letterGrade || "F"`.
+- Fix 6: src/components/views/favorites-view.tsx — all item.gpa.toFixed guarded.
+
+Agent Browser verification:
+- Individual search roll 449381 (not in archive) → "No result found" gracefully, NO crash, server ALIVE.
+- Lint clean.
+
+Stage Summary:
+- The `toFixed` crash is fixed. Live search now handles missing/incomplete fields gracefully. When a real student searches with valid details, the ResultCard will render whatever fields the parser extracted, with "—" placeholders for anything missing.

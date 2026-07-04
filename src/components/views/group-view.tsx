@@ -147,10 +147,10 @@ export function GroupView() {
     });
   };
 
+  const passedResults = data?.results?.filter((r) => r.result === "PASSED" && typeof r.gpa === "number") || [];
   const avgGpa =
-    data && data.results.length > 0
-      ? data.results.filter((r) => r.result === "PASSED").reduce((a, b) => a + b.gpa, 0) /
-        Math.max(1, data.results.filter((r) => r.result === "PASSED").length)
+    passedResults.length > 0
+      ? passedResults.reduce((a, b) => a + (b.gpa || 0), 0) / passedResults.length
       : 0;
 
   return (
