@@ -154,14 +154,14 @@ export function IndividualView() {
       </Card>
 
       {/* Search form */}
-      <Card className="mt-6">
+      <Card className="mt-6 shadow-sm">
         <CardContent className="p-5 sm:p-6">
           <form onSubmit={onSubmit} className="space-y-4">
-            <div className="grid gap-3 sm:grid-cols-3">
+            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-[1fr_2fr_1fr]">
               <div className="space-y-1.5">
-                <Label htmlFor="exam">Exam Type *</Label>
+                <Label htmlFor="exam" className="text-xs font-medium">Exam Type</Label>
                 <Select value={exam} onValueChange={setExam}>
-                  <SelectTrigger id="exam" className="h-11">
+                  <SelectTrigger id="exam" className="h-12">
                     <SelectValue placeholder="Select exam type" />
                   </SelectTrigger>
                   <SelectContent>
@@ -174,19 +174,19 @@ export function IndividualView() {
                 </Select>
               </div>
               <div className="space-y-1.5">
-                <Label htmlFor="roll">Roll No *</Label>
+                <Label htmlFor="roll" className="text-xs font-medium">Roll Number *</Label>
                 <Input
                   id="roll"
                   value={roll}
                   onChange={(e) => setRoll(e.target.value)}
                   placeholder="e.g. 449381"
-                  className="h-11 font-mono"
+                  className="h-12 font-mono text-base"
                   inputMode="numeric"
                   autoComplete="off"
                 />
               </div>
               <div className="space-y-1.5">
-                <Label htmlFor="reg">Registration No (optional)</Label>
+                <Label htmlFor="reg" className="text-xs font-medium">Registration No (optional)</Label>
                 <Input
                   id="reg"
                   value={reg}

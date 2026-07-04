@@ -2,46 +2,48 @@
 
 import { useRouter, type ViewId } from "@/store/use-router";
 import { Logo } from "@/components/site/logo";
-import {
-  Send,
-  Github,
-  Heart,
-  Mail,
-  Shield,
-  Zap,
-  Gift,
-} from "lucide-react";
+import { Send, Github, Heart, Mail, ShieldCheck, Zap, Gift, TrendingUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-const resultLinks: { label: string; view: ViewId }[] = [
-  { label: "Individual Results", view: "individual" },
-  { label: "Group Results", view: "group" },
-  { label: "Institute Results", view: "institute" },
-  { label: "Latest Results", view: "latest" },
+const groups: { title: string; links: { label: string; view: ViewId }[] }[] = [
+  {
+    title: "Results",
+    links: [
+      { label: "Individual Results", view: "individual" },
+      { label: "Group Results", view: "group" },
+      { label: "Institute Directory", view: "institute" },
+      { label: "Statistics", view: "latest" },
+    ],
+  },
+  {
+    title: "Tools",
+    links: [
+      { label: "CGPA Calculator", view: "cgpa" },
+      { label: "GPA Calculator", view: "gpa" },
+      { label: "Booklists", view: "booklists" },
+      { label: "Exam Routines", view: "routines" },
+      { label: "Favorites", view: "favorites" },
+    ],
+  },
+  {
+    title: "More",
+    links: [
+      { label: "Bulk Result Finder", view: "hunt" },
+      { label: "About Us", view: "about" },
+      { label: "Contact", view: "contact" },
+    ],
+  },
 ];
 
-const toolLinks: { label: string; view: ViewId }[] = [
-  { label: "CGPA Calculator", view: "cgpa" },
-  { label: "GPA Calculator", view: "gpa" },
-  { label: "Booklists", view: "booklists" },
-  { label: "Exam Routines", view: "routines" },
-  { label: "Favorites", view: "favorites" },
-];
-
-const moreLinks: { label: string; view: ViewId }[] = [
-  { label: "About Us", view: "about" },
-  { label: "Contact Us", view: "contact" },
-];
-
-const trustBadges = [
-  { icon: Shield, label: "100% Secure" },
-  { icon: Zap, label: "Lightning Fast" },
-  { icon: Gift, label: "Always Free" },
+const trust = [
+  { icon: ShieldCheck, label: "Secure" },
+  { icon: Zap, label: "Fast" },
+  { icon: Gift, label: "Free" },
+  { icon: TrendingUp, label: "Updated" },
 ];
 
 export function SiteFooter() {
   const navigate = useRouter((s) => s.navigate);
-
   return (
     <footer className="mt-auto border-t border-border/60 bg-muted/30">
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
@@ -51,88 +53,59 @@ export function SiteFooter() {
             <Logo onClick={() => navigate("home")} />
             <p className="mt-4 max-w-xs text-sm text-muted-foreground">
               Bangladesh&apos;s most trusted platform for BTEB exam results. Fast,
-              accurate, and always free for diploma students nationwide.
+              accurate and always free for diploma students nationwide.
             </p>
-            <div className="mt-4 flex flex-wrap gap-2">
-              {trustBadges.map((b) => (
+            <div className="mt-4 flex flex-wrap gap-1.5">
+              {trust.map((b) => (
                 <span
                   key={b.label}
-                  className="inline-flex items-center gap-1.5 rounded-full bg-background px-3 py-1 text-xs font-medium text-muted-foreground ring-1 ring-border"
+                  className="inline-flex items-center gap-1 rounded-full bg-background px-2.5 py-1 text-xs font-medium text-muted-foreground ring-1 ring-border"
                 >
-                  <b.icon className="h-3.5 w-3.5 text-primary" />
+                  <b.icon className="h-3 w-3 text-primary" />
                   {b.label}
                 </span>
               ))}
             </div>
-          </div>
-
-          {/* Results */}
-          <div>
-            <h3 className="text-sm font-semibold">Results</h3>
-            <ul className="mt-3 space-y-2">
-              {resultLinks.map((l) => (
-                <li key={l.view}>
-                  <button
-                    onClick={() => navigate(l.view)}
-                    className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-                  >
-                    {l.label}
-                  </button>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Tools */}
-          <div>
-            <h3 className="text-sm font-semibold">Tools</h3>
-            <ul className="mt-3 space-y-2">
-              {toolLinks.map((l) => (
-                <li key={l.view}>
-                  <button
-                    onClick={() => navigate(l.view)}
-                    className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-                  >
-                    {l.label}
-                  </button>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* More */}
-          <div>
-            <h3 className="text-sm font-semibold">More</h3>
-            <ul className="mt-3 space-y-2">
-              {moreLinks.map((l) => (
-                <li key={l.view}>
-                  <button
-                    onClick={() => navigate(l.view)}
-                    className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-                  >
-                    {l.label}
-                  </button>
-                </li>
-              ))}
-            </ul>
             <div className="mt-4 flex gap-2">
-              <Button size="icon" variant="outline" aria-label="Telegram" asChild>
+              <Button size="sm" variant="outline" className="gap-1.5" asChild>
                 <a href="#" onClick={(e) => e.preventDefault()}>
-                  <Send className="h-4 w-4" />
+                  <Send className="h-3.5 w-3.5" />
+                  Telegram
                 </a>
               </Button>
-              <Button size="icon" variant="outline" aria-label="Email" asChild>
+              <Button size="sm" variant="outline" className="gap-1.5" asChild>
                 <a href="#" onClick={(e) => e.preventDefault()}>
-                  <Mail className="h-4 w-4" />
+                  <Mail className="h-3.5 w-3.5" />
+                  Email
                 </a>
               </Button>
-              <Button size="icon" variant="outline" aria-label="GitHub" asChild>
+              <Button size="sm" variant="outline" className="gap-1.5" asChild>
                 <a href="#" onClick={(e) => e.preventDefault()}>
-                  <Github className="h-4 w-4" />
+                  <Github className="h-3.5 w-3.5" />
+                  GitHub
                 </a>
               </Button>
             </div>
           </div>
+
+          {/* Link groups */}
+          {groups.map((g) => (
+            <div key={g.title}>
+              <h3 className="text-sm font-semibold">{g.title}</h3>
+              <ul className="mt-3 space-y-2">
+                {g.links.map((l) => (
+                  <li key={l.view}>
+                    <button
+                      onClick={() => navigate(l.view)}
+                      className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                    >
+                      {l.label}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
 
         <div className="mt-10 flex flex-col items-center justify-between gap-3 border-t border-border/60 pt-6 text-center sm:flex-row sm:text-left">
@@ -140,8 +113,8 @@ export function SiteFooter() {
             © {new Date().getFullYear()} BTEB Results Zone. All rights reserved.
           </p>
           <p className="inline-flex items-center gap-1.5 text-xs text-muted-foreground">
-            Developed with <Heart className="h-3.5 w-3.5 fill-red-500 text-red-500" /> for
-            diploma students
+            Built with <Heart className="h-3.5 w-3.5 fill-red-500 text-red-500" /> for
+            Bangladesh&apos;s diploma students
           </p>
         </div>
       </div>
