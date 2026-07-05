@@ -11,7 +11,7 @@ export type FavoriteItem = {
   semester: number;
   gpa: number;
   letterGrade: string;
-  result: "PASSED" | "FAILED";
+  result: "PASSED" | "FAILED" | "REFERRED";
   addedAt: string;
 };
 
