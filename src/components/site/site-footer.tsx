@@ -2,7 +2,7 @@
 
 import { useRouter, type ViewId } from "@/store/use-router";
 import { Logo } from "@/components/site/logo";
-import { Send, Github, Heart, Mail, ShieldCheck, Zap, Gift, TrendingUp } from "lucide-react";
+import { Send, Heart, Mail, ShieldCheck, Zap, Gift, TrendingUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const groups: { title: string; links: { label: string; view: ViewId }[] }[] = [
@@ -70,21 +70,15 @@ export function SiteFooter() {
             </div>
             <div className="mt-4 flex gap-2">
               <Button size="sm" variant="outline" className="gap-1.5" asChild>
-                <a href="#" onClick={(e) => e.preventDefault()}>
+                <a href="https://t.me/diplomaresultbd" target="_blank" rel="noopener noreferrer">
                   <Send className="h-3.5 w-3.5" />
                   Telegram
                 </a>
               </Button>
               <Button size="sm" variant="outline" className="gap-1.5" asChild>
-                <a href="#" onClick={(e) => e.preventDefault()}>
+                <a href="mailto:support@diplomaresultbd.com">
                   <Mail className="h-3.5 w-3.5" />
                   Email
-                </a>
-              </Button>
-              <Button size="sm" variant="outline" className="gap-1.5" asChild>
-                <a href="#" onClick={(e) => e.preventDefault()}>
-                  <Github className="h-3.5 w-3.5" />
-                  GitHub
                 </a>
               </Button>
             </div>
