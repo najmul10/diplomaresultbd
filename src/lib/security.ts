@@ -83,42 +83,29 @@ export function enableSecurity() {
   });
 
   // 5. Detect DevTools open via window size change (basic deterrent)
-  // This is a lightweight check — if devtools opens docked, the window
-  // dimensions change significantly.
-  let threshold = 160;
-  const checkDevTools = () => {
-    const widthDiff = window.outerWidth - window.innerWidth;
-    const heightDiff = window.outerHeight - window.innerHeight;
-    if (widthDiff > threshold || heightDiff > threshold) {
-      // DevTools likely open — blank the page content as a deterrent
-      document.body.style.filter = "blur(3px)";
-    } else {
-      document.body.style.filter = "";
-    }
-  };
-  setInterval(checkDevTools, 1000);
+  // DISABLED: causes false positives in preview panels and iframes
+  // where outerWidth/innerWidth differ naturally.
+  // const checkDevTools = () => {
+  //   const widthDiff = window.outerWidth - window.innerWidth;
+  //   const heightDiff = window.outerHeight - window.innerHeight;
+  //   if (widthDiff > 160 || heightDiff > 160) {
+  //     document.body.style.filter = "blur(3px)";
+  //   } else {
+  //     document.body.style.filter = "";
+  //   }
+  // };
+  // setInterval(checkDevTools, 1000);
 
   // 6. Clear console periodically (makes it harder to inspect network calls)
-  setInterval(() => {
-    try {
-      // @ts-expect-error - clear console
-      console.clear();
-    } catch {
-      /* ignore */
-    }
-  }, 5000);
+  // DISABLED: causes issues in development/preview environments
+  // setInterval(() => {
+  //   try {
+  //     // @ts-expect-error - clear console
+  //     console.clear();
+  //   } catch {
+  //     /* ignore */
+  //   }
+  // }, 5000);
 
-  // 7. Warn before leaving if DevTools detected
-  const devtoolsOpen = () => {
-    const widthDiff = window.outerWidth - window.innerWidth;
-    const heightDiff = window.outerHeight - window.innerHeight;
-    return widthDiff > 160 || heightDiff > 160;
-  };
-
-  window.addEventListener("beforeunload", (e) => {
-    if (devtoolsOpen()) {
-      e.preventDefault();
-      e.returnValue = "";
-    }
-  });
+  // 7. beforeunload warning removed — too aggressive for normal users
 }
