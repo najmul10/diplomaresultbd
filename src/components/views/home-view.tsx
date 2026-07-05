@@ -140,7 +140,7 @@ export function HomeView() {
             <h1 className="text-balance text-4xl font-extrabold leading-[1.08] tracking-tight sm:text-5xl lg:text-6xl">
               Diploma Result at{" "}
               <span className="relative inline-block">
-                <span className="bg-gradient-to-r from-primary via-teal-500 to-emerald-500 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-primary to-[#2ECC71] bg-clip-text text-transparent">
                   Your Fingertips
                 </span>
                 <svg
@@ -201,7 +201,7 @@ export function HomeView() {
           >
             <Card className="overflow-hidden border-primary/20 shadow-2xl shadow-primary/10">
               {/* Card header */}
-              <div className="flex items-center justify-between bg-gradient-to-br from-primary to-teal-600 px-5 py-4 text-primary-foreground">
+              <div className="flex items-center justify-between bg-gradient-to-br from-primary to-[#2ECC71] px-5 py-4 text-primary-foreground">
                 <div className="flex items-center gap-2.5">
                   <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-white/20">
                     <GraduationCap className="h-5 w-5" />
