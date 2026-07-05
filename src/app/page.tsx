@@ -17,6 +17,7 @@ import { HuntView } from "@/components/views/hunt-view";
 import { AboutView } from "@/components/views/about-view";
 import { ContactView } from "@/components/views/contact-view";
 import { motion, AnimatePresence } from "framer-motion";
+import { enableSecurity } from "@/lib/security";
 
 function ViewSwitch({ view }: { view: ViewId }) {
   switch (view) {
@@ -62,6 +63,11 @@ export default function Page() {
     window.addEventListener("hashchange", onHashChange);
     return () => window.removeEventListener("hashchange", onHashChange);
   }, [navigate]);
+
+  // Enable security measures (disable right-click, devtools, copy, etc.)
+  React.useEffect(() => {
+    enableSecurity();
+  }, []);
 
   return (
     <div className="flex min-h-screen flex-col bg-background">

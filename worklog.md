@@ -580,3 +580,48 @@ Agent Browser verification:
 
 Stage Summary:
 - Full site audited. All 13 pages work. Key improvement: Individual view now has a Year selector so users can do a fast single-year search instead of always waiting for the full 10-year crawl. Default years updated to 2024. Unused file removed.
+
+---
+Task ID: 51
+Agent: main
+Task: Analyze allresultbd.com + add site security
+
+Work Log:
+ANALYSIS OF allresultbd.com:
+- Cloudflare-protected site. Could not read full content, but from search results:
+  * It's an info/blog site — publishes BTEB result notices, guides, and articles.
+  * Pages like "BTEB Result 2026", "Diploma in Agriculture Result 2025" etc.
+  * NOT a result search tool like ours — it's a news/info site.
+- Conclusion: nothing useful to copy from allresultbd.com. They're a different type of site (info publisher vs result search tool). Our site is more feature-rich for actual result searching.
+
+SECURITY IMPLEMENTATION:
+Created src/lib/security.ts with these measures:
+1. Disable right-click context menu
+2. Disable text selection (user-select: none) — except inputs/textareas
+3. Block DevTools keyboard shortcuts:
+   - F12
+   - Ctrl+Shift+I / Cmd+Opt+I (DevTools)
+   - Ctrl+Shift+J / Cmd+Opt+J (Console)
+   - Ctrl+Shift+C / Cmd+Opt+C (Element inspector)
+   - Ctrl+U (View source)
+   - Ctrl+S (Save page)
+4. Disable image drag-and-drop
+5. DevTools detection via window dimension change → blurs the page
+6. Console.clear() every 5 seconds (makes network inspection harder)
+7. beforeunload warning if DevTools detected
+
+Integrated into page.tsx via enableSecurity() in a useEffect.
+
+Agent Browser verification:
+- Page renders correctly: "BTEB Results at Your Fingertips" ✅
+- user-select: "none" (text copy blocked) ✅
+- F12 → defaultPrevented: true ✅
+- Ctrl+Shift+I → defaultPrevented: true ✅
+- Ctrl+U → defaultPrevented: true ✅
+- Ctrl+S → defaultPrevented: true ✅
+- API still works: roll 449381 → MD. RIFAT HOSSAIN, GPA 3.44 ✅
+- Lint clean.
+
+Stage Summary:
+- allresultbd.com is a different type of site (info/blog), nothing useful to copy.
+- Security implemented: right-click, devtools, copy, view-source, save-page all blocked. DevTools detection blurs the page. Console auto-clears.
