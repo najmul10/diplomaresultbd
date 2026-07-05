@@ -19,7 +19,6 @@ import { ContactView } from "@/components/views/contact-view";
 import { PrivacyView, TermsView } from "@/components/views/legal-views";
 import { motion, AnimatePresence } from "framer-motion";
 import { enableSecurity } from "@/lib/security";
-import { ScrollToTop } from "@/components/site/scroll-to-top";
 
 function ViewSwitch({ view }: { view: ViewId }) {
   switch (view) {
@@ -92,7 +91,6 @@ export default function Page() {
         </AnimatePresence>
       </main>
       <SiteFooter />
-      <ScrollToTop />
     </div>
   );
 }
