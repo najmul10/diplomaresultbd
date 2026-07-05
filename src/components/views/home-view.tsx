@@ -138,10 +138,10 @@ export function HomeView() {
               Bangladesh&apos;s Diploma Result Platform
             </Badge>
             <h1 className="text-balance text-4xl font-extrabold leading-[1.08] tracking-tight sm:text-5xl lg:text-6xl">
-              Diploma Result at{" "}
+              Your Diploma Result,{" "}
               <span className="relative inline-block">
                 <span className="bg-gradient-to-r from-primary to-[#2ECC71] bg-clip-text text-transparent">
-                  Your Fingertips
+                  One Click Away
                 </span>
                 <svg
                   className="absolute -bottom-1.5 left-0 h-2.5 w-full text-primary/40"
