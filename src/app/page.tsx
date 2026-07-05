@@ -9,6 +9,7 @@ import { IndividualView } from "@/components/views/individual-view";
 import { GroupView } from "@/components/views/group-view";
 import { InstituteView } from "@/components/views/institute-view";
 import { LatestView } from "@/components/views/latest-view";
+import { PointView } from "@/components/views/point-view";
 import { CgpaView } from "@/components/views/cgpa-view";
 import { BooklistsView } from "@/components/views/booklists-view";
 import { RoutinesView } from "@/components/views/routines-view";
@@ -32,6 +33,8 @@ function ViewSwitch({ view }: { view: ViewId }) {
       return <InstituteView />;
     case "latest":
       return <LatestView />;
+    case "point":
+      return <PointView />;
     case "cgpa":
       return <CgpaView />;
     case "gpa":

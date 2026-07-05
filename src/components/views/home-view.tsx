@@ -26,6 +26,7 @@ import {
   Radar,
   ChevronRight,
   CheckCircle2,
+  Filter,
 } from "lucide-react";
 import { AdSlot } from "@/components/site/ad-slot";
 
@@ -67,6 +68,13 @@ const FEATURES: Feature[] = [
     title: "Statistics",
     desc: "Browse pass rates, grade distribution and average GPA across BTEB results.",
     accent: "from-amber-500/20 to-orange-500/5 text-amber-600 dark:text-amber-400",
+  },
+  {
+    view: "point",
+    icon: Filter,
+    title: "Point Results",
+    desc: "Find students by GPA and grade point. Browse results grouped by grade.",
+    accent: "from-cyan-500/20 to-blue-500/5 text-cyan-600 dark:text-cyan-400",
   },
   {
     view: "cgpa",

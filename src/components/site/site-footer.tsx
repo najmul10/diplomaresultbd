@@ -12,6 +12,7 @@ const groups: { title: string; links: { label: string; view: ViewId }[] }[] = [
       { label: "Individual Results", view: "individual" },
       { label: "Group Results", view: "group" },
       { label: "Institute Directory", view: "institute" },
+      { label: "Point Results", view: "point" },
       { label: "Statistics", view: "latest" },
     ],
   },

@@ -8,6 +8,7 @@ export type ViewId =
   | "group"
   | "institute"
   | "latest"
+  | "point"
   | "cgpa"
   | "gpa"
   | "booklists"
@@ -44,6 +45,7 @@ export function initFromHash(): ViewId {
     "group",
     "institute",
     "latest",
+    "point",
     "cgpa",
     "gpa",
     "booklists",

@@ -19,6 +19,7 @@ const NAV: NavGroup[] = [
       { view: "individual", label: "Individual Results", desc: "Search by roll number", icon: Search },
       { view: "group", label: "Group Results", desc: "Compare multiple students", icon: ChevronRight },
       { view: "institute", label: "Institute Directory", desc: "Browse institutes", icon: ChevronRight },
+      { view: "point", label: "Point Results", desc: "Find by GPA & grade", icon: ChevronRight },
       { view: "latest", label: "Statistics", desc: "Pass rates & analytics", icon: ChevronRight },
     ],
   },
