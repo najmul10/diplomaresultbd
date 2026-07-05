@@ -110,7 +110,7 @@ export function SiteFooter() {
 
         <div className="mt-10 flex flex-col items-center justify-between gap-3 border-t border-border/60 pt-6 text-center sm:flex-row sm:text-left">
           <p className="text-xs text-muted-foreground">
-            © {new Date().getFullYear()} BTEB Results Zone. All rights reserved.
+            © {new Date().getFullYear()} Diploma Result BD. All rights reserved.
           </p>
           <p className="inline-flex items-center gap-1.5 text-xs text-muted-foreground">
             Developed by <span className="font-semibold text-foreground">Kazi Rifat</span>

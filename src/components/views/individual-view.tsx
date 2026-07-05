@@ -368,7 +368,7 @@ function ResultHistory({ results }: { results: StudentResult[] }) {
 
   const onShare = async () => {
     const lines = [
-      `BTEB Results Zone — Academic History`,
+      `Diploma Result BD — Academic History`,
       `${latest.name} (Roll: ${latest.roll})`,
       `${latest.departmentName} • ${latest.curriculum}`,
       latest.instituteName ? `Institute: ${latest.instituteName}` : "",
@@ -409,7 +409,7 @@ function ResultHistory({ results }: { results: StudentResult[] }) {
         (r) => `Year ${r.examYear}: GPA ${r.gpa.toFixed(2)} ${r.letterGrade} — ${r.result}`
       ),
       ``,
-      "Powered by BTEB Results Zone",
+      "Powered by Diploma Result BD",
     ];
     const blob = new Blob([lines.join("\n")], { type: "text/plain" });
     const url = URL.createObjectURL(blob);

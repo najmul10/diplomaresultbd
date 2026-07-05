@@ -4,7 +4,7 @@ export const dynamic = "force-dynamic";
 
 export async function GET() {
   return NextResponse.json({
-    name: "BTEB Results Zone API",
+    name: "Diploma Result BD API",
     status: "live",
     description:
       "Live result search proxy for the official BTEB archive (http://180.211.162.102:8444/result_arch/). No stored/demo data.",

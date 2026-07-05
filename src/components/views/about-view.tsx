@@ -57,7 +57,7 @@ export function AboutView() {
   return (
     <div className="mx-auto w-full max-w-4xl px-4 py-8 sm:px-6 lg:py-12">
       <SectionHeading
-        title="About BTEB Results Zone"
+        title="About Diploma Result BD"
         description="A fast, clean and free platform for checking BTEB diploma, polytechnic and technical education results."
         icon={Info}
       />
@@ -75,7 +75,7 @@ export function AboutView() {
           <p className="mt-3 max-w-2xl text-pretty text-muted-foreground">
             For diploma students across Bangladesh, checking exam results can be
             frustrating — slow portals, confusing interfaces, and scattered data.
-            BTEB Results Zone brings everything together in one clean, fast
+            Diploma Result BD brings everything together in one clean, fast
             platform. Search your roll number and instantly see your complete
             academic history — every semester result, GPA and CGPA in one place.
           </p>

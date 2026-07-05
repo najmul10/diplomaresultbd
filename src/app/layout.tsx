@@ -20,34 +20,40 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "BTEB Results Zone | Results at your fingertips",
+  title: "Diploma Result BD | BTEB Polytechnic Result Check Online",
   description:
-    "Bangladesh's #1 BTEB results platform. Get instant access to diploma, polytechnic, and technical education results with advanced search, analytics, and sharing features.",
+    "Check your BTEB diploma result, polytechnic result online instantly. Search by roll number, view GPA, CGPA, all semester results. Fast, free and always updated for Bangladesh diploma students.",
   keywords: [
-    "BTEB",
-    "BTEB Results",
-    "Diploma Results",
-    "Polytechnic Results",
-    "Bangladesh Technical Education Board",
-    "CGPA Calculator",
-    "Exam Routine",
+    "diploma result bd",
+    "bteb result",
+    "diploma result",
+    "polytechnic result",
+    "bteb result 2026",
+    "diploma result check",
+    "bteb diploma result",
+    "polytechnic result bd",
+    "diploma result 2026",
+    "bteb cgpa calculator",
+    "diploma result search",
+    "bangladesh diploma result",
+    "technical education result",
   ],
-  authors: [{ name: "BTEB Results Zone" }],
+  authors: [{ name: "Kazi Rifat" }],
   manifest: "/manifest.webmanifest",
   other: ADSENSE_CLIENT
     ? { "google-adsense-account": ADSENSE_CLIENT }
     : undefined,
   openGraph: {
-    title: "BTEB Results Zone | Results at your fingertips",
+    title: "Diploma Result BD | BTEB Polytechnic Result Check Online",
     description:
-      "Bangladesh's most trusted platform for BTEB exam results. Instant access to diploma, polytechnic, and technical education results.",
-    siteName: "BTEB Results Zone",
+      "Check your BTEB diploma result, polytechnic result online instantly. Search by roll number, view GPA, CGPA, all semester results.",
+    siteName: "Diploma Result BD",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "BTEB Results Zone",
-    description: "Bangladesh's #1 BTEB results platform.",
+    title: "Diploma Result BD",
+    description: "Check BTEB diploma result online — fast, free, always updated.",
   },
 };
 

@@ -60,7 +60,7 @@ export function RoutinesView() {
   const onDownload = () => {
     if (!current) return;
     const lines = [
-      `BTEB Results Zone — Exam Routine`,
+      `Diploma Result BD — Exam Routine`,
       current.title,
       "=".repeat(50),
       `Department: ${current.departmentName} (${current.departmentCode})`,

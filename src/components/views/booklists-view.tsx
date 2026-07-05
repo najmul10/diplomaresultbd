@@ -63,7 +63,7 @@ export function BooklistsView() {
   const onDownload = () => {
     if (!current) return;
     const lines = [
-      `BTEB Results Zone — Department Booklist`,
+      `Diploma Result BD — Department Booklist`,
       `Department: ${current.departmentName} (${current.departmentCode})`,
       `Curriculum Year: ${current.curriculumYear}`,
       `Total Books: ${current.totalBooks}`,

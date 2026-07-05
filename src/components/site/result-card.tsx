@@ -99,7 +99,7 @@ export function ResultCard({ result }: { result: StudentResult }) {
           `${s.code || "—"}  ${(s.name || "—").padEnd(38)}  Marks:${String(s.marks ?? "—").padStart(3)}  ${s.letter || "—"} (${typeof s.point === "number" ? s.point.toFixed(2) : "—"})`
       ),
       "",
-      "Powered by BTEB Results Zone",
+      "Powered by Diploma Result BD",
     ];
     const blob = new Blob([lines.join("\n")], { type: "text/plain" });
     const url = URL.createObjectURL(blob);

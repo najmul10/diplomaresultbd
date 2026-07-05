@@ -1,7 +1,7 @@
 {
-  "name": "BTEB Results Zone",
-  "short_name": "BTEB Results",
-  "description": "Bangladesh's #1 BTEB results platform. Instant access to diploma, polytechnic, and technical education results.",
+  "name": "Diploma Result BD",
+  "short_name": "Diploma Result",
+  "description": "Check your BTEB diploma result, polytechnic result online instantly. Search by roll number, view GPA, CGPA, all semester results.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",

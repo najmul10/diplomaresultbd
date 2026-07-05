@@ -17,7 +17,7 @@ export function Logo({
         "group flex items-center gap-2 transition-opacity hover:opacity-90",
         className
       )}
-      aria-label="BTEB Results Zone home"
+      aria-label="Diploma Result BD home"
     >
       <span className="relative flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-primary via-teal-600 to-emerald-600 text-primary-foreground shadow-md shadow-primary/25 transition-transform group-hover:scale-105 sm:h-10 sm:w-10">
         <GraduationCap className="h-5 w-5" strokeWidth={2.2} />
@@ -25,10 +25,10 @@ export function Logo({
       </span>
       <span className="flex flex-col items-start leading-none">
         <span className="text-sm font-extrabold tracking-tight sm:text-base">
-          BTEB <span className="text-primary">Results</span>
+          Diploma <span className="text-primary">Result</span>
         </span>
         <span className="text-[10px] font-medium uppercase tracking-[0.15em] text-muted-foreground">
-          Zone
+          BD
         </span>
       </span>
     </button>

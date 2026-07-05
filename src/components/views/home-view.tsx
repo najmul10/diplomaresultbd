@@ -207,7 +207,7 @@ export function HomeView() {
                     <GraduationCap className="h-5 w-5" />
                   </div>
                   <div>
-                    <p className="text-sm font-semibold leading-none">BTEB Results Zone</p>
+                    <p className="text-sm font-semibold leading-none">Diploma Result BD</p>
                     <p className="mt-0.5 text-[10px] opacity-80">Verified Result</p>
                   </div>
                 </div>
@@ -388,7 +388,7 @@ export function HomeView() {
                   Ready to check your BTEB results?
                 </h2>
                 <p className="mt-2 text-muted-foreground">
-                  Join millions of students who trust BTEB Results Zone for
+                  Join millions of students who trust Diploma Result BD for
                   fast, accurate and reliable access to their exam results.
                 </p>
               </div>
