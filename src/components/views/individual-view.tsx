@@ -30,6 +30,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { ResultImageCard, useResultImageDownload } from "@/components/site/result-image-card";
+import { toast } from "sonner";
 import {
   Select,
   SelectContent,
@@ -39,7 +41,6 @@ import {
 } from "@/components/ui/select";
 import { GradeBadge } from "@/components/site/grade-badge";
 import { gpaColor, formatDate, ordinal } from "@/lib/grade";
-import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 import { useFavorites } from "@/store/use-favorites";
 import type { StudentResult } from "@/lib/types";
@@ -390,36 +391,28 @@ function ResultHistory({ results }: { results: StudentResult[] }) {
     }
   };
 
-  const onDownload = () => {
-    const lines = [
-      "DIPLOMA RESULT BD — COMPLETE ACADEMIC HISTORY",
-      "=".repeat(48),
-      `Name            : ${latest.name}`,
-      `Roll            : ${latest.roll}`,
-      `Registration No : ${latest.registrationNo}`,
-      `Institute       : ${latest.instituteName}`,
-      `Department      : ${latest.departmentName}`,
-      `Curriculum      : ${latest.curriculum}`,
-      `Session         : ${latest.batchLabel}`,
-      `CGPA            : ${cgpa.toFixed(2)}`,
-      ``,
-      "SEMESTER RESULTS (by year):",
-      "-".repeat(48),
-      ...results.map(
-        (r) => `Year ${r.examYear}: GPA ${r.gpa.toFixed(2)} ${r.letterGrade} — ${r.result}`
-      ),
-      ``,
-      "Powered by Diploma Result BD",
-    ];
-    const blob = new Blob([lines.join("\n")], { type: "text/plain" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = `DiplomaResult_${latest.roll}.txt`;
-    a.click();
-    URL.revokeObjectURL(url);
-    toast.success("History downloaded");
+  const onDownload = async () => {
+    if (!cardRef.current) return;
+    toast.success("Generating result card image...");
+    try {
+      const { toPng } = await import("html-to-image");
+      const dataUrl = await toPng(cardRef.current, {
+        quality: 0.95,
+        pixelRatio: 2,
+        cacheBust: true,
+        backgroundColor: "#2A3990",
+      });
+      const link = document.createElement("a");
+      link.download = `DiplomaResult_${latest.roll}.png`;
+      link.href = dataUrl;
+      link.click();
+      toast.success("Result card image downloaded!");
+    } catch (e) {
+      toast.error("Could not generate image. Please try again.");
+    }
   };
+
+  const { cardRef } = useResultImageDownload();
 
   return (
     <div className="space-y-5">
@@ -479,7 +472,7 @@ function ResultHistory({ results }: { results: StudentResult[] }) {
               </Button>
               <Button variant="outline" size="sm" onClick={onDownload} className="gap-1.5">
                 <Download className="h-4 w-4" />
-                Download
+                Save as Image
               </Button>
             </div>
           </div>
@@ -574,6 +567,11 @@ function ResultHistory({ results }: { results: StudentResult[] }) {
         {results.map((r, idx) => (
           <SemesterCard key={`${r.examYear}-${idx}`} result={r} />
         ))}
+      </div>
+
+      {/* Hidden result card for image export */}
+      <div style={{ position: "absolute", left: -9999, top: 0, pointerEvents: "none" }}>
+        <ResultImageCard ref={cardRef} results={results} />
       </div>
     </div>
   );
