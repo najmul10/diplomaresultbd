@@ -66,11 +66,8 @@ export function AdSlot({
     // Wait until the AdSense script has loaded the adsbygoogle global, then push.
     const tryPush = () => {
       try {
-        // @ts-expect-error - adsbygoogle is injected by the AdSense script
         if (typeof window !== "undefined" && (window as any).adsbygoogle) {
-          // @ts-expect-error - push ad unit
           (window as any).adsbygoogle = (window as any).adsbygoogle || [];
-          // @ts-expect-error - push ad unit
           (window as any).adsbygoogle.push({});
           setPushed(true);
           return true;
