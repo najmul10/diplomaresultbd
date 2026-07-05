@@ -20,6 +20,10 @@ import { ContactView } from "@/components/views/contact-view";
 import { PrivacyView, TermsView } from "@/components/views/legal-views";
 import { motion, AnimatePresence } from "framer-motion";
 import { enableSecurity } from "@/lib/security";
+import { useKeyboardShortcuts } from "@/lib/keyboard";
+import { ScrollToTop } from "@/components/site/scroll-to-top";
+import { Breadcrumbs } from "@/components/site/breadcrumbs";
+import { ReadingProgress } from "@/components/site/reading-progress";
 
 function ViewSwitch({ view }: { view: ViewId }) {
   switch (view) {
@@ -77,9 +81,14 @@ export default function Page() {
     enableSecurity();
   }, []);
 
+  // Keyboard shortcuts (Alt+1-9,0 for navigation)
+  useKeyboardShortcuts();
+
   return (
     <div className="flex min-h-screen flex-col bg-background">
+      <ReadingProgress />
       <SiteHeader />
+      <Breadcrumbs view={view} />
       <main className="flex-1">
         <AnimatePresence mode="wait">
           <motion.div
@@ -94,6 +103,7 @@ export default function Page() {
         </AnimatePresence>
       </main>
       <SiteFooter />
+      <ScrollToTop />
     </div>
   );
 }

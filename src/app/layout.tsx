@@ -20,7 +20,11 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Diploma Result BD | BTEB Polytechnic Result Check Online",
+  metadataBase: new URL("https://diplomaresultbd.com"),
+  title: {
+    default: "Diploma Result BD | BTEB Polytechnic Result Check Online",
+    template: "%s | Diploma Result BD",
+  },
   description:
     "Check your BTEB diploma result, polytechnic result online instantly. Search by roll number, view GPA, CGPA, all semester results. Fast, free and always updated for Bangladesh diploma students.",
   keywords: [
@@ -40,6 +44,9 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Kazi Rifat" }],
   manifest: "/site.webmanifest",
+  alternates: {
+    canonical: "https://diplomaresultbd.com",
+  },
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "any" },
