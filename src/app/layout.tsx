@@ -39,10 +39,14 @@ export const metadata: Metadata = {
     "technical education result",
   ],
   authors: [{ name: "Kazi Rifat" }],
-  manifest: "/manifest.webmanifest",
+  manifest: "/site.webmanifest",
   icons: {
-    icon: "/logo.png",
-    apple: "/logo.png",
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/favicon-96x96.png", sizes: "96x96", type: "image/png" },
+    ],
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180" }],
   },
   other: ADSENSE_CLIENT
     ? { "google-adsense-account": ADSENSE_CLIENT }
