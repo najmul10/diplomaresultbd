@@ -1,6 +1,6 @@
 "use client";
 
-import { GraduationCap } from "lucide-react";
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 
 export function Logo({
@@ -19,18 +19,14 @@ export function Logo({
       )}
       aria-label="Diploma Result BD home"
     >
-      <span className="relative flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-primary via-teal-600 to-emerald-600 text-primary-foreground shadow-md shadow-primary/25 transition-transform group-hover:scale-105 sm:h-10 sm:w-10">
-        <GraduationCap className="h-5 w-5" strokeWidth={2.2} />
-        <span className="absolute -right-0.5 -top-0.5 h-2.5 w-2.5 rounded-full bg-amber-400 ring-2 ring-background" />
-      </span>
-      <span className="flex flex-col items-start leading-none">
-        <span className="text-sm font-extrabold tracking-tight sm:text-base">
-          Diploma <span className="text-primary">Result</span>
-        </span>
-        <span className="text-[10px] font-medium uppercase tracking-[0.15em] text-muted-foreground">
-          BD
-        </span>
-      </span>
+      <Image
+        src="/logo.png"
+        alt="Diploma Result BD"
+        width={180}
+        height={44}
+        priority
+        className="h-7 w-auto object-contain sm:h-8"
+      />
     </button>
   );
 }

@@ -40,6 +40,10 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Kazi Rifat" }],
   manifest: "/manifest.webmanifest",
+  icons: {
+    icon: "/logo.png",
+    apple: "/logo.png",
+  },
   other: ADSENSE_CLIENT
     ? { "google-adsense-account": ADSENSE_CLIENT }
     : undefined,
