@@ -49,11 +49,20 @@ export const metadata: Metadata = {
       "Check your BTEB diploma result, polytechnic result online instantly. Search by roll number, view GPA, CGPA, all semester results.",
     siteName: "Diploma Result BD",
     type: "website",
+    images: [
+      {
+        url: "/og-image.svg",
+        width: 1200,
+        height: 630,
+        alt: "Diploma Result BD — Check BTEB diploma result online",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Diploma Result BD",
+    title: "Diploma Result BD | BTEB Polytechnic Result Check Online",
     description: "Check BTEB diploma result online — fast, free, always updated.",
+    images: ["/og-image.svg"],
   },
 };
 

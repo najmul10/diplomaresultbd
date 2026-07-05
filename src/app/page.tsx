@@ -16,6 +16,7 @@ import { FavoritesView } from "@/components/views/favorites-view";
 import { HuntView } from "@/components/views/hunt-view";
 import { AboutView } from "@/components/views/about-view";
 import { ContactView } from "@/components/views/contact-view";
+import { PrivacyView, TermsView } from "@/components/views/legal-views";
 import { motion, AnimatePresence } from "framer-motion";
 import { enableSecurity } from "@/lib/security";
 
@@ -47,6 +48,10 @@ function ViewSwitch({ view }: { view: ViewId }) {
       return <AboutView />;
     case "contact":
       return <ContactView />;
+    case "privacy":
+      return <PrivacyView />;
+    case "terms":
+      return <TermsView />;
     default:
       return <HomeView />;
   }

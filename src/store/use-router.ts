@@ -15,7 +15,9 @@ export type ViewId =
   | "favorites"
   | "hunt"
   | "about"
-  | "contact";
+  | "contact"
+  | "privacy"
+  | "terms";
 
 type RouterState = {
   view: ViewId;
@@ -50,6 +52,8 @@ export function initFromHash(): ViewId {
     "hunt",
     "about",
     "contact",
+    "privacy",
+    "terms",
   ];
   return valid.includes(h) ? h : "home";
 }

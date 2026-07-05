@@ -31,6 +31,8 @@ const groups: { title: string; links: { label: string; view: ViewId }[] }[] = [
       { label: "Bulk Result Finder", view: "hunt" },
       { label: "About Us", view: "about" },
       { label: "Contact", view: "contact" },
+      { label: "Privacy Policy", view: "privacy" },
+      { label: "Terms of Service", view: "terms" },
     ],
   },
 ];

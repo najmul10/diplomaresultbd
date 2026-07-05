@@ -1,0 +1,23 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f766e"/>
+      <stop offset="100%" style="stop-color:#14b8a6"/>
+    </linearGradient>
+    <linearGradient id="card" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff"/>
+      <stop offset="100%" style="stop-color:#f0fdfa"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <circle cx="100" cy="100" r="200" fill="#ffffff" opacity="0.05"/>
+  <circle cx="1100" cy="530" r="250" fill="#fbbf24" opacity="0.1"/>
+  <rect x="100" y="140" width="1000" height="350" rx="24" fill="url(#card)" opacity="0.95"/>
+  <text x="160" y="240" font-family="Arial, sans-serif" font-size="42" font-weight="bold" fill="#0f766e">Diploma Result BD</text>
+  <text x="160" y="300" font-family="Arial, sans-serif" font-size="24" fill="#64748b">Check your BTEB diploma result online instantly</text>
+  <text x="160" y="340" font-family="Arial, sans-serif" font-size="24" fill="#64748b">Search by roll number — GPA, CGPA, all semesters</text>
+  <rect x="160" y="380" width="300" height="60" rx="12" fill="#0f766e"/>
+  <text x="310" y="418" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="white" text-anchor="middle">Check Your Result</text>
+  <text x="540" y="418" font-family="Arial, sans-serif" font-size="18" fill="#64748b">Fast · Free · Always Updated</text>
+  <text x="160" y="560" font-family="Arial, sans-serif" font-size="16" fill="#94a3b8">Developed by Kazi Rifat</text>
+</svg>
