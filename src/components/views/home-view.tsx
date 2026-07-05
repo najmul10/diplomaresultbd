@@ -162,30 +162,30 @@ export function HomeView() {
             <div className="mt-7 flex flex-col gap-3 sm:flex-row">
               <Button
                 size="lg"
-                className="h-12 gap-2 px-7 text-base shadow-lg shadow-primary/25"
+                className="h-12 gap-2 px-5 text-base shadow-lg shadow-primary/25 sm:px-7"
                 onClick={() => navigate("individual")}
               >
-                <Search className="h-5 w-5" />
-                Check Your Result
+                <Search className="h-5 w-5 shrink-0" />
+                <span className="truncate">Check Your Result</span>
               </Button>
               <Button
                 size="lg"
                 variant="outline"
-                className="h-12 gap-2 px-7 text-base"
+                className="h-12 gap-2 px-5 text-base sm:px-7"
                 onClick={() => navigate("latest")}
               >
-                <BarChart3 className="h-5 w-5" />
-                View Statistics
+                <BarChart3 className="h-5 w-5 shrink-0" />
+                <span className="truncate">View Statistics</span>
               </Button>
             </div>
 
-            <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2">
+            <div className="mt-6 flex flex-wrap items-center gap-x-4 gap-y-2">
               {TRUST.map((t) => (
                 <span
                   key={t.label}
-                  className="inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground"
+                  className="inline-flex shrink-0 items-center gap-1.5 text-xs font-medium text-muted-foreground sm:text-sm"
                 >
-                  <t.icon className="h-4 w-4 text-primary" />
+                  <t.icon className="h-4 w-4 shrink-0 text-primary" />
                   {t.label}
                 </span>
               ))}
@@ -225,13 +225,14 @@ export function HomeView() {
                     <span className="text-lg font-bold leading-none">3.44</span>
                     <span className="text-[8px] font-semibold uppercase">CGPA</span>
                   </div>
-                  <div className="min-w-0">
+                  <div className="min-w-0 flex-1">
                     <p className="truncate font-bold">MD. Rifat Hossain</p>
-                    <p className="truncate text-xs text-muted-foreground">Computer Technology • 8th Semester</p>
+                    <p className="truncate text-xs text-muted-foreground">Computer Technology • 8th Sem</p>
                   </div>
-                  <Badge className="ml-auto gap-1 bg-emerald-600 hover:bg-emerald-600">
-                    <CheckCircle2 className="h-3 w-3" />
-                    Passed
+                  <Badge className="shrink-0 gap-1 bg-emerald-600 hover:bg-emerald-600">
+                    <CheckCircle2 className="h-3 w-3 shrink-0" />
+                    <span className="hidden sm:inline">Passed</span>
+                    <CheckCircle2 className="h-4 w-4 sm:hidden" />
                   </Badge>
                 </div>
 
