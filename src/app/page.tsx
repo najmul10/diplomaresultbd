@@ -18,6 +18,7 @@ import { AboutView } from "@/components/views/about-view";
 import { ContactView } from "@/components/views/contact-view";
 import { PrivacyView, TermsView } from "@/components/views/legal-views";
 import { motion, AnimatePresence } from "framer-motion";
+import { enableSecurity } from "@/lib/security";
 
 function ViewSwitch({ view }: { view: ViewId }) {
   switch (view) {
@@ -67,6 +68,11 @@ export default function Page() {
     window.addEventListener("hashchange", onHashChange);
     return () => window.removeEventListener("hashchange", onHashChange);
   }, [navigate]);
+
+  // Enable security in production only (not in iframe/localhost)
+  React.useEffect(() => {
+    enableSecurity();
+  }, []);
 
   return (
     <div className="flex min-h-screen flex-col bg-background">
