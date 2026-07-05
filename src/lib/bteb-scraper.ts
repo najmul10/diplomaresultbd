@@ -57,8 +57,6 @@ async function fetchOfficialHtml(params: LiveSearchParams): Promise<string> {
       Accept: "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
       "Accept-Language": "en-US,en;q=0.5",
     },
-    // The official archive is HTTP on a raw IP; allow it.
-    // @ts-expect-error - Next.js fetch allows this via RequestInit
     next: { revalidate: 0 },
   });
 
@@ -432,7 +430,6 @@ export async function fetchLiveCurricula(): Promise<
         "User-Agent": "Mozilla/5.0",
         Referer: "https://result.bteb.gov.bd/result-search",
       },
-      // @ts-expect-error next fetch option
       next: { revalidate: 3600 },
     });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);

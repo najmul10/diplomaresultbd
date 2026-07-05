@@ -67,6 +67,7 @@ export type StudentResult = {
   publicationDate: string;
   subjects: SubjectResult[];
   gpa: number;
+  cgpa: number;
   letterGrade: string;
   result: "PASSED" | "FAILED" | "REFERRED";
   referredSubjects: string[];
