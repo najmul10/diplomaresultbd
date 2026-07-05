@@ -83,10 +83,10 @@ const EXPERIENCE = [
   },
   {
     icon: Briefcase,
-    role: "Manufacturing Engineer",
+    role: "Marketing Manager",
     org: "Landmark Inter Gulf, Saudi Arabia",
     period: "Current",
-    desc: "Currently working as an MF (Manufacturing Engineer) in Saudi Arabia.",
+    desc: "Currently working as a Marketing Manager in Saudi Arabia.",
   },
 ];
 
