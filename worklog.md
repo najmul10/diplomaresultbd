@@ -531,3 +531,52 @@ Agent Browser verification:
 
 Stage Summary:
 - About page now honest and accurate. Removed fabricated stats, timeline, and misleading "built by students" claim. Added a features overview section instead.
+
+---
+Task ID: 50
+Agent: main
+Task: Full site audit — test all pages, find bugs, fix critical issues
+
+Work Log:
+AUDIT RESULTS — tested all 13 pages + 7 API endpoints:
+- ✅ Home: renders, buttons work
+- ✅ Individual: renders, search works (single year + full history)
+- ✅ Group: renders, form present
+- ✅ Institute Directory: renders, 102 institutes
+- ✅ Latest/Analytics: renders, "Generate Statistics" button
+- ✅ CGPA Calculator: renders, inputs present
+- ✅ GPA Calculator: renders
+- ✅ Booklists: 12 booklists, 24 books each
+- ✅ Routines: 6 routines
+- ✅ Favorites: renders, empty state works
+- ✅ Bulk Result Finder: renders, form present
+- ✅ About: renders, honest content
+- ✅ Contact: renders, form works
+
+API tests:
+- ✅ /api/results/live-options: 200 (39 exam types, 22 years, 7 session parts)
+- ✅ /api/results/live-search (single year): 200 — roll 449381 → MD. RIFAT HOSSAIN, PASSED, GPA 3.44
+- ✅ /api/results/live-search (history): 200 — 1 result across 10 years
+- ✅ /api/results/group: 200 — found 1/1
+- ✅ /api/departments: 200 — 12 departments
+- ✅ /api/institutes: 200 — 102 institutes
+- ✅ /api/routines: 200 — 6 routines
+- ✅ /api/booklists: 200 — 12 booklists
+- ✅ /api/feedback: 200
+
+ISSUES FOUND + FIXED:
+1. ❌ Removed unused history-timeline.tsx file (was not imported anywhere).
+2. ❌ Individual view had NO year selector — user couldn't search a single year (only full history which is slow).
+   ✅ FIXED: Added Year dropdown with "All Years (full history)" default + all years 2017-2026. Selecting a specific year does a fast single-year search; "All Years" does the full 10-year crawl.
+3. ❌ Default year was 2022 in Group/Latest/Hunt views — outdated.
+   ✅ FIXED: Updated default year to 2024 in all three views.
+4. ✅ Button text changes dynamically: "Check My Full Result" (all years) vs "Check Result" (single year).
+5. ✅ Helper text changes: "Searching all years (2017–2026)..." vs "Searching only the selected year — much faster."
+
+Agent Browser verification:
+- Individual view: 4 fields (Exam Type, Year, Roll, Reg) all render. Search roll 449381 → "Verified result, 1 semester result found, MD. RIFAT HOSSAIN, PASSED".
+- All other pages render without errors.
+- Lint clean.
+
+Stage Summary:
+- Full site audited. All 13 pages work. Key improvement: Individual view now has a Year selector so users can do a fast single-year search instead of always waiting for the full 10-year crawl. Default years updated to 2024. Unused file removed.

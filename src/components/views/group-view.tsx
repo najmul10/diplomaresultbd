@@ -77,7 +77,7 @@ export function GroupView() {
   });
 
   const [exam, setExam] = React.useState("15");
-  const [year, setYear] = React.useState("2022");
+  const [year, setYear] = React.useState("2024");
   const [sessPart, setSessPart] = React.useState("any");
   const [rollsText, setRollsText] = React.useState("");
   const [singleRoll, setSingleRoll] = React.useState("");

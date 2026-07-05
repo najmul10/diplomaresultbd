@@ -121,7 +121,7 @@ export function LatestView() {
   });
 
   const [exam, setExam] = React.useState("15");
-  const [year, setYear] = React.useState("2022");
+  const [year, setYear] = React.useState("2024");
   const [sessPart, setSessPart] = React.useState("any");
   const [start, setStart] = React.useState("100001");
   const [count, setCount] = React.useState("40");

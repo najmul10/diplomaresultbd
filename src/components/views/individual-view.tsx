@@ -71,29 +71,38 @@ async function searchLiveHistory(params: {
   exam: string;
   roll: string;
   reg?: string;
+  year?: string;
 }): Promise<{ results: StudentResult[]; meta: HistoryMeta }> {
   const sp = new URLSearchParams({
     exam: params.exam,
     roll: params.roll,
-    history: "1",
   });
+  if (params.year && params.year !== "all") {
+    sp.set("year", params.year);
+  } else {
+    sp.set("history", "1");
+  }
   if (params.reg) sp.set("reg", params.reg);
   const res = await fetch(`/api/results/live-search?${sp.toString()}`);
   const json = await res.json();
   if (!res.ok || !json.success) {
     throw new Error(json.error || "Search failed");
   }
-  return { results: json.data as StudentResult[], meta: json.meta as HistoryMeta };
+  // Single-year returns one object, history returns array
+  const data = Array.isArray(json.data) ? json.data : [json.data];
+  return { results: data as StudentResult[], meta: json.meta as HistoryMeta };
 }
 
 export function IndividualView() {
   const [exam, setExam] = React.useState<string>("15");
+  const [year, setYear] = React.useState<string>("all");
   const [roll, setRoll] = React.useState("");
   const [reg, setReg] = React.useState("");
   const [submitted, setSubmitted] = React.useState<{
     exam: string;
     roll: string;
     reg?: string;
+    year?: string;
   } | null>(null);
 
   const { data: options } = useQuery({
@@ -122,6 +131,7 @@ export function IndividualView() {
       exam,
       roll: roll.trim(),
       reg: reg.trim() || undefined,
+      year,
     });
   };
 
@@ -157,7 +167,7 @@ export function IndividualView() {
       <Card className="mt-6 shadow-sm">
         <CardContent className="p-5 sm:p-6">
           <form onSubmit={onSubmit} className="space-y-4">
-            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-[1fr_2fr_1fr]">
+            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-[1fr_1fr_2fr_1fr]">
               <div className="space-y-1.5">
                 <Label htmlFor="exam" className="text-xs font-medium">Exam Type</Label>
                 <Select value={exam} onValueChange={setExam}>
@@ -168,6 +178,22 @@ export function IndividualView() {
                     {options?.exams.map((x) => (
                       <SelectItem key={x.code} value={x.code}>
                         {x.name}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="space-y-1.5">
+                <Label htmlFor="year" className="text-xs font-medium">Year</Label>
+                <Select value={year} onValueChange={setYear}>
+                  <SelectTrigger id="year" className="h-12">
+                    <SelectValue placeholder="All years" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all">All Years (full history)</SelectItem>
+                    {options?.years.map((y) => (
+                      <SelectItem key={y} value={y}>
+                        {y}
                       </SelectItem>
                     ))}
                   </SelectContent>
@@ -186,7 +212,7 @@ export function IndividualView() {
                 />
               </div>
               <div className="space-y-1.5">
-                <Label htmlFor="reg" className="text-xs font-medium">Registration No (optional)</Label>
+                <Label htmlFor="reg" className="text-xs font-medium">Reg. No (optional)</Label>
                 <Input
                   id="reg"
                   value={reg}
@@ -210,11 +236,12 @@ export function IndividualView() {
               ) : (
                 <Search className="h-5 w-5" />
               )}
-              {isLoading ? "Searching..." : "Check My Full Result"}
+              {isLoading ? "Searching..." : year === "all" ? "Check My Full Result" : "Check Result"}
             </Button>
             <p className="text-xs text-muted-foreground">
-              Enter your roll number to view all your semester results, GPA and
-              CGPA in one place.
+              {year === "all"
+                ? "Searching all years (2017–2026) to find every semester result. This takes a few seconds."
+                : "Searching only the selected year — much faster."}
             </p>
           </form>
         </CardContent>

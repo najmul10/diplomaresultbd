@@ -173,7 +173,7 @@ export function HuntView() {
   });
 
   const [exam, setExam] = React.useState("15");
-  const [year, setYear] = React.useState("2022");
+  const [year, setYear] = React.useState("2024");
   const [sessPart, setSessPart] = React.useState("any");
   const [rollStart, setRollStart] = React.useState("100001");
   const [rollEnd, setRollEnd] = React.useState("100080");
