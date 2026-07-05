@@ -29,6 +29,7 @@ import {
   Filter,
 } from "lucide-react";
 import { AdSlot } from "@/components/site/ad-slot";
+import Image from "next/image";
 
 type Feature = {
   view: ViewId;
@@ -229,9 +230,14 @@ export function HomeView() {
               <CardContent className="space-y-4 p-5">
                 {/* Student identity */}
                 <div className="flex items-center gap-3">
-                  <div className="flex h-14 w-14 shrink-0 flex-col items-center justify-center rounded-2xl bg-gradient-to-br from-primary/15 to-[#2ECC71]/10 text-primary ring-1 ring-primary/20">
-                    <span className="text-xl font-bold leading-none">3.44</span>
-                    <span className="text-[8px] font-semibold uppercase opacity-70">CGPA</span>
+                  <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-2xl ring-2 ring-primary/30">
+                    <Image
+                      src="/avatar.png"
+                      alt="Kazi Rifat"
+                      fill
+                      className="object-cover"
+                      priority
+                    />
                   </div>
                   <div className="min-w-0 flex-1">
                     <p className="truncate text-base font-bold">Kazi Rifat</p>
