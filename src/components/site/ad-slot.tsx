@@ -89,25 +89,8 @@ export function AdSlot({
   }, [slotId, pushed]);
 
   if (!CONFIG.client || !slotId) {
-    return (
-      <div
-        className={cn(
-          "flex min-h-24 flex-col items-center justify-center rounded-lg border border-dashed border-border bg-muted/30 px-4 text-center",
-          className
-        )}
-        aria-label="Ad placeholder"
-      >
-        <span className="text-[10px] font-medium uppercase tracking-wider text-muted-foreground">
-          {label}
-        </span>
-        <span className="mt-0.5 text-[10px] text-muted-foreground">
-          AdSense slot: <span className="font-mono">{slot}</span>
-        </span>
-        <span className="mt-1 text-[9px] text-muted-foreground/70">
-          Set NEXT_PUBLIC_ADSENSE_CLIENT &amp; NEXT_PUBLIC_ADSENSE_SLOTS to enable
-        </span>
-      </div>
-    );
+    // AdSense not configured — return nothing (no placeholder)
+    return null;
   }
 
   return (
