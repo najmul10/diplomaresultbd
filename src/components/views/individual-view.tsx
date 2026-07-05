@@ -139,7 +139,7 @@ export function IndividualView() {
     <div className="mx-auto w-full max-w-4xl px-4 py-8 sm:px-6 lg:py-12">
       <SectionHeading
         title="Individual Results"
-        description="Search your complete BTEB academic history — all semester results in one place."
+        description="Search your complete diploma academic history — all semester results in one place."
         icon={Search}
         badge="Live"
       />
@@ -152,7 +152,7 @@ export function IndividualView() {
           </span>
           <div className="flex-1 text-sm">
             <p className="font-semibold text-primary">
-              Fast &amp; reliable BTEB results
+              Fast &amp; reliable diploma results
             </p>
             <p className="mt-0.5 text-muted-foreground">
               Select your exam type and enter your roll number to instantly
@@ -380,7 +380,7 @@ function ResultHistory({ results }: { results: StudentResult[] }) {
     ].filter(Boolean);
     try {
       if (navigator.share) {
-        await navigator.share({ title: "BTEB Academic History", text: lines.join("\n") });
+        await navigator.share({ title: "Diploma Result BD — Academic History", text: lines.join("\n") });
       } else {
         await navigator.clipboard.writeText(lines.join("\n"));
         toast.success("History copied to clipboard");
@@ -392,7 +392,7 @@ function ResultHistory({ results }: { results: StudentResult[] }) {
 
   const onDownload = () => {
     const lines = [
-      "BTEB RESULTS ZONE — COMPLETE ACADEMIC HISTORY",
+      "DIPLOMA RESULT BD — COMPLETE ACADEMIC HISTORY",
       "=".repeat(48),
       `Name            : ${latest.name}`,
       `Roll            : ${latest.roll}`,
@@ -415,7 +415,7 @@ function ResultHistory({ results }: { results: StudentResult[] }) {
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = `BTEB_History_${latest.roll}.txt`;
+    a.download = `DiplomaResult_${latest.roll}.txt`;
     a.click();
     URL.revokeObjectURL(url);
     toast.success("History downloaded");
@@ -650,7 +650,7 @@ function SemesterCard({ result }: { result: StudentResult }) {
             </div>
             <p className="mt-0.5 flex items-center gap-1 text-xs text-muted-foreground">
               <CalendarDays className="h-3 w-3" />
-              {result.batchLabel ? `Session ${result.batchLabel}` : "BTEB Diploma Exam"}
+              {result.batchLabel ? `Session ${result.batchLabel}` : "Diploma Exam"}
             </p>
           </div>
 

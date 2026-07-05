@@ -4,7 +4,7 @@
  * Fetches REAL results from the official Bangladesh Technical Education Board
  * archive at http://180.211.162.102:8444/result_arch/result.php (the public
  * PHP archive — no captcha, no auth). This is the same source that
- * btebresultszone.com mirrors.
+ * competitor sites mirror.
  *
  * The official form submits via GET with params: exam, year, roll, reg,
  * sess_part. It returns an HTML page containing either the result table or a
@@ -344,7 +344,7 @@ export async function searchLive(params: LiveSearchParams): Promise<LiveSearchRe
  * The official archive stores ONE result per (exam, year, roll). To show a
  * student's complete academic history (all semesters 4th–8th), we must search
  * the roll across multiple years in parallel. This mirrors what the original
- * btebresultszone.com does.
+ * competitor sites do.
  *
  * Returns every found result (one per year where the roll exists), sorted by
  * exam year ascending. The caller can present these as semester cards.

@@ -135,10 +135,10 @@ export function HomeView() {
               className="mb-5 gap-1.5 rounded-full border border-primary/20 bg-primary/5 py-1.5 pl-2 pr-3 text-primary"
             >
               <Sparkles className="h-3.5 w-3.5" />
-              Bangladesh&apos;s #1 BTEB Results Platform
+              Bangladesh&apos;s Diploma Result Platform
             </Badge>
             <h1 className="text-balance text-4xl font-extrabold leading-[1.08] tracking-tight sm:text-5xl lg:text-6xl">
-              BTEB Results at{" "}
+              Diploma Result at{" "}
               <span className="relative inline-block">
                 <span className="bg-gradient-to-r from-primary via-teal-500 to-emerald-500 bg-clip-text text-transparent">
                   Your Fingertips
@@ -153,9 +153,9 @@ export function HomeView() {
               </span>
             </h1>
             <p className="mt-5 max-w-lg text-pretty text-base text-muted-foreground sm:text-lg">
-              Search your BTEB result instantly — every semester result, GPA and
-              CGPA in one place. Fast, accurate and always free for diploma
-              students across Bangladesh.
+              Check your diploma result instantly — every semester result, GPA
+              and CGPA in one place. Fast, accurate and always free for
+              polytechnic students across Bangladesh.
             </p>
 
             {/* CTA buttons */}

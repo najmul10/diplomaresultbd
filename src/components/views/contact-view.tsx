@@ -154,7 +154,7 @@ export function ContactView() {
                 </span>
                 <div>
                   <p className="text-sm font-semibold">Email</p>
-                  <p className="text-sm text-muted-foreground">support@btebresultszone.com</p>
+                  <p className="text-sm text-muted-foreground">support@diplomaresultbd.com</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
@@ -163,7 +163,7 @@ export function ContactView() {
                 </span>
                 <div>
                   <p className="text-sm font-semibold">Telegram</p>
-                  <p className="text-sm text-muted-foreground">@btebresultszone</p>
+                  <p className="text-sm text-muted-foreground">@diplomaresultbd</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">

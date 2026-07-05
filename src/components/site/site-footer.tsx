@@ -52,8 +52,8 @@ export function SiteFooter() {
           <div className="col-span-2 lg:col-span-2">
             <Logo onClick={() => navigate("home")} />
             <p className="mt-4 max-w-xs text-sm text-muted-foreground">
-              Bangladesh&apos;s most trusted platform for BTEB exam results. Fast,
-              accurate and always free for diploma students nationwide.
+              Bangladesh&apos;s fastest platform for diploma and polytechnic
+              results. Fast, accurate and always free for students nationwide.
             </p>
             <div className="mt-4 flex flex-wrap gap-1.5">
               {trust.map((b) => (

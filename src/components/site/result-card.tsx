@@ -60,10 +60,10 @@ export function ResultCard({ result }: { result: StudentResult }) {
   };
 
   const onShare = async () => {
-    const text = `BTEB Result — ${result.name}\nRoll: ${result.roll}\n${result.departmentName || result.curriculum || "BTEB"}${result.semester ? ", " + ordinal(result.semester) + " Semester" : ""}\nGPA: ${gpa.toFixed(2)} (${letterGrade}) — ${result.result}`;
+    const text = `Diploma Result — ${result.name}\nRoll: ${result.roll}\n${result.departmentName || result.curriculum || "Diploma"}${result.semester ? ", " + ordinal(result.semester) + " Semester" : ""}\nGPA: ${gpa.toFixed(2)} (${letterGrade}) — ${result.result}`;
     try {
       if (navigator.share) {
-        await navigator.share({ title: "BTEB Result", text });
+        await navigator.share({ title: "Diploma Result", text });
       } else {
         await navigator.clipboard.writeText(text);
         toast.success("Result copied to clipboard");
@@ -75,7 +75,7 @@ export function ResultCard({ result }: { result: StudentResult }) {
 
   const onDownload = () => {
     const lines = [
-      "BTEB RESULTS ZONE — INDIVIDUAL RESULT",
+      "DIPLOMA RESULT BD — INDIVIDUAL RESULT",
       "======================================",
       `Name            : ${result.name}`,
       `Roll            : ${result.roll}`,
@@ -154,7 +154,7 @@ export function ResultCard({ result }: { result: StudentResult }) {
           <div className="min-w-0">
             <h2 className="truncate text-xl font-bold tracking-tight">{result.name}</h2>
             <p className="mt-0.5 truncate text-sm text-muted-foreground">
-              {result.departmentName || result.curriculum || result.instituteName || "BTEB Result"}
+              {result.departmentName || result.curriculum || result.instituteName || "Diploma Result"}
             </p>
             <div className="mt-2 flex flex-wrap items-center gap-2">
               <GradeBadge grade={letterGrade} size="md" />
