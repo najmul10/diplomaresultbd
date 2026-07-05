@@ -67,7 +67,7 @@ const EXPERIENCE = [
 
 const EDUCATION = [
   { name: "National Polytechnic Institute, Manikganj", degree: "Diploma in Computer Technology", period: "2019 — 2020 Session" },
-  { name: "Bonpukur High School", degree: "Secondary School Certificate (SSC)", period: "School Education" },
+  { name: "Bonparil High School", degree: "Secondary School Certificate (SSC)", period: "School Education" },
 ];
 
 export function AboutView() {
