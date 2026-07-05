@@ -2,11 +2,6 @@ User-Agent: *
 Allow: /
 Disallow: /api/
 Disallow: /_next/
-Disallow: /static/
-
-User-Agent: Googlebot
-Allow: /
-Disallow: /api/
 
 Host: https://diplomaresultbd.com
-Sitemap: https://diplomaresultbd.com/sitemap-index.xml
+Sitemap: https://diplomaresultbd.com/sitemap.xml

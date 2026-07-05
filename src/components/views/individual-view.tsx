@@ -253,17 +253,34 @@ export function IndividualView() {
         <AdSlot slot="individual-inline" />
 
         {isLoading ? (
-          <Card>
-            <CardContent className="flex flex-col items-center justify-center gap-3 py-16">
-              <Loader2 className="h-8 w-8 animate-spin text-emerald-600" />
-              <p className="text-sm text-muted-foreground">
-                Fetching your results...
-              </p>
-              <p className="text-xs text-muted-foreground">
-                Roll <span className="font-mono font-semibold">{submitted?.roll}</span>
-              </p>
-            </CardContent>
-          </Card>
+          <div className="space-y-4">
+            {/* Skeleton loading card */}
+            <Card className="overflow-hidden">
+              <div className="h-24 animate-pulse bg-gradient-to-br from-primary/10 to-transparent" />
+              <CardContent className="space-y-4 p-5">
+                <div className="flex items-center gap-4">
+                  <div className="h-16 w-16 animate-pulse rounded-2xl bg-muted" />
+                  <div className="flex-1 space-y-2">
+                    <div className="h-5 w-40 animate-pulse rounded bg-muted" />
+                    <div className="h-3 w-60 animate-pulse rounded bg-muted" />
+                  </div>
+                </div>
+                <div className="grid grid-cols-3 gap-3">
+                  {[1, 2, 3].map((i) => (
+                    <div key={i} className="h-16 animate-pulse rounded-lg bg-muted" />
+                  ))}
+                </div>
+                <div className="flex items-center justify-center gap-3 py-4">
+                  <Loader2 className="h-5 w-5 animate-spin text-primary" />
+                  <p className="text-sm text-muted-foreground">
+                    {submitted?.year === "all"
+                      ? "Searching across all years..."
+                      : `Searching ${submitted?.year}...`}
+                  </p>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
         ) : error ? (
           <Card className="border-rose-500/30">
             <CardContent className="flex flex-col items-center justify-center gap-3 py-14 text-center">

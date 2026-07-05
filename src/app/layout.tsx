@@ -102,6 +102,32 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           }}
         />
         {/* End Google Tag Manager */}
+        {/* Structured Data for SEO */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              name: "Diploma Result BD",
+              url: "https://diplomaresultbd.com",
+              description: "Check your BTEB diploma result, polytechnic result online instantly. Search by roll number, view GPA, CGPA, all semester results.",
+              potentialAction: {
+                "@type": "SearchAction",
+                target: "https://diplomaresultbd.com/#individual",
+                "query-input": "required name=roll",
+              },
+              publisher: {
+                "@type": "Organization",
+                name: "Diploma Result BD",
+                developer: {
+                  "@type": "Person",
+                  name: "Kazi Rifat",
+                },
+              },
+            }),
+          }}
+        />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background text-foreground`}
