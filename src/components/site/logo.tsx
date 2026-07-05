@@ -14,7 +14,7 @@ export function Logo({
     <button
       onClick={onClick}
       className={cn(
-        "group flex items-center gap-2 transition-opacity hover:opacity-90",
+        "group flex items-center transition-opacity hover:opacity-90",
         className
       )}
       aria-label="Diploma Result BD home"
@@ -22,10 +22,10 @@ export function Logo({
       <Image
         src="/logo.png"
         alt="Diploma Result BD"
-        width={180}
-        height={44}
+        width={220}
+        height={55}
         priority
-        className="h-7 w-auto object-contain sm:h-8"
+        className="h-10 w-auto object-contain sm:h-12"
       />
     </button>
   );
