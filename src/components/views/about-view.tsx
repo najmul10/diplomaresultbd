@@ -154,15 +154,21 @@ export function AboutView() {
         ))}
       </div>
 
-      {/* Developer Profile — compact, at bottom */}
-      <Card className="mt-8 overflow-hidden border-primary/20">
-        <div className="bg-gradient-to-br from-primary to-[#2ECC71] px-5 py-4">
-          <h2 className="text-lg font-bold text-white">Meet the Developer</h2>
+      {/* Developer Profile — at bottom, polished */}
+      <Card className="mt-8 overflow-hidden border-primary/30 shadow-lg shadow-primary/5">
+        {/* Header banner */}
+        <div className="relative bg-gradient-to-br from-primary via-primary to-[#2ECC71] px-6 py-5">
+          <div className="pointer-events-none absolute inset-0 bg-dots opacity-20" />
+          <div className="relative flex items-center gap-2">
+            <Code className="h-5 w-5 text-white" />
+            <h2 className="text-xl font-bold text-white">Meet the Developer</h2>
+          </div>
         </div>
-        <CardContent className="p-5">
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-start">
-            {/* Avatar — smaller */}
-            <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-xl ring-2 ring-primary/30 shadow-md">
+        <CardContent className="p-6">
+          {/* Top section: avatar + info */}
+          <div className="flex flex-col items-center gap-5 sm:flex-row sm:items-start">
+            {/* Avatar — bigger */}
+            <div className="relative h-32 w-32 shrink-0 overflow-hidden rounded-2xl ring-4 ring-primary/20 shadow-xl">
               <Image
                 src="/avatar.png"
                 alt="Kazi Rifat"
@@ -171,53 +177,62 @@ export function AboutView() {
                 priority
               />
             </div>
-            {/* Info — compact */}
-            <div className="flex-1">
-              <h3 className="text-lg font-bold">Kazi Rifat</h3>
-              <p className="text-sm text-muted-foreground">Developer & Creator</p>
-              <p className="mt-0.5 flex items-center gap-1 text-xs text-muted-foreground">
-                <MapPin className="h-3 w-3" />
+            {/* Info */}
+            <div className="flex-1 text-center sm:text-left">
+              <h3 className="text-2xl font-extrabold">Kazi Rifat</h3>
+              <p className="mt-0.5 text-sm font-medium text-primary">Developer & Creator</p>
+              <p className="mt-1 flex items-center justify-center gap-1.5 text-sm text-muted-foreground sm:justify-start">
+                <MapPin className="h-3.5 w-3.5" />
                 Manikganj Sadar, Bangladesh
               </p>
-              <div className="mt-2 flex flex-wrap gap-1.5">
-                <Badge variant="secondary" className="gap-1 text-xs">
-                  <Briefcase className="h-3 w-3" />
+              <div className="mt-3 flex flex-wrap justify-center gap-2 sm:justify-start">
+                <Badge className="gap-1.5 bg-primary/10 text-primary hover:bg-primary/10">
+                  <Briefcase className="h-3.5 w-3.5" />
                   Marketing Manager, Saudi Arabia
                 </Badge>
-                <Badge variant="secondary" className="gap-1 text-xs">
-                  <Star className="h-3 w-3" />
+                <Badge className="gap-1.5 bg-[#2ECC71]/10 text-[#2ECC71] hover:bg-[#2ECC71]/10">
+                  <Star className="h-3.5 w-3.5" />
                   Fiverr Level 2 Seller
                 </Badge>
               </div>
             </div>
           </div>
 
-          {/* Experience + Education in compact grid */}
-          <div className="mt-5 grid gap-4 sm:grid-cols-2">
+          {/* Divider */}
+          <div className="my-5 h-px bg-border/60" />
+
+          {/* Experience + Education */}
+          <div className="grid gap-5 sm:grid-cols-2">
             {/* Experience */}
             <div>
-              <h4 className="mb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">Experience</h4>
-              <div className="space-y-2">
+              <h4 className="mb-3 flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                <Briefcase className="h-3.5 w-3.5" />
+                Experience
+              </h4>
+              <div className="space-y-2.5">
                 {EXPERIENCE.map((exp, i) => (
-                  <div key={i} className="flex items-center justify-between gap-2 text-sm">
+                  <div key={i} className="flex items-start justify-between gap-2 rounded-lg bg-muted/30 px-3 py-2">
                     <div className="min-w-0">
-                      <p className="truncate font-medium">{exp.role}</p>
+                      <p className="truncate text-sm font-semibold">{exp.role}</p>
                       <p className="truncate text-xs text-muted-foreground">{exp.org}</p>
                     </div>
-                    <span className="shrink-0 text-[10px] text-muted-foreground">{exp.period}</span>
+                    <span className="shrink-0 rounded-full bg-primary/10 px-2 py-0.5 text-[10px] font-medium text-primary">{exp.period}</span>
                   </div>
                 ))}
               </div>
             </div>
             {/* Education */}
             <div>
-              <h4 className="mb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">Education</h4>
-              <div className="space-y-2">
+              <h4 className="mb-3 flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                <GraduationCap className="h-3.5 w-3.5" />
+                Education
+              </h4>
+              <div className="space-y-2.5">
                 {EDUCATION.map((edu, i) => (
-                  <div key={i} className="text-sm">
-                    <p className="font-medium">{edu.name}</p>
+                  <div key={i} className="rounded-lg bg-muted/30 px-3 py-2">
+                    <p className="text-sm font-semibold">{edu.name}</p>
                     <p className="text-xs text-muted-foreground">{edu.degree}</p>
-                    <p className="text-[10px] text-primary">{edu.period}</p>
+                    <p className="mt-0.5 text-[10px] font-medium text-primary">{edu.period}</p>
                   </div>
                 ))}
               </div>
