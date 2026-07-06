@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { searchLiveBatch } from "@/lib/bteb-scraper";
+import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
 
 export const dynamic = "force-dynamic";
 
@@ -26,6 +27,16 @@ export async function POST(req: NextRequest) {
     return NextResponse.json(
       { success: false, error: "Invalid request body." },
       { status: 400 }
+    );
+  }
+
+  // Rate limiting: 10 group searches per minute per IP
+  const ip = getClientIp(req);
+  const rateLimit = checkRateLimit(ip, 10, 60 * 1000);
+  if (!rateLimit.allowed) {
+    return NextResponse.json(
+      { success: false, error: "Too many requests. Please wait a minute and try again." },
+      { status: 429 }
     );
   }
 

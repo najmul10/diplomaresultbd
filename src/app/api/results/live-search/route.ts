@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { searchLive, searchLiveHistory, type LiveSearchParams } from "@/lib/bteb-scraper";
+import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
 
 export const dynamic = "force-dynamic";
 
@@ -29,6 +30,27 @@ export async function GET(req: NextRequest) {
   const reg = (searchParams.get("reg") || "").trim();
   const sessPart = (searchParams.get("sessPart") || "").trim();
   const historyMode = searchParams.get("history") === "1";
+
+  // Rate limiting: 20 requests per minute per IP (history mode uses more resources)
+  const ip = getClientIp(req);
+  const maxReq = historyMode ? 10 : 30; // history is expensive, limit more
+  const rateLimit = checkRateLimit(ip, maxReq, 60 * 1000);
+  if (!rateLimit.allowed) {
+    return NextResponse.json(
+      {
+        success: false,
+        error: "Too many requests. Please wait a minute and try again.",
+      },
+      {
+        status: 429,
+        headers: {
+          "Retry-After": String(Math.ceil((rateLimit.resetAt - Date.now()) / 1000)),
+          "X-RateLimit-Remaining": "0",
+          "X-RateLimit-Reset": String(rateLimit.resetAt),
+        },
+      }
+    );
+  }
 
   if (!exam || !roll) {
     return NextResponse.json(

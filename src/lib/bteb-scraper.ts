@@ -49,21 +49,35 @@ async function fetchOfficialHtml(params: LiveSearchParams): Promise<string> {
   url.searchParams.set("sess_part", params.sessPart || "");
   url.searchParams.set("Submit", " View Result");
 
-  const res = await fetch(url.toString(), {
-    headers: {
-      "User-Agent":
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
-      Referer: "http://180.211.162.102:8444/result_arch/index.php",
-      Accept: "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-      "Accept-Language": "en-US,en;q=0.5",
-    },
-    next: { revalidate: 0 },
-  });
+  // Use AbortController for timeout (official archive can be slow)
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 15000); // 15s timeout
 
-  if (!res.ok) {
-    throw new Error(`Official archive returned HTTP ${res.status}`);
+  try {
+    const res = await fetch(url.toString(), {
+      headers: {
+        "User-Agent":
+          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+        Referer: "http://180.211.162.102:8444/result_arch/index.php",
+        Accept: "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "Accept-Language": "en-US,en;q=0.5",
+      },
+      signal: controller.signal,
+      next: { revalidate: 0 },
+    });
+
+    if (!res.ok) {
+      throw new Error(`Official archive returned HTTP ${res.status}`);
+    }
+    return res.text();
+  } catch (e) {
+    if (e instanceof Error && e.name === "AbortError") {
+      throw new Error("The official BTEB archive took too long to respond. Please try again.");
+    }
+    throw e;
+  } finally {
+    clearTimeout(timeout);
   }
-  return res.text();
 }
 
 /**
