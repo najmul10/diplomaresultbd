@@ -2,7 +2,7 @@
 
 import { useRouter, type ViewId } from "@/store/use-router";
 import { Logo } from "@/components/site/logo";
-import { Send, Heart, Mail, ShieldCheck, Zap, Gift, TrendingUp } from "lucide-react";
+import { Send, Heart, Mail, ShieldCheck, Zap, Gift, TrendingUp, Facebook } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const groups: { title: string; links: { label: string; view: ViewId }[] }[] = [
@@ -82,6 +82,12 @@ export function SiteFooter() {
                   Email
                 </a>
               </Button>
+              <Button size="sm" variant="outline" className="gap-1.5" asChild>
+                <a href="https://www.facebook.com/rifat660" target="_blank" rel="noopener noreferrer">
+                  <Facebook className="h-3.5 w-3.5" />
+                  Facebook
+                </a>
+              </Button>
             </div>
           </div>
 
@@ -109,9 +115,14 @@ export function SiteFooter() {
           <p className="text-xs text-muted-foreground">
             © {new Date().getFullYear()} Diploma Result BD. All rights reserved.
           </p>
-          <p className="inline-flex items-center gap-1.5 text-xs text-muted-foreground">
-            Developed by <span className="font-semibold text-foreground">Kazi Rifat</span>
-          </p>
+          <a
+            href="https://www.facebook.com/rifat660"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 text-xs text-muted-foreground transition-colors hover:text-primary"
+          >
+            Developed by <span className="font-semibold text-primary hover:underline">Kazi Rifat</span>
+          </a>
         </div>
       </div>
     </footer>
